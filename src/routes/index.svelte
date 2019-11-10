@@ -1,46 +1,53 @@
+<script>
+  import Button from "../components/Button.svelte";
+  import { fade } from "svelte/transition";
+  import { onMount, afterUpdate } from "svelte";
+  import { nock, squakk } from "./soundFx";
+  import { game } from "./store";
+
+  game.useLocalStorage();
+
+  function handleClick({ detail }) {
+    const { value, id } = detail;
+    if (value === $game.expected) {
+      nock.play();
+      game.correct(id);
+      setTimeout(() => {
+        game.reset();
+      }, 500);
+    } else {
+      game.wrong(id);
+      squakk.play();
+    }
+  }
+</script>
+
 <style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
-	}
-
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	}
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 5em);
+    grid-template-rows: repeat(3, 5em);
+    grid-gap: 1em;
+  }
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+  <title>Tables App</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+{#if process.browser}
+  <p>Score {$game.score}</p>
 
-<figure>
-	<img alt='Borat' src='great-success.png'>
-	<figcaption>HIGH FIVE!</figcaption>
-</figure>
+  <h1>{$game.n1} x {$game.n2} = ?</h1>
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+  <div class="container">
+    {#each $game.choices as choice, index (choice)}
+      <Button
+        correct={$game.grid[index] === 'correct'}
+        wrong={$game.grid[index] === 'wrong'}
+        id={index}
+        value={choice}
+        on:click={handleClick} />
+    {/each}
+  </div>
+{/if}
