@@ -1,33 +1,26 @@
 <script>
-  import Button from "../components/Button.svelte";
-  import { fade } from "svelte/transition";
-  import { onMount, afterUpdate } from "svelte";
-  import { nock, squakk } from "./soundFx";
-  import { game } from "./store";
+  import IconLink from "../components/IconLink.svelte";
 
-  game.useLocalStorage();
-
-  function handleClick({ detail }) {
-    const { value, id } = detail;
-    if (value === $game.expected) {
-      nock.play();
-      game.correct(id);
-      setTimeout(() => {
-        game.reset();
-      }, 500);
-    } else {
-      game.wrong(id);
-      squakk.play();
-    }
-  }
+  let tables = [
+    { completed: 0.1, id: "1" },
+    { completed: 0.0, id: "2" },
+    { completed: 0.0, id: "3" },
+    { completed: 1.0, id: "4" },
+    { completed: 0.0, id: "5" },
+    { completed: 0.5, id: "6" },
+    { completed: 1.0, id: "7" },
+    { completed: 0.7, id: "8" },
+    { completed: 0.5, id: "9" },
+    { completed: 1.0, id: "10" }
+  ];
 </script>
 
 <style>
   .container {
     display: grid;
-    grid-template-columns: repeat(3, 5em);
-    grid-template-rows: repeat(3, 5em);
-    grid-gap: 1em;
+    grid-template-columns: repeat(3, 7rem);
+    grid-template-rows: repeat(4, 7rem);
+    grid-gap: 1rem;
   }
 </style>
 
@@ -35,19 +28,12 @@
   <title>Tables App</title>
 </svelte:head>
 
-{#if process.browser}
-  <p>Score {$game.score}</p>
-
-  <h1>{$game.n1} x {$game.n2} = ?</h1>
-
-  <div class="container">
-    {#each $game.choices as choice, index (choice)}
-      <Button
-        correct={$game.grid[index] === 'correct'}
-        wrong={$game.grid[index] === 'wrong'}
-        id={index}
-        value={choice}
-        on:click={handleClick} />
-    {/each}
-  </div>
-{/if}
+<div class="container">
+  {#each tables as table}
+    <IconLink
+      label={table.id}
+      link={`/table${table.id}`}
+      completed={table.completed}
+      passed={table.completed >= 0.7} />
+  {/each}
+</div>

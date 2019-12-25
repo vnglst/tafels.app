@@ -7,3 +7,7 @@ export const nock = new Howl({
 export const squakk = new Howl({
   src: ["./sounds/squakk.mp3"]
 });
+
+export const yeah = new Howl({
+  src: ["./sounds/hooyeah.mp3"]
+});

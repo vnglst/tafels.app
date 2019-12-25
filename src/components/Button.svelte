@@ -5,20 +5,25 @@
   const dispatch = createEventDispatcher();
 
   export let value;
-  export let id;
-  export let wrong;
-  export let correct;
+  export let expected;
+  let wrong = false;
+  let correct = false;
 
   function handleClick() {
-    dispatch("click", { value, id });
+    if (value === expected) {
+      correct = true;
+      dispatch("correct");
+    } else {
+      wrong = true;
+      dispatch("wrong");
+    }
   }
 </script>
 
 <style>
   button {
     font-weight: 900;
-    font-size: 1.5em;
-    padding: 1em;
+    font-size: 1.25em;
     border-radius: 0.5em;
     text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
     background: #ffd332;
@@ -75,6 +80,6 @@
   }
 </style>
 
-<button class:correct class:wrong on:click|preventDefault={handleClick}>
+<button class:correct class:wrong on:click|preventDefault|once={handleClick}>
   {value}
 </button>

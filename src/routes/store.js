@@ -58,19 +58,19 @@ function createGame() {
         state.score = Math.max(0, state.score - 1);
         return state;
       }),
-    reset: () => update(state => newGame(state.score)),
-    useLocalStorage: () => {
-      // skip localstorage for SSR
-      if (!process.browser) return;
-      const json = localStorage.getItem(KEY);
-      if (json) {
-        set(JSON.parse(json));
-      }
+    reset: () => update(state => newGame(state.score))
+    // useLocalStorage: () => {
+    //   // skip localstorage for SSR
+    //   if (!process.browser) return;
+    //   const json = localStorage.getItem(KEY);
+    //   if (json) {
+    //     set(JSON.parse(json));
+    //   }
 
-      subscribe(current => {
-        localStorage.setItem(KEY, JSON.stringify(current));
-      });
-    }
+    //   subscribe(current => {
+    //     localStorage.setItem(KEY, JSON.stringify(current));
+    //   });
+    // }
   };
 }
 

@@ -1,7 +1,7 @@
 <svelte:head>
-	<title>About</title>
+  <title>About Tafels.App</title>
 </svelte:head>
 
-<h1>About this site</h1>
+<h1>Tafels</h1>
 
-<p>This is the 'about' page. There's not much here.</p>
+<p>Tafels.app was made by Koen van Gilst using Sapper and Svelte</p>
