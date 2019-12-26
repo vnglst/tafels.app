@@ -6,7 +6,7 @@
   a {
     height: 6rem;
     width: 6rem;
-    background-color: inherit;
+    background-color: unset;
     border: none;
     cursor: pointer;
     padding: 0;
