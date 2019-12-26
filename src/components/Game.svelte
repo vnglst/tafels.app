@@ -66,7 +66,7 @@
   class="anim"
   in:fly={{ x: -200, duration: 150 }}
   out:fly={{ x: -200, duration: 150 }}>
-  <p>Score {score}</p>
+  <p>score {score}</p>
 
   {#if current}
     <h1>{current.q} = ?</h1>

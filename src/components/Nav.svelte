@@ -80,18 +80,18 @@
   <ul>
     {#if segment && segment.startsWith('table')}
       <li>
-        <a href=".">
+        <a rel="prefetch" href=".">
           <BackIcon />
         </a>
       </li>
     {:else}
       <li class:selected={segment === undefined}>
-        <a href=".">
+        <a rel="prefetch" href=".">
           <HomeIcon />
         </a>
       </li>
       <li class:selected={segment === 'about'} class="right">
-        <a href="about">
+        <a rel="prefetch" href="about">
           <GearIcon />
         </a>
       </li>

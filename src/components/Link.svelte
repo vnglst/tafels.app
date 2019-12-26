@@ -41,6 +41,6 @@
   }
 </style>
 
-<a href={link}>
+<a rel="prefetch" href={link}>
   <slot />
 </a>
