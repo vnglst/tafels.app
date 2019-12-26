@@ -82,8 +82,8 @@
 
 <div
   class="anim"
-  in:fly={{ x: -200, duration: 150 }}
-  out:fly={{ x: -200, duration: 150 }}>
+  in:fly={{ x: 200, duration: 150 }}
+  out:fly={{ x: 200, duration: 150 }}>
   {#if current}
     <h1>{current.q} = ?</h1>
     <div class="container">

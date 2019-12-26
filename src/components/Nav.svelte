@@ -10,13 +10,13 @@
 <style>
   nav {
     font-weight: normal;
-    padding: 0 1.5em;
-    margin: 0;
+    padding: 0.5em 1.5em;
     background-color: hsla(0, 0%, 0%, 0.4);
   }
 
   ul {
-    margin: 0;
+    max-width: 50rem;
+    margin: 0 auto;
     padding: 0;
   }
 
@@ -48,13 +48,13 @@
     height: 2px;
     background-color: hsla(47, 100%, 50%, 1);
     display: block;
-    bottom: 6px;
+    bottom: 4px;
   }
 
   a {
     text-decoration: none;
-    padding: 0.75em;
-    margin: 0;
+    padding: 0.5em;
+    margin: 0.25em;
     display: block;
   }
 
@@ -63,7 +63,7 @@
   }
 
   a:active {
-    animation: zoom 100ms ease-in-out 1 forwards;
+    animation: press 200ms ease-in-out 1 forwards;
   }
 
   @keyframes zoom {
@@ -71,7 +71,22 @@
       transform: scale(1);
     }
     100% {
-      transform: scale(1.4);
+      transform: scale(1.2);
+    }
+  }
+
+  @keyframes press {
+    0% {
+      transform: scale(1);
+    }
+    20% {
+      transform: scale(0.9);
+    }
+    80% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 </style>

@@ -9,7 +9,6 @@
     display: flex;
     justify-content: center;
     padding: 2em;
-    height: 100vw;
   }
 </style>
 

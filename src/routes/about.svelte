@@ -17,7 +17,7 @@
 <div
   class="anim"
   in:fly={{ x: 200, duration: 150 }}
-  out:fly={{ x: -200, duration: 150 }}>
+  out:fly={{ x: 200, duration: 150 }}>
   <h1>Tafels</h1>
 
   <p>Tafels.app was made by Koen van Gilst using Sapper and Svelte</p>

@@ -72,10 +72,16 @@
 
   @keyframes press {
     0% {
+      transform: scale(1);
+    }
+    20% {
+      transform: scale(0.9);
+    }
+    80% {
       transform: scale(1.2);
     }
     100% {
-      transform: scale(1.05);
+      transform: scale(1);
     }
   }
 </style>
