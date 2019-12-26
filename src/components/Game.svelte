@@ -37,11 +37,24 @@
 </script>
 
 <style>
+  .anim {
+    position: absolute;
+  }
   .container {
+    margin: 2em 0;
     display: grid;
     grid-template-columns: repeat(3, 4.5em);
     grid-template-rows: repeat(3, 4.5em);
     grid-gap: 1em;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 2em;
+  }
+
+  h1 {
+    font-size: 3rem;
   }
 
   .smile {
@@ -49,7 +62,10 @@
   }
 </style>
 
-<div in:fly={{ x: 200, duration: 150 }}>
+<div
+  class="anim"
+  in:fly={{ x: -200, duration: 150 }}
+  out:fly={{ x: -200, duration: 150 }}>
   <p>Score {score}</p>
 
   {#if current}

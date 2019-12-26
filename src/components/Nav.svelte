@@ -1,12 +1,18 @@
 <script>
+  import Link from "./Link.svelte";
+  import BackIcon from "./BackIcon.svelte";
+  import GearIcon from "./GearIcon.svelte";
+  import HomeIcon from "./HomeIcon.svelte";
+
   export let segment;
 </script>
 
 <style>
   nav {
-    border-bottom: 1px solid rgba(255, 62, 0, 0.1);
     font-weight: normal;
-    padding: 0 1em;
+    padding: 0 1.5em;
+    margin: 0;
+    background-color: hsla(0, 0%, 0%, 0.4);
   }
 
   ul {
@@ -31,30 +37,64 @@
     display: inline-block;
   }
 
+  .right {
+    float: right;
+  }
+
   .selected::after {
     position: absolute;
     content: "";
-    width: calc(100% - 1em);
+    width: 100%;
     height: 2px;
-    background-color: hsl(47, 100%, 50%);
+    background-color: hsla(47, 100%, 50%, 1);
     display: block;
-    bottom: 5px;
+    bottom: 6px;
   }
 
   a {
     text-decoration: none;
-    padding: 1em 0.5em;
+    padding: 0.75em;
+    margin: 0;
     display: block;
+  }
+
+  a:hover {
+    animation: zoom 100ms ease-in-out 1 forwards;
+  }
+
+  a:active {
+    animation: zoom 100ms ease-in-out 1 forwards;
+  }
+
+  @keyframes zoom {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.4);
+    }
   }
 </style>
 
 <nav>
   <ul>
-    <li>
-      <a class={segment === undefined ? 'selected' : ''} href=".">home</a>
-    </li>
-    <li>
-      <a class={segment === 'about' ? 'selected' : ''} href="about">about</a>
-    </li>
+    {#if segment && segment.startsWith('table')}
+      <li>
+        <a href=".">
+          <BackIcon />
+        </a>
+      </li>
+    {:else}
+      <li class:selected={segment === undefined}>
+        <a href=".">
+          <HomeIcon />
+        </a>
+      </li>
+      <li class:selected={segment === 'about'} class="right">
+        <a href="about">
+          <GearIcon />
+        </a>
+      </li>
+    {/if}
   </ul>
 </nav>

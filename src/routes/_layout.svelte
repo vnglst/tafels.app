@@ -6,10 +6,10 @@
 
 <style>
   main {
-    position: relative;
-    max-width: 56em;
+    display: flex;
+    justify-content: center;
     padding: 2em;
-    margin: 0 auto;
+    height: 100vw;
   }
 </style>
 
