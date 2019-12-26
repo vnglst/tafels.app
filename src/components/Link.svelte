@@ -1,10 +1,5 @@
 <script>
-  import BadgeIconFilled from "./BadgeIconFilled.svelte";
-
-  export let label;
   export let link;
-  export let completed;
-  export let passed;
 </script>
 
 <style>
@@ -16,6 +11,7 @@
     cursor: pointer;
     padding: 0;
     margin: 0;
+    text-decoration: none;
   }
 
   a:hover {
@@ -46,5 +42,5 @@
 </style>
 
 <a href={link}>
-  <BadgeIconFilled {label} {completed} {passed} />
+  <slot />
 </a>

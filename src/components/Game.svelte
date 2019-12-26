@@ -1,9 +1,9 @@
 <script>
-  import Button from "../components/Button.svelte";
-  import { fade } from "svelte/transition";
-  import { onMount, afterUpdate } from "svelte";
+  import Button from "./Button.svelte";
   import { nock, squakk, yeah } from "./soundFx";
+  import { tables } from "../routes/store.js";
 
+  export let table;
   export let questions;
 
   let score = 0;
@@ -18,7 +18,13 @@
     setTimeout(() => {
       current = questions.shift();
       questions = questions;
-      if (!current) yeah.play();
+      tables.updateCompleted(table, score / 10);
+      if (!current) {
+        yeah.play();
+        yeah.on("end", function() {
+          window.location.assign("/");
+        });
+      }
     }, 700);
   }
 
@@ -36,13 +42,16 @@
     grid-template-rows: repeat(3, 4.5em);
     grid-gap: 1em;
   }
+
+  .smile {
+    font-size: 12rem;
+  }
 </style>
 
 <p>Score {score}</p>
 
 {#if current}
   <h1>{current.q} = ?</h1>
-
   <div class="container">
     {#each current.options as option, index (`${current.q}-${option}-${index}`)}
       <Button
@@ -53,7 +62,5 @@
     {/each}
   </div>
 {:else}
-  <div class="container">
-    <button>Home</button>
-  </div>
+  <div class="smile">😸</div>
 {/if}

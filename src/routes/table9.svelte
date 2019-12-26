@@ -1,6 +1,6 @@
 <script>
   import { tables9 } from "./questions";
-  import TableTemplate from "../components/Game.svelte";
+  import Game from "../components/Game.svelte";
   let questions = process.browser ? tables9 : [];
 </script>
 
@@ -8,4 +8,4 @@
   <title>Tables 9</title>
 </svelte:head>
 
-<TableTemplate {questions} />
+<Game {questions} table={9} />
