@@ -1,5 +1,4 @@
 <script>
-  export let id;
   export let completed = 0.1;
   export let passed = false;
 </script>
@@ -15,12 +14,12 @@
   svg:active .outer,
   svg:hover .outer {
     fill: hsla(47, 100%, 70%, 1);
-    transition: all 1.5s ease;
+    transition: all 1s ease;
   }
 
   svg:active .inner,
   svg:hover .inner {
-    fill: hsla(47, 100%, 50%, 1);
+    fill: hsla(47, 100%, 70%, 1);
   }
   .label {
     fill: hsl(47, 0%, 10%);
@@ -31,18 +30,8 @@
   enable-background="new 0 0 512 512"
   viewBox="0 0 512 512"
   xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id={id + 'grad'} x1="20%" y1="0%" x2="100%" y2="100%">
-      <stop
-        offset="0%"
-        style={`stop-color:hsla(47, 100%, 70%, ${completed})`} />
-      <stop
-        offset="100%"
-        style={`stop-color:hsla(47, 100%, 50%, ${completed})`} />
-    </linearGradient>
-  </defs>
   <path
-    fill={`url(#${id}grad)`}
+    fill={`hsla(47, 100%, 60%, ${completed})`}
     class="inner"
     d="m274.937 59.937c-9.344-5.419-15.258-8.738-18.935-8.738-3.686 0-9.6
     3.319-18.936 8.738-18.492 10.718-43.81 25.395-83.465 25.395-18.654

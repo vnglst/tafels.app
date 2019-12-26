@@ -31,10 +31,7 @@
   <div class="container">
     {#each $tables as table}
       <Link link={`/table${table.id}`}>
-        <Badge
-          id={table.id}
-          completed={table.completed}
-          passed={table.completed >= 0.7}>
+        <Badge completed={table.completed} passed={table.completed >= 0.7}>
           {table.id}
         </Badge>
       </Link>

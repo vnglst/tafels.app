@@ -100,7 +100,6 @@
       {#each badges as badge, index}
         <li>
           <Badge
-            id={index}
             completed={index < score ? 1 : 0.3}
             passed={index < score ? true : false} />
         </li>
