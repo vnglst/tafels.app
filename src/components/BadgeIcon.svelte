@@ -1,6 +1,6 @@
 <script>
-  export let label;
-  export let completed = false;
+  export let id;
+  export let completed = 0.1;
   export let passed = false;
 </script>
 
@@ -32,7 +32,7 @@
   viewBox="0 0 512 512"
   xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id={label + 'grad'} x1="20%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id={id + 'grad'} x1="20%" y1="0%" x2="100%" y2="100%">
       <stop
         offset="0%"
         style={`stop-color:hsla(47, 100%, 70%, ${completed})`} />
@@ -42,7 +42,7 @@
     </linearGradient>
   </defs>
   <path
-    fill={`url(#${label}grad)`}
+    fill={`url(#${id}grad)`}
     class="inner"
     d="m274.937 59.937c-9.344-5.419-15.258-8.738-18.935-8.738-3.686 0-9.6
     3.319-18.936 8.738-18.492 10.718-43.81 25.395-83.465 25.395-18.654
@@ -78,6 +78,6 @@
     text-anchor="middle"
     font-weight="bold"
     font-size="150">
-    {label}
+    <slot />
   </text>
 </svg>

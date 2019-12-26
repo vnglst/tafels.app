@@ -32,9 +32,11 @@
     {#each $tables as table}
       <Link link={`/table${table.id}`}>
         <Badge
-          label={table.id}
+          id={table.id}
           completed={table.completed}
-          passed={table.completed >= 0.7} />
+          passed={table.completed >= 0.7}>
+          {table.id}
+        </Badge>
       </Link>
     {/each}
   </div>
