@@ -2,6 +2,7 @@
   import Link from "../components/Link.svelte";
   import Badge from "../components/BadgeIcon.svelte";
   import { tables } from "./store.js";
+  import { fly, fade } from "svelte/transition";
 
   tables.useLocalStorage();
 </script>
@@ -19,7 +20,7 @@
   <title>Tables App</title>
 </svelte:head>
 
-<div class="container">
+<div class="container" in:fly={{ x: -200, duration: 150 }}>
   {#each $tables as table}
     <Link link={`/table${table.id}`}>
       <Badge

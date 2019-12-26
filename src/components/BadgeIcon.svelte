@@ -9,25 +9,25 @@
     fill: hsla(47, 100%, 50%, 0.3);
   }
 
-  .shadow {
-    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 1));
-  }
-
   .passed {
-    fill: hsla(47, 100%, 50%, 1);
+    fill: hsla(47, 100%, 70%, 1);
   }
-
+  svg:active .outer,
   svg:hover .outer {
-    fill: hsla(47, 100%, 50%, 1);
+    fill: hsla(47, 100%, 70%, 1);
+    transition: all 1.5s ease;
   }
 
+  svg:active .inner,
+  svg:hover .inner {
+    fill: hsla(47, 100%, 50%, 1);
+  }
   .label {
     fill: hsl(47, 0%, 10%);
   }
 </style>
 
 <svg
-  class:shadow={passed}
   enable-background="new 0 0 512 512"
   viewBox="0 0 512 512"
   xmlns="http://www.w3.org/2000/svg">

@@ -2,6 +2,7 @@
   import Button from "./Button.svelte";
   import { nock, squakk, yeah } from "./soundFx";
   import { tables } from "../routes/store.js";
+  import { fly, fade } from "svelte/transition";
 
   export let table;
   export let questions;
@@ -48,19 +49,21 @@
   }
 </style>
 
-<p>Score {score}</p>
+<div in:fly={{ x: 200, duration: 150 }}>
+  <p>Score {score}</p>
 
-{#if current}
-  <h1>{current.q} = ?</h1>
-  <div class="container">
-    {#each current.options as option, index (`${current.q}-${option}-${index}`)}
-      <Button
-        expected={current.answer}
-        value={option}
-        on:correct={handleCorrect}
-        on:wrong={handleWrong} />
-    {/each}
-  </div>
-{:else}
-  <div class="smile">😸</div>
-{/if}
+  {#if current}
+    <h1>{current.q} = ?</h1>
+    <div class="container">
+      {#each current.options as option, index (`${current.q}-${option}-${index}`)}
+        <Button
+          expected={current.answer}
+          value={option}
+          on:correct={handleCorrect}
+          on:wrong={handleWrong} />
+      {/each}
+    </div>
+  {:else}
+    <div class="smile">😸</div>
+  {/if}
+</div>
