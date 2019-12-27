@@ -12,7 +12,6 @@
     position: absolute;
   }
   .container {
-    margin-top: 3rem;
     display: grid;
     grid-template-columns: repeat(3, 7rem);
     grid-template-rows: repeat(4, 7rem);
@@ -21,7 +20,7 @@
     background-color: hsla(0, 0%, 0%, 0.6);
     border-radius: 20px;
     padding: 2em;
-    margin: 1em 0;
+    margin: 2em 0;
   }
 </style>
 
@@ -33,6 +32,16 @@
   class="anim"
   in:fly={{ x: -200, duration: 150 }}
   out:fly={{ x: -200, duration: 150 }}>
+  <div class="container">
+    {#each $tables as table}
+      <Link link={`/table${table.id}`}>
+        <Badge completed={table.completed} passed={table.completed >= 0.7}>
+          {table.id}
+        </Badge>
+      </Link>
+    {/each}
+  </div>
+
   <div class="container">
     {#each $tables as table}
       <Link link={`/table${table.id}`}>

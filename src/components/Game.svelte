@@ -105,7 +105,7 @@
             value={option}
             on:correct={handleCorrect}
             on:wrong={handleWrong}>
-            {option.value}
+            {option}
           </GameButton>
         {/each}
       </div>

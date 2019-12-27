@@ -10,7 +10,7 @@
 <style>
   nav {
     font-weight: normal;
-    padding: 0.5em 1.5em;
+    padding: 1rem 1.5rem;
     background-color: hsla(0, 0%, 0%, 0.6);
   }
 
