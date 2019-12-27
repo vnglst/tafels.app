@@ -11,7 +11,7 @@
   nav {
     font-weight: normal;
     padding: 0.5em 1.5em;
-    background-color: hsla(0, 0%, 0%, 0.4);
+    background-color: hsla(0, 0%, 0%, 0.6);
   }
 
   ul {
@@ -48,13 +48,14 @@
     height: 2px;
     background-color: hsla(47, 100%, 50%, 1);
     display: block;
-    bottom: 4px;
+    bottom: 0px;
   }
 
   a {
     text-decoration: none;
-    padding: 0.5em;
-    margin: 0.25em;
+    margin: 0.5em;
+    height: 1.5em;
+    width: 1.5em;
     display: block;
   }
 

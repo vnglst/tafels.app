@@ -13,8 +13,8 @@ body {
   font-family: "Lato", verdana, sans-serif;
   font-size: 14px;
   line-height: 1.5;
-  color: white;
-  background-color: #025f76;
+  color: hsl(192, 0%, 95%);
+  background-color: hsl(192, 97%, 24%);
 }
 
 *,

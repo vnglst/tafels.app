@@ -1,5 +1,5 @@
 <script>
-  import Button from "./Button.svelte";
+  import GameButton from "./GameButton.svelte";
   import { nock, squakk, yeah } from "./soundFx";
   import { tables } from "../routes/store.js";
   import { fly, fade } from "svelte/transition";
@@ -24,9 +24,7 @@
       tables.updateCompleted(table, score / 10);
       if (!current) {
         yeah.play();
-        yeah.on("end", function() {
-          window.location.assign("/");
-        });
+        yeah.on("end", () => window.location.assign("/"));
       }
     }, 700);
   }
@@ -42,17 +40,30 @@
   .anim {
     position: absolute;
   }
+
+  .question {
+    background-color: hsla(0, 0%, 0%, 0.6);
+    border-radius: 20px;
+    padding: 2em;
+    margin: 1em 0;
+  }
   .container {
-    margin: 2em 0;
+    margin: 2.5em 0;
     display: grid;
     grid-template-columns: repeat(3, 4.5em);
     grid-template-rows: repeat(3, 4.5em);
-    grid-gap: 1em;
+    grid-gap: 1.5em;
+  }
+
+  .stats {
+    background-color: hsla(0, 0%, 0%, 0.6);
+    border-radius: 20px;
+    padding: 2em;
   }
 
   p {
     font-size: 1rem;
-    margin: 0;
+    margin: 0.5em 0;
     padding: 0.5em;
   }
 
@@ -85,26 +96,32 @@
   in:fly={{ x: 200, duration: 150 }}
   out:fly={{ x: 200, duration: 150 }}>
   {#if current}
-    <h1>{current.q} = ?</h1>
-    <div class="container">
-      {#each current.options as option, index (`${current.q}-${option}-${index}`)}
-        <Button
-          expected={current.answer}
-          value={option}
-          on:correct={handleCorrect}
-          on:wrong={handleWrong} />
-      {/each}
+    <div class="question">
+      <h1>{current.q} = ?</h1>
+      <div class="container">
+        {#each current.options as option, index (`${current.q}-${option}-${index}`)}
+          <GameButton
+            expected={current.answer}
+            value={option}
+            on:correct={handleCorrect}
+            on:wrong={handleWrong}>
+            {option.value}
+          </GameButton>
+        {/each}
+      </div>
     </div>
-    <p>{score} / {total}</p>
-    <ul>
-      {#each badges as badge, index}
-        <li>
-          <Badge
-            completed={index < score ? 1 : 0.3}
-            passed={index < score ? true : false} />
-        </li>
-      {/each}
-    </ul>
+    <div class="stats">
+      <p>{score} / {total}</p>
+      <ul>
+        {#each badges as badge, index}
+          <li>
+            <Badge
+              completed={index < score ? 1 : 0.3}
+              passed={index < score ? true : false} />
+          </li>
+        {/each}
+      </ul>
+    </div>
   {:else}
     <div class="smile">😸</div>
   {/if}

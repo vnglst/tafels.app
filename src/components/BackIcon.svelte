@@ -1,8 +1,7 @@
-<svg
-  viewBox="0 0 24 24"
-  height="32"
-  width="32"
-  xmlns="http://www.w3.org/2000/svg">
-  <path fill="#fff" d="m15.41 16.59-4.58-4.59 4.58-4.59-1.41-1.41-6 6 6 6z" />
-  <path d="m0 0h24v24h-24z" fill="none" />
+<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="10" />
+  <path
+    fill="hsl(47, 0%, 10%)"
+    d="M13.7 15.3a1 1 0 0 1-1.4 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 0 1 1.4
+    1.4L10.42 12l3.3 3.3z" />
 </svg>

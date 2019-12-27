@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { fly, fade } from "svelte/transition";
 
   const dispatch = createEventDispatcher();
 
@@ -26,7 +25,7 @@
     font-size: 1.25em;
     border-radius: 0.5em;
     text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
-    background: #ffd332;
+    background: hsl(47, 100%, 60%);
     border: 1px solid #011627;
     color: #011627;
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
@@ -36,20 +35,11 @@
     width: 100%;
   }
 
-  button:disabled {
-    background: grey;
-    color: #002747;
-  }
-
-  button:disabled {
-    cursor: default;
-  }
-
-  button:hover:not([disabled]) {
+  button:hover {
     animation: zoom 100ms ease-in-out 1 forwards;
   }
 
-  button:active:not([disabled]) {
+  button:active {
     animation: press 100ms ease-in-out 1 forwards;
   }
 
@@ -87,5 +77,5 @@
 </style>
 
 <button class:correct class:wrong on:click|preventDefault|once={handleClick}>
-  {value}
+  <slot />
 </button>

@@ -17,6 +17,11 @@
     grid-template-columns: repeat(3, 7rem);
     grid-template-rows: repeat(4, 7rem);
     grid-gap: 1rem;
+
+    background-color: hsla(0, 0%, 0%, 0.6);
+    border-radius: 20px;
+    padding: 2em;
+    margin: 1em 0;
   }
 </style>
 

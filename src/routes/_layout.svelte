@@ -8,7 +8,7 @@
   main {
     display: flex;
     justify-content: center;
-    padding: 2em;
+    padding: 1em;
   }
 </style>
 
