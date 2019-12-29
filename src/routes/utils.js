@@ -13,21 +13,20 @@ export function shuffleOptions(table) {
   return table;
 }
 
-export function addRandomOptions(table, total) {
+export function addRandomOptions({ table, total, min = 1, max = 100 }) {
   table.forEach(question => {
     const newOptions = generateMoreOptions({
       total,
-      existing: question.options
+      existing: question.options,
+      min,
+      max
     });
     question.options = newOptions;
   });
   return table;
 }
 
-export function generateMoreOptions({ total, existing }) {
-  const min = 1;
-  const max = 100;
-
+export function generateMoreOptions({ total, existing, min, max }) {
   const choices = [...existing];
 
   while (choices.length < total) {
@@ -37,4 +36,18 @@ export function generateMoreOptions({ total, existing }) {
   }
 
   return choices;
+}
+
+export function removeDups(arr, property) {
+  const newArray = [];
+  const lookupObject = {};
+
+  for (let i in arr) {
+    lookupObject[arr[i][property]] = arr[i];
+  }
+
+  for (let i in lookupObject) {
+    newArray.push(lookupObject[i]);
+  }
+  return newArray;
 }

@@ -1,7 +1,7 @@
 <script>
-  import { tables1 } from "./questions";
+  import { adds1000 } from "./questions";
   import Game from "../components/Game.svelte";
-  let questions = process.browser ? tables1 : [];
+  let questions = process.browser ? adds1000 : [];
 </script>
 
 <svelte:head>

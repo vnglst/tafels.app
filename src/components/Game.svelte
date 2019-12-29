@@ -7,7 +7,6 @@
   import GameKitten from "./GameKitten.svelte";
   import { nock, squakk, yeah } from "./soundFx";
   import { tables } from "../routes/store.js";
-  import { fly, fade } from "svelte/transition";
   import Badge from "../components/BadgeIcon.svelte";
 
   export let table;
