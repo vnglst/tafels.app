@@ -5,11 +5,7 @@
 </script>
 
 <style>
-  main {
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-  }
+
 </style>
 
 <Nav {segment} />

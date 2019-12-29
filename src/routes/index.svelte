@@ -1,5 +1,8 @@
 <script>
   import Link from "../components/Link.svelte";
+  import Page from "../components/Page.svelte";
+  import Card from "../components/Card.svelte";
+  import Grid from "../components/Grid.svelte";
   import Badge from "../components/BadgeIcon.svelte";
   import { tables } from "./store.js";
   import { fly, fade } from "svelte/transition";
@@ -8,19 +11,9 @@
 </script>
 
 <style>
-  .anim {
-    position: absolute;
-  }
-  .container {
-    display: grid;
-    grid-template-columns: repeat(3, 7rem);
-    grid-template-rows: repeat(4, 7rem);
-    grid-gap: 1rem;
-
-    background-color: hsla(0, 0%, 0%, 0.6);
-    border-radius: 20px;
-    padding: 2em;
-    margin: 2em 0;
+  p {
+    padding: 1em;
+    margin: 0;
   }
 </style>
 
@@ -28,28 +21,31 @@
   <title>Tables App</title>
 </svelte:head>
 
-<div
-  class="anim"
-  in:fly={{ x: -200, duration: 150 }}
-  out:fly={{ x: -200, duration: 150 }}>
-  <div class="container">
-    {#each $tables as table}
-      <Link link={`/table${table.id}`}>
-        <Badge completed={table.completed} passed={table.completed >= 0.7}>
-          {table.id}
-        </Badge>
-      </Link>
-    {/each}
-  </div>
+<Page reverse>
+  <Card>
+    <p slot="header">Multiplications</p>
+    <Grid>
+      {#each $tables as table}
+        <Link link={`/table${table.id}`}>
+          <Badge completed={table.completed} passed={table.completed >= 0.7}>
+            {table.id}
+          </Badge>
+        </Link>
+      {/each}
+    </Grid>
+  </Card>
 
-  <div class="container">
-    {#each $tables as table}
-      <Link link={`/table${table.id}`}>
-        <Badge completed={table.completed} passed={table.completed >= 0.7}>
-          {table.id}
-        </Badge>
-      </Link>
-    {/each}
-  </div>
+  <Card>
+    <p slot="header">Additions</p>
 
-</div>
+    <Grid>
+      {#each $tables as table}
+        <Link link={`/table${table.id}`}>
+          <Badge completed={table.completed} passed={table.completed >= 0.7}>
+            {table.id}
+          </Badge>
+        </Link>
+      {/each}
+    </Grid>
+  </Card>
+</Page>

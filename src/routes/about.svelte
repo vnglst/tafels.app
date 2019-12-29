@@ -1,30 +1,27 @@
 <script>
-  import { tables } from "../routes/store.js";
-  import { fly, fade } from "svelte/transition";
+  import Page from "../components/Page.svelte";
+  import Card from "../components/Card.svelte";
+  import { tables } from "./store.js";
 </script>
 
 <style>
-  .anim {
-    position: absolute;
+  h1 {
+    font-size: 2rem;
+    padding: 1.5rem;
+  }
+  div {
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
   }
 
-  .container {
-    margin: 2em;
+  p {
+    margin: 0 0 2rem 0;
+    font-size: 1.25rem;
+    line-height: 2;
   }
 
   button {
-    font-weight: 900;
-    font-size: 1em;
-    border-radius: 0.5em;
-    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
-    border: 1px solid #011627;
-    background-color: hsl(0, 83%, 47%);
-    color: #011627;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
-      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
-    text-decoration: none;
-    padding: 1em;
-    text-transform: uppercase;
+    background-color: hsla(0, 100%, 100%, 0.5);
   }
 </style>
 
@@ -32,21 +29,18 @@
   <title>About Tafels</title>
 </svelte:head>
 
-<div
-  class="anim"
-  in:fly={{ x: 200, duration: 150 }}
-  out:fly={{ x: 200, duration: 150 }}>
-  <div class="container">
-    <h1>Tafels</h1>
-
-    <p>Tafels.app was made by Koen van Gilst using Sapper and Svelte.</p>
-
-    <button
-      on:click={() => {
-        tables.reset();
-        alert('ok');
-      }}>
-      Reset game state
-    </button>
-  </div>
-</div>
+<Page>
+  <Card>
+    <h1 slot="header">About</h1>
+    <div>
+      <p>Tafels.app was made by Koen van Gilst using Sapper and Svelte.</p>
+      <button
+        on:click={() => {
+          const sure = confirm('Cannot be undone, are you sure?');
+          if (sure) tables.reset();
+        }}>
+        Reset game state
+      </button>
+    </div>
+  </Card>
+</Page>

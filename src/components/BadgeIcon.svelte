@@ -1,6 +1,8 @@
 <script>
+  export let wrong = false;
   export let completed = 0.1;
   export let passed = false;
+  export let size = 4;
 </script>
 
 <style>
@@ -10,6 +12,10 @@
 
   .passed {
     fill: hsla(47, 100%, 90%, 1);
+  }
+
+  .wrong {
+    fill: red;
   }
   svg:active .outer,
   svg:hover .outer {
@@ -27,12 +33,15 @@
 </style>
 
 <svg
+  width={size + 'rem'}
+  height={size + 'rem'}
   enable-background="new 0 0 512 512"
   viewBox="0 0 512 512"
   xmlns="http://www.w3.org/2000/svg">
   <path
     fill={`hsla(47, 100%, ${90 - completed * 40}%, ${0.4 + completed})`}
     class="inner"
+    class:wrong
     d="m274.937 59.937c-9.344-5.419-15.258-8.738-18.935-8.738-3.686 0-9.6
     3.319-18.936 8.738-18.492 10.718-43.81 25.395-83.465 25.395-18.654
     0-35.857-3.371-51.2-6.571v143.104c0 92.51 58.726 183.185 153.6 237.662

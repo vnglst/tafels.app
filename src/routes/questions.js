@@ -3,9 +3,9 @@ import { shuffle, shuffleOptions, addRandomOptions } from "./utils";
 const prepareTable = table =>
   shuffle(shuffleOptions(addRandomOptions(table, 9)));
 
-function generateTable(base) {
+function generateTable(base, maxValue = 10) {
   const table = [];
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= maxValue; i++) {
     const t = {
       q: `${i} x ${base}`,
       answer: i * base,

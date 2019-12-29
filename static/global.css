@@ -5,15 +5,14 @@ html {
   font-weight: 900;
   letter-spacing: 2px;
   font-size: calc(0.5em + 1vmin);
+  line-height: 1.8;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
 body {
   margin: 0;
   font-family: "Lato", verdana, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  color: hsl(192, 0%, 95%);
+  color: hsl(192, 0%, 100%);
   background-color: hsl(192, 97%, 24%);
 }
 
@@ -43,17 +42,18 @@ a {
   color: inherit;
 }
 
-code {
-  font-family: menlo, inconsolata, monospace;
-  font-size: calc(1em - 2px);
-  color: #555;
-  background-color: #f0f0f0;
-  padding: 0.2em 0.4em;
-  border-radius: 2px;
+ul {
+  list-style: none;
 }
 
-@media (min-width: 400px) {
-  body {
-    font-size: 16px;
-  }
+button {
+  font-weight: 900;
+  font-size: 1.25rem;
+  border-radius: 0.5em;
+  background: hsl(47, 100%, 60%);
+  border: 1px solid #011627;
+  color: #011627;
+  box-shadow: 0 1px 3px hsla(47, 100%, 60%, 0.2);
+  text-decoration: none;
+  padding: 1rem;
 }

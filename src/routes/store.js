@@ -22,9 +22,7 @@ function createTables() {
     subscribe,
     updateCompleted: (table, completed) =>
       update(state => {
-        const currentCompleted = state[table - 1].completed;
-        if (completed + 0.1 > currentCompleted)
-          state[table - 1].completed = completed + 0.1;
+        state[table - 1].completed = completed;
         return state;
       }),
     reset: () => update(() => initialState),
