@@ -1,7 +1,7 @@
 <script>
   import Page from "../components/Page.svelte";
   import Card from "../components/Card.svelte";
-  import { tables } from "./store.js";
+  import { store } from "./store.js";
 </script>
 
 <style>
@@ -37,7 +37,10 @@
       <button
         on:click={() => {
           const sure = confirm('Cannot be undone, are you sure?');
-          if (sure) tables.reset();
+          if (sure) {
+            store.reset();
+            localStorage.clear();
+          }
         }}>
         Reset game state
       </button>

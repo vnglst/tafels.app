@@ -6,10 +6,10 @@
   import GameScore from "./GameScore.svelte";
   import GameKitten from "./GameKitten.svelte";
   import { nock, squakk, yeah } from "./soundFx";
-  import { tables } from "../routes/store.js";
+  import { store, tables } from "../routes/store.js";
   import Badge from "../components/BadgeIcon.svelte";
 
-  export let table;
+  export let id;
   export let questions;
 
   let total = questions.length;
@@ -21,7 +21,7 @@
   $: wrongs = results.filter(r => r === false).length;
   $: isDone = currentIdx === total;
   $: if (isDone) {
-    tables.updateCompleted(table, rights / total);
+    store.updateCompleted(id, rights / total);
     yeah.play();
   }
 

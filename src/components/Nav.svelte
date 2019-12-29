@@ -94,13 +94,7 @@
 
 <nav>
   <ul>
-    {#if segment && segment.startsWith('table')}
-      <li>
-        <a rel="prefetch" href=".">
-          <BackIcon />
-        </a>
-      </li>
-    {:else}
+    {#if !segment || segment === 'about'}
       <li class:selected={segment === undefined}>
         <a rel="prefetch" href=".">
           <HomeIcon />
@@ -109,6 +103,12 @@
       <li class:selected={segment === 'about'} class="right">
         <a rel="prefetch" href="about">
           <GearIcon />
+        </a>
+      </li>
+    {:else}
+      <li>
+        <a rel="prefetch" href=".">
+          <BackIcon />
         </a>
       </li>
     {/if}

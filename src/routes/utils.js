@@ -13,7 +13,7 @@ export function shuffleOptions(table) {
   return table;
 }
 
-export function addRandomOptions({ table, total, min = 1, max = 100 }) {
+export function addRandomOptions({ table, total, min, max }) {
   table.forEach(question => {
     const newOptions = generateMoreOptions({
       total,
@@ -51,3 +51,5 @@ export function removeDups(arr, property) {
   }
   return newArray;
 }
+
+export const prepare = table => shuffleOptions(shuffle(table));
