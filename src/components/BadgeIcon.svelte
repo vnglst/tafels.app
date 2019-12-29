@@ -1,6 +1,6 @@
 <script>
   export let wrong = false;
-  export let completed = 0.1;
+  export let completed = 0.0;
   export let passed = false;
   export let size = 4;
 </script>
@@ -75,7 +75,7 @@
     dominat-baseline="middle"
     text-anchor="middle"
     font-weight="bold"
-    font-size="150">
+    font-size="130">
     <slot />
   </text>
 </svg>

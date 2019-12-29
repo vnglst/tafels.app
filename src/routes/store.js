@@ -1,23 +1,34 @@
 import { writable, derived } from "svelte/store";
 
-const initialState = [
-  { completed: 0.0, id: "1", type: "table" },
-  { completed: 0.0, id: "2", type: "table" },
-  { completed: 0.0, id: "3", type: "table" },
-  { completed: 0.0, id: "4", type: "table" },
-  { completed: 0.0, id: "5", type: "table" },
-  { completed: 0.0, id: "6", type: "table" },
-  { completed: 0.0, id: "7", type: "table" },
-  { completed: 0.0, id: "8", type: "table" },
-  { completed: 0.0, id: "9", type: "table" },
-  { completed: 0.0, id: "10", type: "table" },
-  { completed: 0.0, id: "10", type: "add" },
-  { completed: 0.0, id: "15", type: "add" },
-  { completed: 0.0, id: "20", type: "add" }
-];
+const initialState = {
+  "table-1": { completed: 0.0, n: 1 },
+  "table-3": { completed: 0.0, n: 3 },
+  "table-4": { completed: 0.0, n: 4 },
+  "table-2": { completed: 0.0, n: 2 },
+  "table-5": { completed: 0.0, n: 5 },
+  "table-6": { completed: 0.0, n: 6 },
+  "table-7": { completed: 0.0, n: 7 },
+  "table-8": { completed: 0.0, n: 8 },
+  "table-9": { completed: 0.0, n: 9 },
+  "table-10": { completed: 0.0, n: 10 },
+  "table-11": { completed: 0.0, n: 11 },
+  "table-20": { completed: 0.0, n: 20 },
+  "add-10": { completed: 0.0, n: 10 },
+  "add-15": { completed: 0.0, n: 15 },
+  "add-20": { completed: 0.0, n: 20 },
+  "add-25": { completed: 0.0, n: 25 },
+  "add-50": { completed: 0.0, n: 50 },
+  "add-75": { completed: 0.0, n: 75 },
+  "add-100": { completed: 0.0, n: 100 },
+  "add-200": { completed: 0.0, n: 200 },
+  "add-250": { completed: 0.0, n: 250 },
+  "add-500": { completed: 0.0, n: 500 },
+  "add-750": { completed: 0.0, n: 750 },
+  "add-999": { completed: 0.0, n: 999 }
+};
 
 function createStore() {
-  const KEY = "tafels-app-v2";
+  const KEY = "tafels-app-v5";
 
   const { subscribe, set, update } = writable(initialState);
 
@@ -25,8 +36,7 @@ function createStore() {
     subscribe,
     updateCompleted: (id, completed) =>
       update(state => {
-        const idx = state.findIndex(s => id === s.type + s.id);
-        state[idx].completed = completed;
+        state[id].completed = completed;
         return state;
       }),
     reset: () => update(() => initialState),
@@ -35,7 +45,8 @@ function createStore() {
       if (!process.browser) return;
       const json = localStorage.getItem(KEY);
       if (json) {
-        set(JSON.parse(json));
+        const stored = JSON.parse(json);
+        set(stored);
       }
 
       subscribe(current => {
@@ -47,18 +58,24 @@ function createStore() {
 
 export const store = createStore();
 
-export const tables = derived(store, $state =>
-  $state.filter(t => t.type === "table")
+// converte lookup table to array for rendering
+export const storeAsArray = derived(store, $state =>
+  Object.keys($state).map(key => {
+    return { id: key, ...$state[key] };
+  })
 );
 
-export const adds = derived(store, $state =>
-  $state.filter(t => t.type === "add")
+export const tables = derived(storeAsArray, $state =>
+  $state.filter(t => t.id.startsWith("table"))
 );
 
-export const initialTables = initialState.filter(t => t.type === "table");
-export const allowedTables = initialTables.map(t => t.id);
-export const isLegalTable = n => allowedTables.includes(n);
+export const adds = derived(storeAsArray, $state =>
+  $state.filter(t => t.id.startsWith("add"))
+);
 
-export const initialAdds = initialState.filter(t => t.type === "add");
-export const allowedAdds = initialAdds.map(t => t.id);
-export const isLegalAdd = n => allowedAdds.includes(n);
+const isLegal = id => initialState[id];
+
+export const getTableId = n => (isLegal("table-" + n) ? "table-" + n : null);
+export const getAddId = n => (isLegal("add-" + n) ? "add-" + n : null);
+
+export const hasPassed = completed => completed >= 0.7;

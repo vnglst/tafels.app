@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   let showKitten = false;
 
@@ -7,6 +7,10 @@
     setTimeout(() => {
       showKitten = true;
     }, 100);
+  });
+
+  onDestroy(() => {
+    showKitten = false;
   });
 </script>
 

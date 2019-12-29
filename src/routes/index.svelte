@@ -4,7 +4,7 @@
   import Card from "../components/Card.svelte";
   import Grid from "../components/Grid.svelte";
   import Badge from "../components/BadgeIcon.svelte";
-  import { store, tables, adds } from "./store.js";
+  import { store, tables, adds, hasPassed } from "./store.js";
   import { fly, fade } from "svelte/transition";
 
   store.useLocalStorage();
@@ -23,25 +23,26 @@
 
 <Page reverse>
   <Card>
-    <p slot="header">Multiplications</p>
+    <p slot="header">Additions</p>
     <Grid>
-      {#each $tables as table}
-        <Link link={`/tafel${table.id}`}>
-          <Badge completed={table.completed} passed={table.completed >= 0.7}>
-            {table.id}
+      {#each $adds as add}
+        <Link link={`/add${add.n}`}>
+          <Badge completed={add.completed} passed={hasPassed(add.completed)}>
+            {add.n}
           </Badge>
         </Link>
       {/each}
     </Grid>
   </Card>
-
   <Card>
-    <p slot="header">Additions</p>
+    <p slot="header">Multiplications</p>
     <Grid>
-      {#each $adds as add}
-        <Link link={`/add${add.id}`}>
-          <Badge completed={add.completed} passed={add.completed >= 0.7}>
-            {add.id}
+      {#each $tables as table}
+        <Link link={`tafel${table.n}`}>
+          <Badge
+            completed={table.completed}
+            passed={hasPassed(table.completed)}>
+            {table.n}
           </Badge>
         </Link>
       {/each}

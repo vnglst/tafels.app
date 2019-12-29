@@ -10,7 +10,12 @@ function generateTable(base, maxValue = 10) {
     };
     table.push(question);
   }
-  return addRandomOptions({ table, total: 9, min: 1, max: 100 });
+  return addRandomOptions({
+    table,
+    total: 9,
+    min: 1,
+    max: base * maxValue + 10
+  });
 }
 
 export const getTable = n => prepare(generateTable(parseInt(n, 10)));
