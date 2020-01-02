@@ -1,46 +1,14 @@
 <script>
   export let link;
+  export let active;
 </script>
 
 <style>
-  a {
-    height: 6rem;
-    width: 6rem;
-    background-color: unset;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-  }
-
-  a:hover {
-    animation: zoom 100ms ease-in-out 1 forwards;
-  }
-
-  a:active {
-    animation: press 100ms ease-in-out 1 forwards;
-  }
-
-  @keyframes zoom {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(1.2);
-    }
-  }
-
-  @keyframes press {
-    0% {
-      transform: scale(1.2);
-    }
-    100% {
-      transform: scale(1.05);
-    }
+  .active {
+    background-color: var(--blue-400);
   }
 </style>
 
-<a rel="prefetch" href={link}>
+<a rel="prefetch" class="button" class:active href={link}>
   <slot />
 </a>

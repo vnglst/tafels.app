@@ -1,25 +1,34 @@
 <style>
   .card {
-    background-color: hsla(0, 0%, 0%, 0.4);
+    display: grid;
+    background-color: var(--white);
+    color: var(--grey-1000);
     border-radius: 20px;
-    margin: 2em;
-    box-shadow: 0 15px 35px 5px hsla(0, 0%, 0%, 0.5);
-    width: 24rem;
-    min-height: 30rem;
+    margin: 3rem 3rem 0 3rem;
+    padding: 0;
+    box-shadow: var(--shadow-2);
+    width: 28rem;
+    min-height: 35rem;
   }
 
   .header {
-    background-color: hsla(0, 100%, 100%, 0.1);
-    border-radius: 20px 20px 0 0;
-    font-variant: small-caps;
+    font-weight: 500;
     margin: 0;
-    font-size: 1.75rem;
+    padding: 4rem 0 0 0;
+    font-size: 28px;
     text-align: center;
   }
 
+  .card::before {
+    border-top: 8px solid var(--blue-400);
+    background-color: var(--blue-400);
+    border-radius: 20px 20px 0 0;
+    margin: 0px 4px;
+    display: block;
+    content: "";
+  }
+
   .footer {
-    background-color: hsla(0, 0%, 0%, 0.5);
-    border-radius: 0 0 20px 20px;
     margin: 0;
     padding: 0;
   }

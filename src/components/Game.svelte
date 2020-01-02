@@ -4,10 +4,8 @@
   import Page from "./Page.svelte";
   import GameButton from "./GameButton.svelte";
   import GameScore from "./GameScore.svelte";
-  import GameKitten from "./GameKitten.svelte";
   import { nock, squakk, yeah } from "./soundFx";
   import { store, tables } from "../routes/store.js";
-  import Badge from "../components/BadgeIcon.svelte";
 
   export let id;
   export let questions;
@@ -27,31 +25,26 @@
 
   function handleCorrect() {
     nock.play();
+    if (results[currentIdx] === undefined) results[currentIdx] = true;
     setTimeout(() => {
-      results[currentIdx] = true;
       currentIdx++;
     }, 500);
   }
 
   function handleWrong() {
     squakk.play();
-    setTimeout(() => {
-      results[currentIdx] = false;
-      currentIdx++;
-    }, 500);
+    results[currentIdx] = false;
   }
 </script>
 
 <style>
-  .header {
-    padding: 1em;
+  p {
+    font-size: 38px;
+    padding: 0;
     margin: 0;
-    font-variant: small-caps;
   }
 
   ul {
-    font-family: menlo inconsolate, monospace;
-    font-size: 1.25rem;
     margin: 2.5em 0 0 0;
     padding: 0;
     text-align: center;
@@ -61,7 +54,7 @@
 <Page>
   {#if current}
     <Card>
-      <p class="header" slot="header">{`${current.q} = ?`}</p>
+      <p slot="header">{`${current.q} = ?`}</p>
       <Grid>
         {#each current.options as option, index (`${current.q}-${option}-${index}`)}
           <GameButton
@@ -74,19 +67,17 @@
         {/each}
       </Grid>
       <div slot="footer">
-        <GameScore {results} {total} {rights} size={1} />
+        <GameScore {results} {total} {rights} />
       </div>
     </Card>
   {:else}
     <Card>
-      <p class="header" slot="header">Report {rights} / {total}</p>
+      <p slot="header">RAPPORT</p>
       <ul>
         {#each questions as question, idx}
           <li>{question.q} = {question.answer} {results[idx] ? '✅' : '❌'}</li>
         {/each}
       </ul>
-      <GameScore {results} {total} {rights} size={2} showLabel={false} />
     </Card>
-    <GameKitten />
   {/if}
 </Page>

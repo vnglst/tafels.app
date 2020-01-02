@@ -3,7 +3,6 @@
   import Page from "../components/Page.svelte";
   import Card from "../components/Card.svelte";
   import Grid from "../components/Grid.svelte";
-  import Badge from "../components/BadgeIcon.svelte";
   import { store, tables, adds, hasPassed } from "./store.js";
   import { fly, fade } from "svelte/transition";
 
@@ -12,8 +11,8 @@
 
 <style>
   p {
-    padding: 1em;
     margin: 0;
+    padding: 1rem 0 0 0;
   }
 </style>
 
@@ -23,27 +22,22 @@
 
 <Page reverse>
   <Card>
-    <p slot="header">Additions</p>
+    <p slot="header">VERMENIGVULDIGEN</p>
     <Grid>
-      {#each $adds as add}
-        <Link link={`/add${add.n}`}>
-          <Badge completed={add.completed} passed={hasPassed(add.completed)}>
-            {add.n}
-          </Badge>
+      {#each $tables as table}
+        <Link link={`tafel${table.n}`} primary completed={table.completed >= 1}>
+          {table.n}
         </Link>
       {/each}
     </Grid>
   </Card>
+
   <Card>
-    <p slot="header">Multiplications</p>
+    <p slot="header">OPTELLEN</p>
     <Grid>
-      {#each $tables as table}
-        <Link link={`tafel${table.n}`}>
-          <Badge
-            completed={table.completed}
-            passed={hasPassed(table.completed)}>
-            {table.n}
-          </Badge>
+      {#each $adds as add}
+        <Link link={`/add${add.n}`} completed={add.completed >= 1}>
+          {add.n}
         </Link>
       {/each}
     </Grid>

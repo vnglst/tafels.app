@@ -1,11 +1,11 @@
 <script>
-  import Badge from "../components/BadgeIcon.svelte";
+  import IconCorrect from "./IconCorrect.svelte";
+  import IconWrong from "./IconWrong.svelte";
+  import IconCircle from "./IconCircle.svelte";
 
   export let rights;
   export let total;
   export let results;
-  export let size = 1;
-  export let showLabel = true;
 </script>
 
 <style>
@@ -16,28 +16,24 @@
     margin: 0;
     padding: 1.5em;
   }
-  .label {
-    margin: 0;
-    padding: 0 0.5em 0 0;
-  }
 
   li {
     display: block;
     padding: 0.1em;
+    color: var(--grey-200);
   }
 </style>
 
-<ul style={`font-size: ${size}rem`}>
-  {#if showLabel}
-    <p class="label">{`${rights}/${total}`}</p>
-  {/if}
+<ul>
   {#each results as result, index}
     <li>
-      <Badge
-        completed={result === true ? 1 : 0}
-        passed
-        wrong={result === false}
-        {size} />
+      {#if result === true}
+        <IconCorrect />
+      {:else if result === false}
+        <IconWrong />
+      {:else if result === undefined}
+        <IconCircle />
+      {/if}
     </li>
   {/each}
 </ul>

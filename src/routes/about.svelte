@@ -5,23 +5,13 @@
 </script>
 
 <style>
-  h1 {
-    font-size: 2rem;
-    padding: 1.5rem;
-  }
   div {
-    padding: 1rem 2rem;
-    margin-bottom: 1rem;
+    margin: 5rem;
   }
-
-  p {
-    margin: 0 0 2rem 0;
-    font-size: 1.25rem;
-    line-height: 2;
-  }
-
   button {
-    background-color: hsla(0, 100%, 100%, 0.5);
+    width: 15rem;
+    height: 3rem;
+    background-color: inherit;
   }
 </style>
 
@@ -30,20 +20,18 @@
 </svelte:head>
 
 <Page>
-  <Card>
-    <h1 slot="header">About</h1>
-    <div>
-      <p>Tafels.app was made by Koen van Gilst using Sapper and Svelte.</p>
-      <button
-        on:click={() => {
-          const sure = confirm('Cannot be undone, are you sure?');
-          if (sure) {
-            store.reset();
-            localStorage.clear();
-          }
-        }}>
-        Reset game state
-      </button>
-    </div>
-  </Card>
+  <div>
+    <h1>About</h1>
+    <p>Tafels.app was made by Koen van Gilst using Sapper and Svelte.</p>
+    <button
+      on:click={() => {
+        const sure = confirm('Cannot be undone, are you sure?');
+        if (sure) {
+          store.reset();
+          localStorage.clear();
+        }
+      }}>
+      Reset game state
+    </button>
+  </div>
 </Page>

@@ -2,15 +2,15 @@ import { writable, derived } from "svelte/store";
 
 const initialState = {
   "table-1": { completed: 0.0, n: 1 },
-  "table-3": { completed: 0.0, n: 3 },
-  "table-4": { completed: 0.0, n: 4 },
+  "table-10": { completed: 0.0, n: 10 },
   "table-2": { completed: 0.0, n: 2 },
   "table-5": { completed: 0.0, n: 5 },
+  "table-3": { completed: 0.0, n: 3 },
+  "table-4": { completed: 0.0, n: 4 },
   "table-6": { completed: 0.0, n: 6 },
   "table-7": { completed: 0.0, n: 7 },
   "table-8": { completed: 0.0, n: 8 },
   "table-9": { completed: 0.0, n: 9 },
-  "table-10": { completed: 0.0, n: 10 },
   "table-11": { completed: 0.0, n: 11 },
   "table-20": { completed: 0.0, n: 20 },
   "add-10": { completed: 0.0, n: 10 },
@@ -58,7 +58,7 @@ function createStore() {
 
 export const store = createStore();
 
-// converte lookup table to array for rendering
+// convert lookup table to array for rendering
 export const storeAsArray = derived(store, $state =>
   Object.keys($state).map(key => {
     return { id: key, ...$state[key] };
