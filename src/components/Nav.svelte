@@ -1,7 +1,7 @@
 <script>
   import Link from "./Link.svelte";
-  import BackIcon from "./BackIcon.svelte";
-  import GearIcon from "./GearIcon.svelte";
+  import IconBack from "./IconBack.svelte";
+  import IconCog from "./IconCog.svelte";
 
   export let segment;
 </script>
@@ -48,13 +48,13 @@
     {#if !segment}
       <!-- <li class:selected={segment === 'about'} class="right">
         <a rel="prefetch" href="about">
-          <GearIcon />
+          <IconCog />
         </a>
       </li> -->
     {:else}
       <li>
         <a rel="prefetch" href=".">
-          <BackIcon />
+          <IconBack />
         </a>
       </li>
     {/if}
