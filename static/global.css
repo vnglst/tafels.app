@@ -28,10 +28,12 @@
   --blue-800: hsl(212, 87%, 29%);
   --blue-900: hsl(212, 100%, 21%);
 
+  --red-050: hsl(0, 100%, 87%);
   --red-100: hsl(0, 100%, 87%);
   --red-500: hsl(360, 100%, 69%);
   --red-1000: hsl(0, 100%, 15%);
 
+  --green-050: hsla(134, 85%, 85%);
   --green-100: hsl(134, 94%, 79%);
   --green-500: hsl(134, 95%, 71%);
   --green-1000: hsl(127, 66%, 15%);
@@ -89,7 +91,7 @@ button,
   font-weight: 500;
   font-size: 24px;
   box-shadow: var(--shadow-2);
-  background-color: var(--grey-200);
+  background-color: var(--grey-100);
   color: var(--grey-900);
   display: flex;
   justify-content: center;

@@ -1,6 +1,6 @@
 <style>
   .primary {
-    color: var(--red-100);
+    color: var(--red-050);
   }
 
   .secondary {

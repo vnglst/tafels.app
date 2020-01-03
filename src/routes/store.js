@@ -7,7 +7,7 @@ const initialState = {
 };
 
 function createStore() {
-  const KEY = "tafels-app-v6";
+  const KEY = "tafels-app-v7";
 
   const { subscribe, set, update } = writable(initialState);
 

@@ -11,3 +11,11 @@ export const squakk = new Howl({
 export const yeah = new Howl({
   src: ["./sounds/hooyeah.mp3"]
 });
+
+export const tik = new Howl({
+  src: ["./sounds/tik.mp3"]
+});
+
+export const nope = new Howl({
+  src: ["./sounds/nope.mp3"]
+});

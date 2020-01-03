@@ -1,6 +1,7 @@
 <script>
   import IconLock from "./IconLock.svelte";
   import IconCorrect from "./IconCorrect.svelte";
+  import { tik } from "../components/soundFx.js";
 
   export let link;
   export let unlocked = false;
@@ -38,7 +39,11 @@
     <slot />
   </a>
 {:else}
-  <span class="button locked">
+  <button
+    on:click={() => {
+      tik.play();
+    }}
+    class="locked">
     <IconLock />
-  </span>
+  </button>
 {/if}
