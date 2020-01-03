@@ -19,7 +19,7 @@
 
   li {
     display: block;
-    padding: 0.1em;
+    padding: 0;
     color: var(--grey-200);
   }
 </style>
