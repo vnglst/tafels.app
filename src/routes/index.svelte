@@ -3,10 +3,14 @@
   import Page from "../components/Page.svelte";
   import Card from "../components/Card.svelte";
   import Grid from "../components/Grid.svelte";
-  import { store, tables, adds, hasPassed } from "./store.js";
+  import { store } from "./store.js";
   import { fly, fade } from "svelte/transition";
 
   store.useLocalStorage();
+  store.useUnlocking();
+
+  $: tables = Object.values($store).filter(t => t.type === "table");
+  $: adds = Object.values($store).filter(t => t.type === "add");
 </script>
 
 <style>
@@ -24,25 +28,24 @@
   <Card>
     <p slot="header">VERMENIGVULDIGEN</p>
     <Grid>
-      {#each $tables as table}
+      {#each tables as table}
         <Link
           link={`tafel${table.n}`}
-          locked={table.completed <= 0}
-          completed={table.completed >= 1}>
+          unlocked={table.unlocked}
+          completed={table.completed}>
           {table.n}
         </Link>
       {/each}
     </Grid>
   </Card>
-
   <Card>
     <p slot="header">OPTELLEN</p>
     <Grid>
-      {#each $adds as add}
+      {#each adds as add}
         <Link
           link={`add${add.n}`}
-          locked={add.completed <= 0}
-          completed={add.completed >= 1}>
+          unlocked={add.unlocked}
+          completed={add.completed}>
           {add.n}
         </Link>
       {/each}

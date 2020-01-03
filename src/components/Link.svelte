@@ -3,10 +3,10 @@
   import IconCorrect from "./IconCorrect.svelte";
 
   export let link;
-  export let locked = true;
+  export let unlocked = false;
   export let completed;
 
-  let active = !locked && !completed;
+  let active = unlocked && !completed;
 </script>
 
 <style>
@@ -28,20 +28,17 @@
   }
 </style>
 
-<a
-  rel="prefetch"
-  class="button"
-  class:locked
-  class:active
-  href={locked ? '#' : link}>
-  {#if completed}
-    <span class="icon-correct">
-      <IconCorrect />
-    </span>
-  {/if}
-  {#if locked}
-    <IconLock />
-  {:else}
+{#if unlocked}
+  <a rel="prefetch" class="button" class:active href={link}>
+    {#if completed}
+      <span class="icon-correct">
+        <IconCorrect />
+      </span>
+    {/if}
     <slot />
-  {/if}
-</a>
+  </a>
+{:else}
+  <span class="button locked">
+    <IconLock />
+  </span>
+{/if}

@@ -1,9 +1,9 @@
 <script context="module">
   import Game from "../components/Game.svelte";
   import { getAdditions } from "./addQuestions";
-  import { getAddId } from "./store.js";
+  import { getAddId } from "./categories";
 
-  export async function preload(page, session) {
+  export async function preload(page) {
     const { n } = page.params;
     const addId = getAddId(n);
     if (!addId) return this.error(404, "Not found");

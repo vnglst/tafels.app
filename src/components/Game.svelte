@@ -5,7 +5,7 @@
   import GameButton from "./GameButton.svelte";
   import GameScore from "./GameScore.svelte";
   import { nock, squakk, yeah } from "./soundFx";
-  import { store, tables } from "../routes/store.js";
+  import { store } from "../routes/store.js";
 
   export let id;
   export let questions;
@@ -19,7 +19,7 @@
   $: wrongs = results.filter(r => r === false).length;
   $: isDone = currentIdx === total;
   $: if (isDone) {
-    store.updateCompleted(id, rights / total);
+    store.complete(id);
     yeah.play();
   }
 

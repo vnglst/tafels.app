@@ -107,3 +107,13 @@ button,
     transform: scale(1);
   }
 }
+
+.button:hover,
+button:hover:not([disabled]) {
+  animation: zoom 100ms ease-in-out 1 forwards;
+}
+
+.button:active,
+button:active:not([disabled]) {
+  animation: press 100ms ease-in-out 1 forwards;
+}
