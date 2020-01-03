@@ -1,10 +1,10 @@
 <script>
   import Link from "../components/Link.svelte";
+  import VisuallyHidden from "../components/VisuallyHidden.svelte";
   import Page from "../components/Page.svelte";
   import Card from "../components/Card.svelte";
   import Grid from "../components/Grid.svelte";
   import { store } from "./store.js";
-  import { fly, fade } from "svelte/transition";
 
   store.useLocalStorage();
   store.useUnlocking();
@@ -25,12 +25,15 @@
 </svelte:head>
 
 <Page reverse>
+  <VisuallyHidden>
+    <h1>Beter leren rekenen</h1>
+  </VisuallyHidden>
   <Card>
     <p slot="header">VERMENIGVULDIGEN</p>
     <Grid>
       {#each tables as table}
         <Link
-          link={`tafel${table.n}`}
+          link={`tafel/${table.n}`}
           unlocked={table.unlocked}
           completed={table.completed}>
           {table.n}
@@ -43,7 +46,7 @@
     <Grid>
       {#each adds as add}
         <Link
-          link={`add${add.n}`}
+          link={`optellen/${add.n}`}
           unlocked={add.unlocked}
           completed={add.completed}>
           {add.n}

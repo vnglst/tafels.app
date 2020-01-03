@@ -1,7 +1,7 @@
 <script context="module">
-  import Game from "../components/Game.svelte";
+  import Game from "../../components/Game.svelte";
   import { getAdditions } from "./addQuestions";
-  import { getAddId } from "./categories";
+  import { getAddId } from "../categories";
 
   export async function preload(page) {
     const { n } = page.params;

@@ -1,4 +1,4 @@
-import { addRandomOptions, removeDups, rnd, prepare } from "./utils";
+import { addRandomOptions, removeDups, rnd, prepare } from "../utils";
 
 function generateAdditions(maxValue = 10, total = 10) {
   let table = [];

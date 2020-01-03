@@ -14,7 +14,7 @@
     position: relative;
   }
   .active {
-    background-color: var(--blue-400);
+    background-color: var(--blue-300);
   }
 
   .locked {

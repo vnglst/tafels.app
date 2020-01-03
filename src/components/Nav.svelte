@@ -9,7 +9,7 @@
 <style>
   nav {
     font-weight: normal;
-    color: var(--grey-1000);
+    color: var(--grey-800);
     background-color: var(--white);
     box-shadow: var(--shadow-3);
   }
@@ -37,9 +37,31 @@
   }
 
   a {
-    display: block;
+    display: flex;
     text-decoration: none;
     padding: 1rem;
+    align-items: center;
+  }
+
+  a:hover {
+    animation: bounce-left 800ms ease 0s 1 normal;
+  }
+
+  span {
+    padding-left: 0.5em;
+    line-height: 1em;
+  }
+
+  @keyframes bounce-left {
+    0% {
+      transform: translateX(0px);
+    }
+    25% {
+      transform: translateX(-10px);
+    }
+    100% {
+      transform: translateX(0px);
+    }
   }
 </style>
 
@@ -55,6 +77,7 @@
       <li>
         <a rel="prefetch" href=".">
           <IconBack />
+          <span>Terug</span>
         </a>
       </li>
     {/if}

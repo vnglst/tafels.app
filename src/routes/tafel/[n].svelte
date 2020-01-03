@@ -1,7 +1,7 @@
 <script context="module">
-  import Game from "../components/Game.svelte";
+  import Game from "../../components/Game.svelte";
   import { getTable } from "./tableQuestions";
-  import { getTableId } from "./categories.js";
+  import { getTableId } from "../categories";
 
   export async function preload(page) {
     const { n } = page.params;

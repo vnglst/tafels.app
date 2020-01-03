@@ -38,8 +38,8 @@
 </script>
 
 <style>
-  p {
-    font-size: 38px;
+  h1 {
+    font-size: 45px;
     padding: 0;
     margin: 0;
   }
@@ -54,10 +54,11 @@
 <Page>
   {#if current}
     <Card>
-      <p slot="header">{`${current.q} = ?`}</p>
+      <h1 slot="header">{`${current.q} = ?`}</h1>
       <Grid>
         {#each current.options as option, index (`${current.q}-${option}-${index}`)}
           <GameButton
+            i={index}
             expected={current.answer}
             value={option}
             on:correct={handleCorrect}
