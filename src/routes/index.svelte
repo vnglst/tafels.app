@@ -26,7 +26,7 @@
 
 <Page reverse>
   <VisuallyHidden>
-    <h1>Beter leren rekenen</h1>
+    <h1>Categoriën</h1>
   </VisuallyHidden>
   <Card>
     <p slot="header">VERMENIGVULDIGEN</p>
