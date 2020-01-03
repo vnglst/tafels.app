@@ -3,8 +3,9 @@
 :root {
   --white: white;
 
-  --grey-100: hsl(210, 36%, 96%);
-  --grey-200: hsl(212, 33%, 89%);
+  --grey-100: hsl(209, 36%, 96%);
+  --grey-200: hsl(209, 33%, 89%);
+  --grey-500: hsl(209, 17%, 45%);
   --grey-1000: hsl(209, 61%, 16%);
 
   --shadow-2: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
@@ -81,16 +82,6 @@ button,
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.button:hover,
-button:hover {
-  animation: zoom 100ms ease-in-out 1 forwards;
-}
-
-.button:active,
-button:active {
-  animation: press 100ms ease-in-out 1 forwards;
 }
 
 @keyframes zoom {

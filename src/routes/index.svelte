@@ -25,7 +25,10 @@
     <p slot="header">VERMENIGVULDIGEN</p>
     <Grid>
       {#each $tables as table}
-        <Link link={`tafel${table.n}`} primary completed={table.completed >= 1}>
+        <Link
+          link={`tafel${table.n}`}
+          locked={table.completed <= 0}
+          completed={table.completed >= 1}>
           {table.n}
         </Link>
       {/each}
@@ -36,7 +39,10 @@
     <p slot="header">OPTELLEN</p>
     <Grid>
       {#each $adds as add}
-        <Link link={`/add${add.n}`} completed={add.completed >= 1}>
+        <Link
+          link={`add${add.n}`}
+          locked={add.completed <= 0}
+          completed={add.completed >= 1}>
           {add.n}
         </Link>
       {/each}

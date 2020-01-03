@@ -32,6 +32,14 @@
   .wrong {
     background-color: var(--red-500);
   }
+
+  button:hover:not([disabled]) {
+    animation: zoom 100ms ease-in-out 1 forwards;
+  }
+
+  button:active:not([disabled]) {
+    animation: press 100ms ease-in-out 1 forwards;
+  }
 </style>
 
 <button class:correct class:wrong on:click|preventDefault|once={handleClick}>

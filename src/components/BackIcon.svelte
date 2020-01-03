@@ -1,6 +1,6 @@
 <svg
-  height="2rem"
-  width="2rem"
+  height="28"
+  width="28"
   fill="currentColor"
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 24 24">
