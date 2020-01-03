@@ -4,6 +4,8 @@
   import Page from "./Page.svelte";
   import GameButton from "./GameButton.svelte";
   import GameScore from "./GameScore.svelte";
+  import GameReport from "./GameReport.svelte";
+
   import { nock, squakk, yeah } from "./soundFx";
   import { store } from "../routes/store.js";
 
@@ -43,12 +45,6 @@
     padding: 0;
     margin: 0;
   }
-
-  ul {
-    margin: 2.5em 0 0 0;
-    padding: 0;
-    text-align: center;
-  }
 </style>
 
 <Page>
@@ -72,13 +68,6 @@
       </div>
     </Card>
   {:else}
-    <Card>
-      <p slot="header">RAPPORT</p>
-      <ul>
-        {#each questions as question, idx}
-          <li>{question.q} = {question.answer} {results[idx] ? '✅' : '❌'}</li>
-        {/each}
-      </ul>
-    </Card>
+    <GameReport {questions} {results} />
   {/if}
 </Page>

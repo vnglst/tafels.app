@@ -16,6 +16,7 @@
     background-color: var(--blue-050);
     border-radius: 20px 20px 0 0;
     margin: 0px 4px;
+    height: 4px;
     display: block;
     content: "";
   }
