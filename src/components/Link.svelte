@@ -1,46 +1,47 @@
 <script>
+  import IconLock from "./IconLock.svelte";
+  import IconCorrect from "./IconCorrect.svelte";
+
   export let link;
+  export let locked = true;
+  export let completed;
+
+  let active = !locked && !completed;
 </script>
 
 <style>
   a {
-    height: 6rem;
-    width: 6rem;
-    background-color: unset;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
+    position: relative;
+  }
+  .active {
+    background-color: var(--blue-400);
   }
 
-  a:hover {
-    animation: zoom 100ms ease-in-out 1 forwards;
+  .locked {
+    cursor: initial;
   }
 
-  a:active {
-    animation: press 100ms ease-in-out 1 forwards;
-  }
-
-  @keyframes zoom {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(1.2);
-    }
-  }
-
-  @keyframes press {
-    0% {
-      transform: scale(1.2);
-    }
-    100% {
-      transform: scale(1.05);
-    }
+  .icon-correct {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
   }
 </style>
 
-<a rel="prefetch" href={link}>
-  <slot />
+<a
+  rel="prefetch"
+  class="button"
+  class:locked
+  class:active
+  href={locked ? '#' : link}>
+  {#if completed}
+    <span class="icon-correct">
+      <IconCorrect />
+    </span>
+  {/if}
+  {#if locked}
+    <IconLock />
+  {:else}
+    <slot />
+  {/if}
 </a>

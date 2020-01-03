@@ -4,9 +4,9 @@ function generateTable(base, maxValue = 10) {
   const table = [];
   for (let i = 1; i <= maxValue; i++) {
     const question = {
-      q: `${i} x ${base}`,
-      answer: i * base,
-      options: [i * base]
+      q: `${base} x ${i}`,
+      answer: base * i,
+      options: [base * i]
     };
     table.push(question);
   }

@@ -1,19 +1,39 @@
-@import url("https://fonts.googleapis.com/css?family=Lato:400,900");
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+
+:root {
+  --white: white;
+
+  --grey-100: hsl(209, 36%, 96%);
+  --grey-200: hsl(209, 33%, 89%);
+  --grey-500: hsl(209, 17%, 45%);
+  --grey-1000: hsl(209, 61%, 16%);
+
+  --shadow-2: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+  --shadow-3: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+
+  --blue-400: hsl(212, 71%, 63%);
+
+  --red-100: hsl(0, 100%, 87%);
+  --red-500: hsl(360, 100%, 69%);
+  --red-1000: hsl(0, 100%, 15%);
+
+  --green-100: hsl(134, 94%, 79%);
+  --green-500: hsl(134, 95%, 71%);
+  --green-1000: hsl(127, 66%, 15%);
+}
 
 html {
   box-sizing: border-box;
-  font-weight: 900;
-  letter-spacing: 2px;
+  font-weight: 500;
   font-size: calc(0.5em + 1vmin);
-  line-height: 1.8;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
 body {
   margin: 0;
-  font-family: "Lato", verdana, sans-serif;
-  color: hsl(192, 0%, 100%);
-  background-color: hsl(192, 97%, 24%);
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  color: var(--grey-1000);
+  background-color: var(--grey-100);
 }
 
 *,
@@ -46,14 +66,44 @@ ul {
   list-style: none;
 }
 
-button {
-  font-weight: 900;
-  font-size: 1.25rem;
-  border-radius: 0.5em;
-  background: hsl(47, 100%, 60%);
-  border: 1px solid #011627;
-  color: #011627;
-  box-shadow: 0 1px 3px hsla(47, 100%, 60%, 0.2);
+button,
+.button {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
   text-decoration: none;
-  padding: 1rem;
+  border-radius: 1rem;
+  font-weight: 500;
+  font-size: 24px;
+  box-shadow: var(--shadow-2);
+  background-color: var(--grey-200);
+  color: var(--grey-1000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes press {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(0.9);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
