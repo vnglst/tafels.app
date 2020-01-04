@@ -21,7 +21,7 @@
   $: wrongs = results.filter(r => r === false).length;
   $: isDone = currentIdx === total;
   $: if (isDone) {
-    store.complete(id);
+    if (wrongs === 0) store.complete(id);
     yeah.play();
   }
 
