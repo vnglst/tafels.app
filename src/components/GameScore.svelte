@@ -3,8 +3,6 @@
   import IconWrong from "./IconWrong.svelte";
   import IconCircle from "./IconCircle.svelte";
 
-  export let rights;
-  export let total;
   export let results;
 </script>
 
