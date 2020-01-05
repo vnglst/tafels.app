@@ -4,11 +4,11 @@ A simple game to teach kids basic math (multiplication tables, additions, etc.)
 
 Made with:
 
-- 🎆 `svelte` and `sapper`
-- 🍡 nice animations and page transitions
-- 🌐 service workers
-- 🎺 web Audio with Howler
-- 🎉 UI + colors based on book Refactoring UI
+- `svelte` and `sapper`🎆
+- nice animations and page transitions 🍡
+- service workers 🌐
+- web Audio with Howler 🎺
+- UI + colors based on book Refactoring UI 🎉
 
 ## Development
 
