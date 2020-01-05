@@ -18,6 +18,10 @@
     background-color: var(--blue-300);
   }
 
+  .completed {
+    background-color: var(--blue-100);
+  }
+
   .locked {
     cursor: initial;
   }
@@ -30,7 +34,7 @@
 </style>
 
 {#if unlocked}
-  <a rel="prefetch" class="button" class:active href={link}>
+  <a rel="prefetch" class="button" class:active class:completed href={link}>
     {#if completed}
       <span class="icon-correct">
         <IconCorrect />
