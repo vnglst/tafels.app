@@ -7,6 +7,11 @@ import { terser } from "rollup-plugin-terser";
 import config from "sapper/config/rollup.js";
 import pkg from "./package.json";
 
+const commitHash = require("child_process")
+  .execSync('git log --pretty=format:"%h" -n1')
+  .toString()
+  .trim();
+
 const mode = process.env.NODE_ENV;
 const dev = mode === "development";
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
@@ -18,6 +23,14 @@ const onwarn = (warning, onwarn) =>
 const dedupe = importee =>
   importee === "svelte" || importee.startsWith("svelte/");
 
+const vars = {
+  "process.env.NODE_ENV": JSON.stringify(mode),
+  "process.env.COMMIT_HASH": JSON.stringify(commitHash),
+  "process.env.APP_VERSION": JSON.stringify(pkg.version)
+};
+
+console.log(vars);
+
 export default {
   client: {
     input: config.client.input(),
@@ -25,7 +38,7 @@ export default {
     plugins: [
       replace({
         "process.browser": true,
-        "process.env.NODE_ENV": JSON.stringify(mode)
+        ...vars
       }),
       svelte({
         dev,
@@ -77,7 +90,7 @@ export default {
     plugins: [
       replace({
         "process.browser": false,
-        "process.env.NODE_ENV": JSON.stringify(mode)
+        ...vars
       }),
       svelte({
         generate: "ssr",
@@ -103,7 +116,7 @@ export default {
       resolve(),
       replace({
         "process.browser": true,
-        "process.env.NODE_ENV": JSON.stringify(mode)
+        ...vars
       }),
       commonjs(),
       !dev && terser()

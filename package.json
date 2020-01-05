@@ -1,7 +1,8 @@
 {
   "name": "tafels-app",
-  "description": "TODO",
+  "description": "Tafels",
   "version": "0.0.1",
+  "license": "MIT",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
