@@ -1,0 +1,79 @@
+<script>
+  // Source :https://github.com/imbolc/sapper-page-loading-bar/blob/master/PageLoadingBar.svelte
+  export let preloading;
+  export let height = "6px";
+  export let color1 = "hsl(212, 74%, 65%)";
+  export let color2 = "hsl(212, 97%, 85%)";
+  $: style = `background-color: ${color1}; height: ${height}`;
+  $: inner_style = `background-color: ${color2}`;
+</script>
+
+<style>
+  .progress {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    height: 6px;
+    width: 100%;
+    border-radius: 2px;
+    background-clip: padding-box;
+    overflow: hidden;
+  }
+  .progress .indeterminate:before {
+    content: "";
+    position: absolute;
+    background-color: inherit;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    will-change: left, right;
+    animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395)
+      infinite;
+  }
+  .progress .indeterminate:after {
+    content: "";
+    position: absolute;
+    background-color: inherit;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    will-change: left, right;
+    animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1)
+      infinite;
+    animation-delay: 1.15s;
+  }
+  @keyframes indeterminate {
+    0% {
+      left: -35%;
+      right: 100%;
+    }
+    60% {
+      left: 100%;
+      right: -90%;
+    }
+    100% {
+      left: 100%;
+      right: -90%;
+    }
+  }
+  @keyframes indeterminate-short {
+    0% {
+      left: -200%;
+      right: 100%;
+    }
+    60% {
+      left: 107%;
+      right: -8%;
+    }
+    100% {
+      left: 107%;
+      right: -8%;
+    }
+  }
+</style>
+
+{#if $preloading}
+  <div class="progress" {style}>
+    <div class="indeterminate" style={inner_style} />
+  </div>
+{/if}

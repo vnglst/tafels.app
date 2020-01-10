@@ -98,30 +98,26 @@ button,
   align-items: center;
 }
 
-@keyframes zoom {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.2);
-  }
-}
-
-@keyframes press {
-  0% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1.05);
-  }
+.button,
+button {
+  transition: 0.5s cubic-bezier(0, 1.2, 0.2, 1.5);
 }
 
 .button:hover,
 button:hover:not([disabled]) {
-  animation: zoom 100ms ease-in-out 1 forwards;
+  transform: scale(1.15);
 }
 
 .button:active,
 button:active:not([disabled]) {
-  animation: press 100ms ease-in-out 1 forwards;
+  transform: scale(1.15);
+}
+
+code {
+  font-family: menlo, inconsolata, monospace;
+  font-size: calc(1em - 2px);
+  color: #555;
+  background-color: #f0f0f0;
+  padding: 0.2em 0.4em;
+  border-radius: 2px;
 }

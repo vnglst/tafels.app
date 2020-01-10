@@ -41,7 +41,7 @@
 
 <style>
   h1 {
-    font-size: 45px;
+    font-size: 28px;
     padding: 0;
     margin: 0;
   }
@@ -64,7 +64,7 @@
         {/each}
       </Grid>
       <div slot="footer">
-        <GameScore {results} {total} {rights} />
+        <GameScore {results} />
       </div>
     </Card>
   {:else}

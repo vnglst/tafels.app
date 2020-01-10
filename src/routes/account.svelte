@@ -8,10 +8,15 @@
   div {
     margin: 5rem;
   }
+
   button {
     width: 15rem;
     height: 3rem;
-    background-color: inherit;
+  }
+
+  pre {
+    font-family: menlo, inconsolata, monospace;
+    margin-top: 2rem;
   }
 </style>
 
@@ -22,7 +27,12 @@
 <Page>
   <div>
     <h1>About</h1>
-    <p>Tafels.app was made by Koen van Gilst using Sapper and Svelte.</p>
+    <p>
+      Tafels.app was made by Koen van Gilst using Sapper and Svelte.
+      <br />
+      🚧 Work in Progress 🚧
+      <br />
+    </p>
     <button
       on:click={() => {
         const sure = confirm('Cannot be undone, are you sure?');
@@ -31,7 +41,8 @@
           localStorage.clear();
         }
       }}>
-      Reset game state
+      Reset state
     </button>
+    <pre>{JSON.stringify($store, null, 4)}</pre>
   </div>
 </Page>
