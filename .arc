@@ -7,8 +7,11 @@ sweet-bwa
 
 @static
 
-@http
 
+@http
+get /
+post /count
+post /reset
 
 @tables
 data

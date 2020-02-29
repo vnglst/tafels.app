@@ -1,0 +1,15 @@
+{
+  "name": "post-reset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Koen van Gilst <koen.vangilst@gmail.com> (https://koenvangilst.nl)",
+  "license": "MIT",
+  "dependencies": {
+    "@architect/functions": "^3.7.6"
+  }
+}
