@@ -9,7 +9,7 @@
   store.useLocalStorage();
   store.useUnlocking();
 
-  $: tables = Object.values($store).filter(t => t.type === "table");
+  $: tables = Object.values($store).filter(t => t.type === "tafel");
   $: adds = Object.values($store).filter(t => t.type === "add");
 </script>
 

@@ -1,6 +1,6 @@
 import { addRandomOptions, prepare } from '../utils'
 
-function generateTableQuestions(base, maxValue = 1) {
+function generateTableQuestions(base, maxValue = 10) {
   const table = []
   for (let i = 1; i <= maxValue; i++) {
     const question = {
