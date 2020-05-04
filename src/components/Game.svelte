@@ -11,6 +11,7 @@
 
   export let id;
   export let questions;
+  export let unlocks;
 
   let total = questions.length;
   let results = new Array(total);
@@ -25,12 +26,17 @@
     yeah.play();
   }
 
+  function restart() {
+    results = new Array(total);
+    currentIdx = 0;
+  }
+
   function handleCorrect() {
     nock.play();
     if (results[currentIdx] === undefined) results[currentIdx] = true;
     setTimeout(() => {
       currentIdx++;
-    }, 500);
+    }, 200);
   }
 
   function handleWrong() {
@@ -68,6 +74,6 @@
       </div>
     </Card>
   {:else}
-    <GameReport {questions} {results} />
+    <GameReport {questions} {results} {unlocks} {restart} {id} {wrongs} />
   {/if}
 </Page>

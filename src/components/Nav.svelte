@@ -77,7 +77,7 @@
       <li>
         <a class="back-link" rel="prefetch" href=".">
           <IconBack />
-          <span>Terug</span>
+          <span>Back</span>
         </a>
       </li>
     {/if}

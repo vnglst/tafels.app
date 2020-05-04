@@ -9,7 +9,7 @@
   store.useLocalStorage();
   store.useUnlocking();
 
-  $: tables = Object.values($store).filter(t => t.type === "table");
+  $: tables = Object.values($store).filter(t => t.type === "tafel");
   $: adds = Object.values($store).filter(t => t.type === "add");
 </script>
 
@@ -26,10 +26,10 @@
 
 <Page reverse>
   <VisuallyHidden>
-    <h1>Categoriën</h1>
+    <h1>Categories</h1>
   </VisuallyHidden>
   <Card>
-    <p slot="header">VERMENIGVULDIGEN</p>
+    <p slot="header">MULTIPLICATION</p>
     <Grid>
       {#each tables as table}
         <Link
@@ -42,11 +42,11 @@
     </Grid>
   </Card>
   <Card>
-    <p slot="header">OPTELLEN</p>
+    <p slot="header">ADDITION</p>
     <Grid>
       {#each adds as add}
         <Link
-          link={`optellen/${add.n}`}
+          link={`add/${add.n}`}
           unlocked={add.unlocked}
           completed={add.completed}>
           {add.n}
