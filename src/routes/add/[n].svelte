@@ -1,14 +1,15 @@
 <script context="module">
   import Game from "../../components/Game.svelte";
-  import { getAdditions } from "./addQuestions";
-  import { getAddId } from "../categories";
+  import { getAddQuestions } from "./addQuestions";
+  import { getAddId, getAdd } from "../categories";
 
   export async function preload(page) {
     const { n } = page.params;
     const addId = getAddId(n);
     if (!addId) return this.error(404, "Not found");
-    let questions = getAdditions(n);
-    return { questions, addId, n };
+    let questions = getAddQuestions(n);
+    let add = getAdd(addId);
+    return { questions, addId, n, add };
   }
 </script>
 
@@ -16,10 +17,11 @@
   export let questions;
   export let addId;
   export let n;
+  export let add;
 </script>
 
 <svelte:head>
   <title>Additions {n}</title>
 </svelte:head>
 
-<Game {questions} id={addId} />
+<Game {questions} id={addId} unlocks={add.unlocks} />
