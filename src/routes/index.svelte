@@ -41,8 +41,9 @@
 <style>
   h2 {
     margin: 0;
-    padding: 2rem 0 0 0;
+    padding: 5rem 0 0 0;
     font-weight: 400;
     font-size: 28px;
+    text-transform: uppercase;
   }
 </style>

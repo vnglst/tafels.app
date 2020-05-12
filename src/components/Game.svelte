@@ -87,6 +87,6 @@
   h1 {
     font-size: 28px;
     margin: 0;
-    padding: 3rem 0 0 0;
+    padding: 4rem 0 0 0;
   }
 </style>

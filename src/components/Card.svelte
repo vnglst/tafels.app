@@ -25,7 +25,6 @@
     margin: 0;
     font-size: 28px;
     text-align: center;
-    text-transform: uppercase;
   }
 
   .footer {
