@@ -60,7 +60,7 @@
   button {
     margin: 0 auto;
     width: 15rem;
-    height: 3rem;
+    height: 4rem;
     background-color: var(--red-500);
   }
 </style>
