@@ -53,3 +53,18 @@ export function removeDups(arr, property) {
 }
 
 export const prepare = table => shuffleOptions(shuffle(table));
+
+export function generateChallenges({ initialState, definition, getQuestions }) {
+  let challenges = {};
+  for (let n in initialState) {
+    challenges[n] = {
+      ...definition,
+      ...initialState[n],
+      getQuestions,
+      id: n,
+      questions: getQuestions(n)
+    }
+  }
+  return challenges;
+}
+

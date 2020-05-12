@@ -6,6 +6,20 @@
   export let results;
 </script>
 
+<ul>
+  {#each results as result, index}
+    <li>
+      {#if result === true}
+        <IconCorrect />
+      {:else if result === false}
+        <IconWrong />
+      {:else if result === undefined}
+        <IconCircle />
+      {/if}
+    </li>
+  {/each}
+</ul>
+
 <style>
   ul {
     display: flex;
@@ -21,17 +35,3 @@
     color: var(--grey-200);
   }
 </style>
-
-<ul>
-  {#each results as result, index}
-    <li>
-      {#if result === true}
-        <IconCorrect />
-      {:else if result === false}
-        <IconWrong />
-      {:else if result === undefined}
-        <IconCircle />
-      {/if}
-    </li>
-  {/each}
-</ul>
