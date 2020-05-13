@@ -2,11 +2,13 @@
 
 A simple game to teach kids basic math (multiplication tables, additions, etc.)
 
+I created this for my daughter to help her get better at math. It's still a work in progress. It's one of my first projects with Sapper and (coming from React) I'm a big fan. My code is shorter and everything feels easier and faster (especially animations). I think it's a big leap forward.
+
 Made with:
 
 - `svelte` and `sapper`🎆
 - nice animations and page transitions 🍡
-- service workers 🌐
+- service worker 🌐
 - web Audio with Howler 🎺
 - UI + colors based on book Refactoring UI 🎉
 
@@ -28,11 +30,11 @@ yarn export
 git push # 😸
 ```
 
-## Conclusions about sapper and svelte
+## About Sapper and Svelte
 
-Needs some polishing here and there (lots of bug fixes with every new version) but in general it's pretty cool. Less code & a faster user experience. Built-in animations are a big win (always a pain with React) and the routing solution that sappers offers (also for SPA's) is a godsend compared to React Router.
+Needs some polishing here and there (lots of bug fixes with every new version) but in general it's pretty cool. Less code & a faster user experience. Built-in animations are a big win (always a pain with React) and the routing solution that Sapper offers (also for SPA's) is a godsend compared to React Router.
 
-Still figering out svelte's state management solution, which is an improvement on Redux, but I also ran into some gotcha's.
+Still figuring out Svelte's state management solution, which is an improvement on Redux, but I also ran into some gotcha's.
 
 ## Credits
 
