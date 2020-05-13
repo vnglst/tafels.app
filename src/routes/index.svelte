@@ -4,21 +4,13 @@
   import Page from "../components/Page.svelte";
   import Card from "../components/Card.svelte";
   import Grid from "../components/Grid.svelte";
-  import { store } from "./store.js";
+  import { store } from "./questions-store.js";
+  import { subtracts } from "./subtract/subtractQuestions.js";
+  import { adds } from "./add/addQuestions.js";
+  import { tables } from "./table/tableQuestions.js";
 
-  store.useLocalStorage();
-  store.useUnlocking();
-
-  $: tables = Object.values($store).filter(t => t.type === "tafel");
-  $: adds = Object.values($store).filter(t => t.type === "add");
+  let categories = [tables, adds, subtracts];
 </script>
-
-<style>
-  p {
-    margin: 0;
-    padding: 1rem 0 0 0;
-  }
-</style>
 
 <svelte:head>
   <title>Tables App</title>
@@ -28,30 +20,30 @@
   <VisuallyHidden>
     <h1>Categories</h1>
   </VisuallyHidden>
-  <Card>
-    <p slot="header">MULTIPLICATION</p>
-    <Grid>
-      {#each tables as table}
-        <Link
-          link={`tafel/${table.n}`}
-          unlocked={table.unlocked}
-          completed={table.completed}>
-          {table.n}
-        </Link>
-      {/each}
-    </Grid>
-  </Card>
-  <Card>
-    <p slot="header">ADDITION</p>
-    <Grid>
-      {#each adds as add}
-        <Link
-          link={`add/${add.n}`}
-          unlocked={add.unlocked}
-          completed={add.completed}>
-          {add.n}
-        </Link>
-      {/each}
-    </Grid>
-  </Card>
+  {#each categories as category}
+    <Card>
+      <h2 slot="header">{category.title}</h2>
+      <Grid>
+        {#each Object.entries($store[category.category]) as [n, challenge]}
+          <Link
+            link={`${category.slug}/${n}`}
+            unlocked={challenge.unlocked}
+            completed={challenge.completed}
+          >
+            {n}
+          </Link>
+        {/each}
+      </Grid>
+    </Card>
+  {/each}
 </Page>
+
+<style>
+  h2 {
+    margin: 0;
+    padding: 5rem 0 0 0;
+    font-weight: 400;
+    font-size: 28px;
+    text-transform: uppercase;
+  }
+</style>

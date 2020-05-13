@@ -1,3 +1,13 @@
+<div class="card">
+  <div class="header">
+    <slot name="header" />
+  </div>
+  <slot />
+  <div class="footer">
+    <slot name="footer" />
+  </div>
+</div>
+
 <style>
   .card {
     border-top: 10px solid var(--blue-050);
@@ -13,7 +23,6 @@
   }
   .header {
     margin: 0;
-    padding: 4rem 0 0 0;
     font-size: 28px;
     text-align: center;
   }
@@ -23,13 +32,3 @@
     padding: 0;
   }
 </style>
-
-<div class="card">
-  <div class="header">
-    <slot name="header" />
-  </div>
-  <slot />
-  <div class="footer">
-    <slot name="footer" />
-  </div>
-</div>

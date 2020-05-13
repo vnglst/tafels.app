@@ -5,25 +5,37 @@
   import GameButton from "./GameButton.svelte";
   import GameScore from "./GameScore.svelte";
   import GameReport from "./GameReport.svelte";
-
   import { nock, squakk, yeah } from "./soundFx";
-  import { store } from "../routes/store.js";
+  import { store } from "../routes/questions-store.js";
 
-  export let id;
-  export let questions;
-  export let unlocks;
+  export let challenge;
 
-  let total = questions.length;
+  let total = challenge.questions.length;
   let results = new Array(total);
   let currentIdx = 0;
 
-  $: current = questions[currentIdx];
+  $: current = challenge.questions[currentIdx];
   $: rights = results.filter(r => r === true).length;
   $: wrongs = results.filter(r => r === false).length;
+  $: flawless = wrongs === 0;
+  $: passed = wrongs <= 2;
   $: isDone = currentIdx === total;
+
   $: if (isDone) {
-    if (wrongs === 0) store.complete(id);
-    yeah.play();
+    if (flawless) {
+      store.complete({
+        category: challenge.category,
+        challenge: challenge.id
+      });
+    }
+
+    if (passed) {
+      store.unlockNext({
+        category: challenge.category,
+        challenge: challenge.id
+      });
+      yeah.play();
+    }
   }
 
   function restart() {
@@ -45,14 +57,6 @@
   }
 </script>
 
-<style>
-  h1 {
-    font-size: 28px;
-    padding: 0;
-    margin: 0;
-  }
-</style>
-
 <Page>
   {#if current}
     <Card>
@@ -64,7 +68,8 @@
             expected={current.answer}
             value={option}
             on:correct={handleCorrect}
-            on:wrong={handleWrong}>
+            on:wrong={handleWrong}
+          >
             {option}
           </GameButton>
         {/each}
@@ -74,6 +79,14 @@
       </div>
     </Card>
   {:else}
-    <GameReport {questions} {results} {unlocks} {restart} {id} {wrongs} />
+    <GameReport {challenge} {results} {restart} {passed} {flawless} />
   {/if}
 </Page>
+
+<style>
+  h1 {
+    font-size: 28px;
+    margin: 0;
+    padding: 4rem 0 0 0;
+  }
+</style>

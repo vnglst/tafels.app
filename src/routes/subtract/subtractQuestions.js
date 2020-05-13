@@ -1,38 +1,39 @@
 import { addRandomOptions, removeDups, rnd, prepare, generateChallenges } from '../utils'
 
-function generateAddQuestions(maxValue = 10, total = 10) {
+function generateQuestions(maxValue = 10, total = 10) {
   let table = []
 
   while (table.length < total) {
-    const i = rnd({ from: 1, to: maxValue - 1 })
-    const j = rnd({ from: 1, to: maxValue - i })
+    const i = rnd({ from: 1, to: maxValue })
+    const j = rnd({ from: 1, to: maxValue })
 
     const question = {
-      q: `${i} + ${j}`,
-      answer: i + j,
-      options: [i + j],
+      q: `${i} - ${j}`,
+      answer: i - j,
+      options: [i - j]
     }
 
-    table.push(question)
-    table = removeDups(table, 'q')
+    // only add subtractions with positive results
+    if (i - j > 0) {
+      table.push(question)
+      table = removeDups(table, 'q')
+    }
   }
-
-  const half = Math.floor(maxValue / 2)
 
   return addRandomOptions({
     table,
     total: 9,
-    min: maxValue - half,
-    max: maxValue + half,
+    min: 0,
+    max: maxValue,
   })
 }
 
-const getQuestions = n => prepare(generateAddQuestions(n))
+const getQuestions = n => prepare(generateQuestions(n))
 
 const definition = {
-  title: "Additions",
-  category: 'adds',
-  slug: 'add'
+  title: "Subtractions",
+  category: 'subtracts',
+  slug: 'subtract'
 }
 
 const initialState = {
@@ -50,7 +51,7 @@ const initialState = {
   999: { unlocks: null },
 }
 
-export const adds = {
+export const subtracts = {
   ...definition,
   initialState,
   challenges: generateChallenges({ initialState, definition, getQuestions })

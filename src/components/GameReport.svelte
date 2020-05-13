@@ -3,15 +3,54 @@
   import IconCorrect from "./IconCorrect.svelte";
   import IconWrong from "./IconWrong.svelte";
 
-  export let id;
-  export let questions;
   export let results;
-  export let unlocks;
-  export let wrongs;
   export let restart;
+  export let flawless = false;
+  export let passed = false;
+  export let challenge;
+
+  const { slug, id, questions, unlocks } = challenge;
 </script>
 
+<Card>
+  <h1 slot="header">REPORT CARD</h1>
+  {#if flawless}
+    <p>Flawless! 🎉</p>
+  {:else}
+    {#if passed}
+      <p>Passed! 🚀</p>
+    {/if}
+    <ul>
+      {#each questions as question, idx}
+        {#if !results[idx]}
+          <li>
+            {question.q} = {question.answer}
+            <span>
+              <IconWrong />
+            </span>
+          </li>
+        {/if}
+      {/each}
+    </ul>
+  {/if}
+  <div class="call-to-actions">
+    <a on:click={restart} class="button link again" href={`/${slug}/${id}`}>
+      Try again
+    </a>
+    {#if passed && unlocks}
+      <a on:click={restart} class="button link" href={`/${slug}/${unlocks}`}>
+        Next
+      </a>
+    {:else if flawless && !unlocks}
+      <a class="button link" href="/">Overview</a>
+    {/if}
+  </div>
+</Card>
+
 <style>
+  h1 {
+    margin-top: 4rem;
+  }
   ul {
     font-size: 18px;
     margin: 1em 0;
@@ -59,39 +98,3 @@
     font-size: 28px;
   }
 </style>
-
-<Card>
-  <h1 slot="header">REPORT CARD</h1>
-  {#if wrongs === 0}
-    <p>Flawless! 🎉</p>
-  {:else}
-    <ul>
-      {#each questions as question, idx}
-        {#if !results[idx]}
-          <li>
-            {question.q} = {question.answer}
-            <span>
-              <IconWrong />
-            </span>
-          </li>
-        {/if}
-      {/each}
-    </ul>
-  {/if}
-  <div class="call-to-actions">
-    <a
-      on:click={restart}
-      class="button link again"
-      href={`/${id.replace('-', '/')}`}>
-      Try again
-    </a>
-    {#if wrongs === 0}
-      <a
-        on:click={restart}
-        class="button link"
-        href={`/${unlocks.replace('-', '/')}`}>
-        Next
-      </a>
-    {/if}
-  </div>
-</Card>
