@@ -22,8 +22,8 @@ function generateAddQuestions(maxValue = 10, total = 10) {
   return addRandomOptions({
     table,
     total: 9,
-    min: maxValue - half,
-    max: maxValue + half,
+    min: half,
+    max: 2 * maxValue,
   })
 }
 

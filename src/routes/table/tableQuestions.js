@@ -28,7 +28,7 @@ const definition = {
 
 const initialState = {
   1: { unlocked: true, unlocks: 2 },
-  10: { unlocked: true, unlocks: 2 },
+  10: { unlocks: 2 },
   2: { unlocks: 5 },
   5: { unlocks: 3 },
   3: { unlocks: 4 },
