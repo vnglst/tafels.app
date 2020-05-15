@@ -1,7 +1,7 @@
 {
   "background_color": "#ffffff",
   "theme_color": "#333333",
-  "name": "Tafels App",
+  "name": "tafels.app",
   "short_name": "Tafels",
   "display": "standalone",
   "start_url": "/",
