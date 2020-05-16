@@ -34,6 +34,10 @@ Needs some polishing here and there (lots of bug fixes with every new version) b
 
 Still figering out svelte's state management solution, which is an improvement on Redux, but I also ran into some gotcha's.
 
+## PWA tips
+
+- Tried using pwacompat but it wasn't doing anything for me on iOS/Safari. Also: I did not like the idea of using JavaScript to fix issues that can also be manually fixed by adding the correct icons. That's something you'd have to do 1 time for you app using a tool like: https://app-manifest.firebaseapp.com/.
+
 ## Credits
 
 - Sound files (squakk + nock + restart): https://freesound.org/people/yawfle/packs/367/
