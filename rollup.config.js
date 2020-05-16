@@ -29,8 +29,6 @@ const vars = {
   "process.env.APP_VERSION": JSON.stringify(pkg.version)
 };
 
-console.log(vars);
-
 export default {
   client: {
     input: config.client.input(),
@@ -52,35 +50,35 @@ export default {
       commonjs(),
 
       legacy &&
-        babel({
-          extensions: [".js", ".mjs", ".html", ".svelte"],
-          runtimeHelpers: true,
-          exclude: ["node_modules/@babel/**"],
-          presets: [
-            [
-              "@babel/preset-env",
-              {
-                targets: "> 0.25%, not dead"
-              }
-            ]
-          ],
-          plugins: [
-            "@babel/plugin-syntax-dynamic-import",
-            [
-              "@babel/plugin-transform-runtime",
-              {
-                useESModules: true
-              }
-            ]
+      babel({
+        extensions: [".js", ".mjs", ".html", ".svelte"],
+        runtimeHelpers: 'runtime',
+        exclude: ["node_modules/@babel/**"],
+        presets: [
+          [
+            "@babel/preset-env",
+            {
+              targets: "> 0.25%, not dead"
+            }
           ]
-        }),
+        ],
+        plugins: [
+          "@babel/plugin-syntax-dynamic-import",
+          [
+            "@babel/plugin-transform-runtime",
+            {
+              useESModules: true
+            }
+          ]
+        ]
+      }),
 
       !dev &&
-        terser({
-          module: true
-        })
+      terser({
+        module: true
+      })
     ],
-
+    preserveEntrySignatures: false,
     onwarn
   },
 
@@ -103,7 +101,7 @@ export default {
     ],
     external: Object.keys(pkg.dependencies).concat(
       require("module").builtinModules ||
-        Object.keys(process.binding("natives"))
+      Object.keys(process.binding("natives"))
     ),
 
     onwarn
