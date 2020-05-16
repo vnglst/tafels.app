@@ -1,6 +1,6 @@
 {
   "name": "tafels.app",
-  "short_name": "tafels",
+  "short_name": "tafels.app",
   "theme_color": "#266ec0",
   "background_color": "#102a42",
   "display": "standalone",
