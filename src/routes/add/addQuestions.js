@@ -1,4 +1,4 @@
-import { addRandomOptions, removeDups, rnd, prepare, generateChallenges } from '../utils'
+import { addRandomOptions, removeDups, rnd, generateChallenges } from '../utils'
 
 function generateAddQuestions(maxValue = 10, total = 10) {
   let table = []
@@ -27,7 +27,7 @@ function generateAddQuestions(maxValue = 10, total = 10) {
   })
 }
 
-const getQuestions = n => prepare(generateAddQuestions(n))
+const getQuestions = n => generateAddQuestions(n)
 
 const definition = {
   title: "Additions",
