@@ -6,36 +6,16 @@ export const rnd = ({ from = 0, to = 1 }) => {
 
 export const shuffle = arr => arr.sort(() => Math.random() - 0.5);
 
-export function shuffleOptions(table) {
-  table.forEach(question => {
-    question.options = shuffle(question.options);
-  });
-  return table;
-}
-
 export function addRandomOptions({ table, total, min, max }) {
   table.forEach(question => {
-    const newOptions = generateMoreOptions({
-      total,
-      existing: question.options,
-      min,
-      max
-    });
-    question.options = newOptions;
+    while (question.options.length < total) {
+      const newOption = rnd({ from: min, to: max });
+      const exists = question.options.find(option => option === newOption);
+      if (!exists) question.options.push(newOption);
+    }
+    question.options.sort((a, b) => a - b)
   });
   return table;
-}
-
-export function generateMoreOptions({ total, existing, min, max }) {
-  const choices = [...existing];
-
-  while (choices.length < total) {
-    const newChoice = rnd({ from: min, to: max });
-    const exists = choices.find(choice => choice === newChoice);
-    if (!exists) choices.push(newChoice);
-  }
-
-  return choices;
 }
 
 export function removeDups(arr, property) {
@@ -51,8 +31,6 @@ export function removeDups(arr, property) {
   }
   return newArray;
 }
-
-export const prepare = table => shuffleOptions(shuffle(table));
 
 export function generateChallenges({ initialState, definition, getQuestions }) {
   let challenges = {};

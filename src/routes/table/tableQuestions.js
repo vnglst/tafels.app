@@ -1,4 +1,4 @@
-import { addRandomOptions, prepare, generateChallenges } from '../utils'
+import { addRandomOptions, generateChallenges } from '../utils'
 
 function generateTableQuestions(base, maxValue = 10) {
   const table = []
@@ -18,7 +18,7 @@ function generateTableQuestions(base, maxValue = 10) {
   })
 }
 
-export const getQuestions = n => prepare(generateTableQuestions((n)))
+export const getQuestions = n => generateTableQuestions((n))
 
 const definition = {
   title: "Multiplications",

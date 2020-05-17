@@ -88,6 +88,7 @@
     font-size: 20px;
     width: max-content;
     padding: 0.5em 1em;
+    min-width: 6em;
   }
 
   .again {
