@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-  <title>Tables App</title>
+  <title>tafels.app - a math trainer for kids</title>
 </svelte:head>
 
 <Page reverse>

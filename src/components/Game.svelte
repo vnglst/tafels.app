@@ -10,6 +10,8 @@
 
   export let challenge;
 
+  const DURATION = 10;
+
   let total = challenge.questions.length;
   let results = new Array(total);
   let currentIdx = 0;
@@ -18,7 +20,7 @@
   $: rights = results.filter(r => r === true).length;
   $: wrongs = results.filter(r => r === false).length;
   $: flawless = wrongs === 0;
-  $: passed = wrongs <= 2;
+  $: passed = wrongs <= Math.round(total * 0.2); // 20% of questions correct
   $: isDone = currentIdx === total;
 
   $: if (isDone) {
@@ -55,11 +57,23 @@
     squakk.play();
     results[currentIdx] = false;
   }
+
+  function handleTimeout() {
+    squakk.play();
+    results[currentIdx] = false;
+    setTimeout(() => {
+      currentIdx++;
+    }, 200);
+  }
 </script>
 
 <Page>
   {#if current}
-    <Card>
+    <Card
+      duration={DURATION}
+      onTimeout={handleTimeout}
+      completed={results[currentIdx] === true}
+    >
       <h1 slot="header">{`${current.q} = ?`}</h1>
       <Grid>
         {#each current.options as option, index (`${current.q}-${option}-${index}`)}

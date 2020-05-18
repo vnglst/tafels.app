@@ -36,6 +36,7 @@ Needs some polishing here and there (lots of bug fixes with every new version) b
 
 Still figuring out Svelte's state management solution, which is an improvement on Redux, but I also ran into some gotcha's.
 
+
 ## Credits
 
 - Sound files (squakk + nock + restart): https://freesound.org/people/yawfle/packs/367/
