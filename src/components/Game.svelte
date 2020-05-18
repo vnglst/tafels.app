@@ -10,11 +10,12 @@
 
   export let challenge;
 
-  const DURATION = 10;
+  const DURATION = 20;
 
   let total = challenge.questions.length;
   let results = new Array(total);
   let currentIdx = 0;
+  let showTimer = true;
 
   $: current = challenge.questions[currentIdx];
   $: rights = results.filter(r => r === true).length;
@@ -48,7 +49,9 @@
   function handleCorrect() {
     nock.play();
     if (results[currentIdx] === undefined) results[currentIdx] = true;
+    showTimer = false;
     setTimeout(() => {
+      showTimer = true;
       currentIdx++;
     }, 200);
   }
@@ -61,7 +64,9 @@
   function handleTimeout() {
     squakk.play();
     results[currentIdx] = false;
+    showTimer = false;
     setTimeout(() => {
+      showTimer = true;
       currentIdx++;
     }, 200);
   }
@@ -69,11 +74,7 @@
 
 <Page>
   {#if current}
-    <Card
-      duration={DURATION}
-      onTimeout={handleTimeout}
-      completed={results[currentIdx] === true}
-    >
+    <Card duration={DURATION} onTimeout={handleTimeout} {showTimer}>
       <h1 slot="header">{`${current.q} = ?`}</h1>
       <Grid>
         {#each current.options as option, index (`${current.q}-${option}-${index}`)}

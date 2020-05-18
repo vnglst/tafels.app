@@ -4,13 +4,13 @@
 
   export let duration = null;
   export let onTimeout = null;
-  export let completed = false;
+  export let showTimer = false;
 
   let timedOut = false;
 </script>
 
 <div class="card">
-  {#if duration && !timedOut && !completed}
+  {#if duration && showTimer && !timedOut}
     <div
       class="progress animated"
       on:animationend={() => {
@@ -22,8 +22,7 @@
       }}
       style="animation-duration: {duration}s"
     />
-  {/if}
-  {#if timedOut}
+  {:else if timedOut}
     <div class="progress ended" />
   {/if}
   <div class="header">
