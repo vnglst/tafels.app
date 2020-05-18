@@ -10,6 +10,13 @@
   import { tables } from "./table/tableQuestions.js";
 
   let categories = [tables, adds, subtracts];
+
+  function calcProgress(category) {
+    let challenges = Object.values($store[category.category]);
+    let completed = challenges.filter(challenge => challenge.completed).length;
+    let total = challenges.length;
+    return Math.round((completed / total) * 100);
+  }
 </script>
 
 <svelte:head>
@@ -21,7 +28,7 @@
     <h1>Categories</h1>
   </VisuallyHidden>
   {#each categories as category}
-    <Card>
+    <Card progress={calcProgress(category)}>
       <h2 slot="header">{category.title}</h2>
       <Grid>
         {#each Object.entries($store[category.category]) as [n, challenge]}

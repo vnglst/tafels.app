@@ -1,5 +1,6 @@
 <script>
   import Card from "./Card.svelte";
+  import Timer from "./Timer.svelte";
   import Grid from "./Grid.svelte";
   import Page from "./Page.svelte";
   import GameButton from "./GameButton.svelte";
@@ -74,7 +75,10 @@
 
 <Page>
   {#if current}
-    <Card duration={DURATION} onTimeout={handleTimeout} {showTimer}>
+    <Card>
+      <span slot="progress">
+        <Timer duration={DURATION} on:timeout={handleTimeout} {showTimer} />
+      </span>
       <h1 slot="header">{`${current.q} = ?`}</h1>
       <Grid>
         {#each current.options as option, index (`${current.q}-${option}-${index}`)}
