@@ -29,7 +29,7 @@
 <style>
   .progress {
     margin-top: -10px;
-    border-bottom: 10px solid var(--blue-300);
+    border-top: 10px solid var(--blue-300);
     border-radius: 20px 0 0 0;
     width: 100%;
   }
