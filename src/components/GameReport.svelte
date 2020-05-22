@@ -1,7 +1,8 @@
 <script>
   import Card from "./Card.svelte";
-  import IconCorrect from "./IconCorrect.svelte";
-  import IconWrong from "./IconWrong.svelte";
+  import IconCorrect from "../ui/IconCorrect.svelte";
+  import IconWrong from "../ui/IconWrong.svelte";
+  import Button from "../ui/Button.svelte";
 
   export let results;
   export let restart;
@@ -34,15 +35,31 @@
     </ul>
   {/if}
   <div class="call-to-actions">
-    <a on:click={restart} class="button link again" href={`/${slug}/${id}`}>
-      Try again
-    </a>
+    <Button
+      on:click={restart}
+      primary
+      pill
+      href={`/${slug}/${id}`}
+      elementType="link"
+    >
+      {flawless ? 'Again' : 'Try again'}
+    </Button>
     {#if passed && unlocks}
-      <a on:click={restart} class="button link" href={`/${slug}/${unlocks}`}>
+      <Button
+        on:click={restart}
+        success
+        pill
+        animate
+        delay={100}
+        href={`/${slug}/${unlocks}`}
+        elementType="link"
+      >
         Next
-      </a>
-    {:else if flawless && !unlocks}
-      <a class="button link" href="/">Overview</a>
+      </Button>
+    {:else}
+      <Button on:click={restart} success pill href={`/`} elementType="link">
+        Overview
+      </Button>
     {/if}
   </div>
 </Card>
@@ -81,18 +98,6 @@
     align-items: center;
     justify-content: space-around;
     margin: 2em 0;
-  }
-
-  .link {
-    background-color: var(--blue-100);
-    font-size: 20px;
-    width: max-content;
-    padding: 0.5em 1em;
-    min-width: 6em;
-  }
-
-  .again {
-    background-color: var(--green-100);
   }
 
   h1 {

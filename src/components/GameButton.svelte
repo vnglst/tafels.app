@@ -1,55 +1,43 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { fly } from "svelte/transition";
-  import { flip } from "svelte/animate";
-  import { elasticOut } from "svelte/easing";
-
-  const dispatch = createEventDispatcher();
+  import Button from "../ui/Button.svelte";
 
   export let i;
   export let value;
   export let expected;
 
-  let wrong = false;
-  let correct = false;
+  const dispatch = createEventDispatcher();
+
+  let answer = "no answer";
 
   function handleClick() {
     if (value === expected) {
-      correct = true;
+      answer = "correct";
       dispatch("correct");
     } else {
-      wrong = true;
+      answer = "wrong";
       dispatch("wrong");
     }
   }
-
-  function pop(node, { duration, delay }) {
-    return {
-      delay,
-      duration,
-      css: t => {
-        const eased = elasticOut(t);
-        return `transform: scale(${eased});`;
-      }
-    };
-  }
 </script>
 
+<Button
+  primary={answer === 'no answer'}
+  success={answer === 'correct'}
+  danger={answer === 'wrong'}
+  class={answer === 'wrong' ? 'wrong' : ''}
+  animate
+  delay={i * 50}
+  on:click|once={handleClick}
+  elementType="button"
+>
+  <slot />
+</Button>
+
 <style>
-  button {
-    background-color: var(--blue-300);
-  }
-
-  .correct {
-    background-color: var(--green-500);
-  }
-
-  .wrong {
-    background-color: var(--red-500);
-    animation: fall-down 1000ms ease-in-out 1 forwards;
-  }
-
-  .wrong:hover {
+  /* only global classes can be passed to child components in svelte :-(  */
+  :global(.wrong) {
+    background-color: var(--red-100) !important;
     animation: fall-down 1000ms ease-in-out 1 forwards;
   }
 
@@ -64,11 +52,3 @@
     }
   }
 </style>
-
-<button
-  in:pop={{ duration: 750, delay: i * 50 }}
-  class:correct
-  class:wrong
-  on:click|preventDefault|once={handleClick}>
-  <slot />
-</button>

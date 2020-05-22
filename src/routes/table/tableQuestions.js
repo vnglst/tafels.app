@@ -1,6 +1,6 @@
 import { addRandomOptions, generateChallenges } from '../utils'
 
-function generateTableQuestions(base, maxValue = 10) {
+function generateTableQuestions(base, maxValue = 1) {
   const table = []
   for (let i = 1; i <= maxValue; i++) {
     const question = {
@@ -27,7 +27,7 @@ const definition = {
 }
 
 const initialState = {
-  1: { unlocked: true, unlocks: 2 },
+  1: { unlocked: true, unlocks: 10 },
   10: { unlocks: 2 },
   2: { unlocks: 5 },
   5: { unlocks: 3 },
