@@ -1,6 +1,6 @@
 <script>
-  import IconBack from "../ui/IconBack.svelte";
-  import IconUserCircle from "../ui/IconUserCircle.svelte";
+  import IconBack from "./IconBack.svelte";
+  import IconUserCircle from "./IconUserCircle.svelte";
 
   export let segment;
 </script>

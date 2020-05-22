@@ -1,11 +1,13 @@
 <script>
-  import ChallengeLink from "../components/ChallengeLink.svelte";
   import VisuallyHidden from "../ui/VisuallyHidden.svelte";
   import IconLock from "../ui/IconLock.svelte";
   import IconCorrect from "../ui/IconCorrect.svelte";
-  import Page from "../components/Page.svelte";
-  import Card from "../components/Card.svelte";
-  import Grid from "../components/Grid.svelte";
+  import Page from "../ui/Page.svelte";
+  import Card from "../ui/Card.svelte";
+  import Grid from "../ui/Grid.svelte";
+
+  import ChallengeLink from "../components/ChallengeLink.svelte";
+
   import { store } from "./questions-store.js";
   import { subtracts } from "./subtract/subtractQuestions.js";
   import { adds } from "./add/addQuestions.js";

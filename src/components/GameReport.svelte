@@ -1,5 +1,5 @@
 <script>
-  import Card from "./Card.svelte";
+  import Card from "../ui/Card.svelte";
   import IconCorrect from "../ui/IconCorrect.svelte";
   import IconWrong from "../ui/IconWrong.svelte";
   import Button from "../ui/Button.svelte";
