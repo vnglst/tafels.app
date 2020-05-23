@@ -40,7 +40,7 @@ Developing with Service Workers turned on (i.e. in dev mode) really works well w
 
 ## PWA tips
 
-- Tried using pwacompat but it wasn't doing anything for me on iOS/Safari. Also: I did not like the idea of using JavaScript to fix issues that can also be manually fixed by adding the correct icons. That's something you'd have to do 1 time for you app using a tool like: https://app-manifest.firebaseapp.com/.
+- Tried using pwacompat but it wasn't doing much for me on iOS/Safari. I also don't like the idea of using JavaScript to fix issues that can be fixed by adding the correct icons. That's something you'd have to do 1 time for you app using a tool like: https://app-manifest.firebaseapp.com/. I'm still using pwacompat for the splashscreens, though.
 
 ## Credits
 
