@@ -1,7 +1,7 @@
 <script>
-  import IconCorrect from "./IconCorrect.svelte";
-  import IconWrong from "./IconWrong.svelte";
-  import IconCircle from "./IconCircle.svelte";
+  import IconCorrect from "../ui/IconCorrect.svelte";
+  import IconWrong from "../ui/IconWrong.svelte";
+  import IconCircle from "../ui/IconCircle.svelte";
 
   export let results;
 </script>

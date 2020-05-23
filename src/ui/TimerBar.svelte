@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import Card from "./Card.svelte";
 
   export let duration = null;
   export let showTimer = false;

@@ -1,22 +1,19 @@
 <script>
-  import Link from "../components/Link.svelte";
-  import VisuallyHidden from "../components/VisuallyHidden.svelte";
-  import Page from "../components/Page.svelte";
-  import Card from "../components/Card.svelte";
-  import Grid from "../components/Grid.svelte";
+  import VisuallyHidden from "../ui/VisuallyHidden.svelte";
+  import IconLock from "../ui/IconLock.svelte";
+  import IconCorrect from "../ui/IconCorrect.svelte";
+  import Page from "../ui/Page.svelte";
+  import Card from "../ui/Card.svelte";
+  import Grid from "../ui/Grid.svelte";
+
+  import ChallengeLink from "../components/ChallengeLink.svelte";
+
   import { store } from "./questions-store.js";
   import { subtracts } from "./subtract/subtractQuestions.js";
   import { adds } from "./add/addQuestions.js";
   import { tables } from "./table/tableQuestions.js";
 
   let categories = [tables, adds, subtracts];
-
-  function calcProgress(category) {
-    let challenges = Object.values($store[category.category]);
-    let completed = challenges.filter(challenge => challenge.completed).length;
-    let total = challenges.length;
-    return Math.round((completed / total) * 100);
-  }
 </script>
 
 <svelte:head>
@@ -28,17 +25,17 @@
     <h1>Categories</h1>
   </VisuallyHidden>
   {#each categories as category}
-    <Card progress={calcProgress(category)}>
+    <Card>
       <h2 slot="header">{category.title}</h2>
       <Grid>
         {#each Object.entries($store[category.category]) as [n, challenge]}
-          <Link
-            link={`${category.slug}/${n}`}
+          <ChallengeLink
+            href={`${category.slug}/${n}`}
             unlocked={challenge.unlocked}
             completed={challenge.completed}
           >
             {n}
-          </Link>
+          </ChallengeLink>
         {/each}
       </Grid>
     </Card>

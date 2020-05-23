@@ -1,3 +1,7 @@
+<div class="grid">
+  <slot />
+</div>
+
 <style>
   .grid {
     display: grid;
@@ -8,7 +12,3 @@
     margin: 3rem auto;
   }
 </style>
-
-<div class="grid">
-  <slot />
-</div>

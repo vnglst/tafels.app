@@ -1,10 +1,29 @@
 <script>
-  import Link from "./Link.svelte";
   import IconBack from "./IconBack.svelte";
   import IconUserCircle from "./IconUserCircle.svelte";
 
   export let segment;
 </script>
+
+<nav>
+  <ul>
+    {#if segment && process.browser}
+      <li class="back-link">
+        <a rel="prefetch" href="../">
+          <IconBack />
+          <span>Back</span>
+        </a>
+      </li>
+    {/if}
+    {#if !segment}
+      <li class="right nav-link">
+        <a rel="prefetch" href="/account">
+          <IconUserCircle />
+        </a>
+      </li>
+    {/if}
+  </ul>
+</nav>
 
 <style>
   nav {
@@ -70,23 +89,3 @@
     transform: scale(1.3);
   }
 </style>
-
-<nav>
-  <ul>
-    {#if segment && process.browser}
-      <li>
-        <a class="back-link" rel="prefetch" href=".">
-          <IconBack />
-          <span>Back</span>
-        </a>
-      </li>
-    {/if}
-    {#if !segment}
-      <li class="right">
-        <a class="nav-link" rel="prefetch" href="/account">
-          <IconUserCircle />
-        </a>
-      </li>
-    {/if}
-  </ul>
-</nav>

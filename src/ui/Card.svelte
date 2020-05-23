@@ -40,6 +40,7 @@
     border-bottom: 10px solid var(--blue-300);
     border-radius: 20px 0 0 0;
   }
+
   .header {
     font-size: 28px;
     text-align: center;

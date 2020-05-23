@@ -1,12 +1,14 @@
 <script>
-  import Card from "./Card.svelte";
-  import Timer from "./Timer.svelte";
-  import Grid from "./Grid.svelte";
-  import Page from "./Page.svelte";
+  import Card from "../ui/Card.svelte";
+  import TimerBar from "../ui/TimerBar.svelte";
+  import Grid from "../ui/Grid.svelte";
+  import Page from "../ui/Page.svelte";
+
   import GameButton from "./GameButton.svelte";
   import GameScore from "./GameScore.svelte";
   import GameReport from "./GameReport.svelte";
-  import { nock, squakk, yeah } from "./soundFx";
+
+  import { nock, squakk, yeah } from "../helpers/soundFx";
   import { store } from "../routes/questions-store.js";
 
   export let challenge;
@@ -77,7 +79,7 @@
   {#if current}
     <Card>
       <span slot="progress">
-        <Timer duration={DURATION} on:timeout={handleTimeout} {showTimer} />
+        <TimerBar duration={DURATION} on:timeout={handleTimeout} {showTimer} />
       </span>
       <h1 slot="header">{`${current.q} = ?`}</h1>
       <Grid>

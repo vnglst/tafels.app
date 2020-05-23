@@ -1,7 +1,7 @@
 <script>
   import { stores } from "@sapper/app";
-  import Nav from "../components/Nav.svelte";
-  import PageLoadingBar from "../components/PageLoadingBar.svelte";
+  import Nav from "../ui/Nav.svelte";
+  import PageLoadingBar from "../ui/PageLoadingBar.svelte";
 
   export let segment;
 
