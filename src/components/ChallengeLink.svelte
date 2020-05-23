@@ -13,7 +13,7 @@
     <slot />
     {#if completed}
       <span class="icon">
-        <IconCorrect />
+        <IconCorrect size={24} />
       </span>
     {/if}
   {:else}
@@ -24,7 +24,7 @@
 <style>
   .icon {
     position: absolute;
-    top: -0.5rem;
-    right: -0.5rem;
+    top: -0.6rem;
+    right: -0.6rem;
   }
 </style>
