@@ -38,6 +38,11 @@ But there are a few things I like: you can just use <a href=... and it (more of 
 
 Developing with Service Workers turned on (i.e. in dev mode) really works well with Sapper too, not sure how they're doing that!
 
+### What I didn't like
+- you can't (easily) pass classes to child components (I had to make them global to make it work).
+- multiple slots per component are nice, but they have to be DOMElements, so you end up putting extra spans and divs around Components to use them as slots
+- animations are only available on DOM elements, so you can't create a basic component (i.e. a Button) and add animations only in one of the parent components. This hinders composition somewhat I my opninion.
+
 ## PWA tips
 
 - Tried using pwacompat but it wasn't doing much for me on iOS/Safari. I also don't like the idea of using JavaScript to fix issues that can be fixed by adding the correct icons. That's something you'd have to do 1 time for you app using a tool like: https://app-manifest.firebaseapp.com/. I'm still using pwacompat for the splashscreens, though.
