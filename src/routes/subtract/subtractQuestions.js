@@ -43,11 +43,11 @@ const initialState = {
   25: { unlocks: 50 },
   50: { unlocks: 75 },
   75: { unlocks: 100 },
-  100: { unlocks: 100 },
-  200: { unlocks: 200 },
-  250: { unlocks: 250 },
-  500: { unlocks: 500 },
-  750: { unlocks: 750 },
+  100: { unlocks: 200 },
+  200: { unlocks: 250 },
+  250: { unlocks: 500 },
+  500: { unlocks: 750 },
+  750: { unlocks: 999 },
   999: { unlocks: null },
 }
 
