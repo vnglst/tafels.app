@@ -1,10 +1,10 @@
-<script>
+<script lang="typescript">
   import { createEventDispatcher } from "svelte";
   import Button from "../ui/Button.svelte";
 
-  export let i;
-  export let value;
-  export let expected;
+  export let i: number;
+  export let value: string;
+  export let expected: string;
 
   const dispatch = createEventDispatcher();
 

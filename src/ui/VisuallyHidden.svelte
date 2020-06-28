@@ -1,3 +1,8 @@
+f
+<span>
+  <slot />
+</span>
+
 <style>
   span {
     border: 0;
@@ -14,7 +19,3 @@
     word-wrap: normal;
   }
 </style>
-
-<span>
-  <slot />
-</span>

@@ -1,9 +1,9 @@
-<script>
+<script lang="typescript">
   import IconLock from "../ui/IconLock.svelte";
   import IconCorrect from "../ui/IconCorrect.svelte";
   import Button from "../ui/Button.svelte";
 
-  export let href;
+  export let href: string;
   export let unlocked = false;
   export let completed = false;
 </script>

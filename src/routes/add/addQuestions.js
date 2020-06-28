@@ -1,39 +1,44 @@
-import { addRandomOptions, removeDups, rnd, generateChallenges } from '../utils'
+import {
+  addRandomOptions,
+  removeDups,
+  rnd,
+  generateChallenges,
+} from "../utils";
 
 function generateAddQuestions(maxValue = 10, total = 10) {
-  let table = []
+  let table = [];
 
   while (table.length < total) {
-    const i = rnd({ from: 1, to: maxValue - 1 })
-    const j = rnd({ from: 1, to: maxValue - i })
+    const i = rnd({ from: 1, to: maxValue - 1 });
+    const j = rnd({ from: 1, to: maxValue - i });
 
     const question = {
       q: `${i} + ${j}`,
       answer: i + j,
       options: [i + j],
-    }
+    };
 
-    table.push(question)
-    table = removeDups(table, 'q')
+    table.push(question);
+    table = removeDups(table, "q");
   }
 
-  const half = Math.floor(maxValue / 2)
+  const half = Math.floor(maxValue / 2);
 
   return addRandomOptions({
     table,
     total: 9,
     min: half,
     max: 2 * maxValue,
-  })
+  });
 }
 
-const getQuestions = n => generateAddQuestions(n)
+const getQuestions = (n) => generateAddQuestions(n);
 
 const definition = {
   title: "Additions",
-  category: 'adds',
-  slug: 'add'
-}
+  category: "adds",
+  slug: "add",
+};
 
 const initialState = {
   10: { unlocked: true, unlocks: 15 },
@@ -48,12 +53,10 @@ const initialState = {
   500: { unlocks: 750 },
   750: { unlocks: 999 },
   999: { unlocks: null },
-}
+};
 
 export const adds = {
   ...definition,
   initialState,
-  challenges: generateChallenges({ initialState, definition, getQuestions })
-}
-
-
+  challenges: generateChallenges({ initialState, definition, getQuestions }),
+};

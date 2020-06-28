@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
   import Card from "../ui/Card.svelte";
   import TimerBar from "../ui/TimerBar.svelte";
   import Grid from "../ui/Grid.svelte";
@@ -20,10 +20,15 @@
   let currentIdx = 0;
   let showTimer = true;
 
-  $: current = challenge.questions[currentIdx];
-  $: rights = results.filter(r => r === true).length;
-  $: wrongs = results.filter(r => r === false).length;
+  let flawless: boolean;
+  let current: number;
+  let wrongs: number;
+  let passed: boolean;
+  let isDone: boolean;
+
   $: flawless = wrongs === 0;
+  $: current = challenge.questions[currentIdx];
+  $: wrongs = results.filter((r) => r === false).length;
   $: passed = wrongs <= Math.round(total * 0.2); // 20% of questions correct
   $: isDone = currentIdx === total;
 
@@ -31,14 +36,14 @@
     if (flawless) {
       store.complete({
         category: challenge.category,
-        challenge: challenge.id
+        challenge: challenge.id,
       });
     }
 
     if (passed) {
       store.unlockNext({
         category: challenge.category,
-        challenge: challenge.id
+        challenge: challenge.id,
       });
       yeah.play();
     }

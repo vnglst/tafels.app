@@ -4,6 +4,8 @@ import commonjs from "rollup-plugin-commonjs";
 import svelte from "rollup-plugin-svelte";
 import babel from "rollup-plugin-babel";
 import { terser } from "rollup-plugin-terser";
+import sveltePreprocess from "svelte-preprocess";
+import typescript from "@rollup/plugin-typescript";
 import config from "sapper/config/rollup.js";
 import pkg from "./package.json";
 
@@ -20,13 +22,13 @@ const onwarn = (warning, onwarn) =>
   (warning.code === "CIRCULAR_DEPENDENCY" &&
     /[/\\]@sapper[/\\]/.test(warning.message)) ||
   onwarn(warning);
-const dedupe = importee =>
+const dedupe = (importee) =>
   importee === "svelte" || importee.startsWith("svelte/");
 
 const vars = {
   "process.env.NODE_ENV": JSON.stringify(mode),
   "process.env.COMMIT_HASH": JSON.stringify(commitHash),
-  "process.env.APP_VERSION": JSON.stringify(pkg.version)
+  "process.env.APP_VERSION": JSON.stringify(pkg.version),
 };
 
 export default {
@@ -36,50 +38,52 @@ export default {
     plugins: [
       replace({
         "process.browser": true,
-        ...vars
+        ...vars,
       }),
       svelte({
         dev,
         hydratable: true,
-        emitCss: true
+        emitCss: true,
+        preprocess: sveltePreprocess(),
       }),
       resolve({
         browser: true,
-        dedupe
+        dedupe,
       }),
+      typescript(),
       commonjs(),
 
       legacy &&
-      babel({
-        extensions: [".js", ".mjs", ".html", ".svelte"],
-        runtimeHelpers: 'runtime',
-        exclude: ["node_modules/@babel/**"],
-        presets: [
-          [
-            "@babel/preset-env",
-            {
-              targets: "> 0.25%, not dead"
-            }
-          ]
-        ],
-        plugins: [
-          "@babel/plugin-syntax-dynamic-import",
-          [
-            "@babel/plugin-transform-runtime",
-            {
-              useESModules: true
-            }
-          ]
-        ]
-      }),
+        babel({
+          extensions: [".js", ".mjs", ".html", ".svelte"],
+          runtimeHelpers: "runtime",
+          exclude: ["node_modules/@babel/**"],
+          presets: [
+            [
+              "@babel/preset-env",
+              {
+                targets: "> 0.25%, not dead",
+              },
+            ],
+          ],
+          plugins: [
+            "@babel/plugin-syntax-dynamic-import",
+            [
+              "@babel/plugin-transform-runtime",
+              {
+                useESModules: true,
+              },
+            ],
+          ],
+        }),
 
       !dev &&
-      terser({
-        module: true
-      })
+        terser({
+          module: true,
+        }),
     ],
     preserveEntrySignatures: false,
-    onwarn
+    onwarn,
   },
 
   server: {
@@ -88,23 +92,25 @@ export default {
     plugins: [
       replace({
         "process.browser": false,
-        ...vars
+        ...vars,
       }),
       svelte({
         generate: "ssr",
-        dev
+        dev,
+        preprocess: sveltePreprocess(),
       }),
       resolve({
-        dedupe
+        dedupe,
       }),
-      commonjs()
+      commonjs(),
+      typescript(),
     ],
     external: Object.keys(pkg.dependencies).concat(
       require("module").builtinModules ||
-      Object.keys(process.binding("natives"))
+        Object.keys(process.binding("natives"))
     ),
 
-    onwarn
+    onwarn,
   },
 
   serviceworker: {
@@ -114,12 +120,12 @@ export default {
       resolve(),
       replace({
         "process.browser": true,
-        ...vars
+        ...vars,
       }),
       commonjs(),
-      !dev && terser()
+      !dev && terser(),
     ],
 
-    onwarn
-  }
+    onwarn,
+  },
 };

@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
   import { createEventDispatcher } from "svelte";
   import { elasticOut } from "svelte/easing";
 
@@ -23,10 +23,10 @@
     return {
       delay,
       duration,
-      css: t => {
+      css: (t) => {
         const eased = elasticOut(t);
         return `transform: scale(${eased});`;
-      }
+      },
     };
   }
 </script>
@@ -41,7 +41,7 @@
     class:danger
     {disabled}
     {href}
-    on:click|preventDefault={e => dispatch('click', e)}
+    on:click|preventDefault={(e) => dispatch('click', e)}
   >
     <slot />
   </button>
@@ -54,7 +54,7 @@
     class:success
     class:danger
     {href}
-    on:click={e => dispatch('click', e)}
+    on:click={(e) => dispatch('click', e)}
   >
     <slot />
   </a>

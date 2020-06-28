@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
   import IconCorrect from "../ui/IconCorrect.svelte";
   import IconWrong from "../ui/IconWrong.svelte";
   import IconCircle from "../ui/IconCircle.svelte";

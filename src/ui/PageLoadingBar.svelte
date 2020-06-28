@@ -1,9 +1,11 @@
-<script>
+<script lang="typescript">
   // Source :https://github.com/imbolc/sapper-page-loading-bar/blob/master/PageLoadingBar.svelte
   export let preloading;
   export let height = "6px";
   export let color1 = "hsl(212, 74%, 65%)";
   export let color2 = "hsl(212, 97%, 85%)";
+  let style: string;
+  let inner_style: string;
   $: style = `background-color: ${color1}; height: ${height}`;
   $: inner_style = `background-color: ${color2}`;
 </script>

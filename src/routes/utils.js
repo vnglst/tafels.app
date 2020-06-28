@@ -4,16 +4,18 @@ export const rnd = ({ from = 0, to = 1 }) => {
   return Math.round(rnd);
 };
 
-export const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+export const shuffle = (arr) => {
+  return arr.sort(() => Math.random() - 0.5);
+};
 
 export function addRandomOptions({ table, total, min, max }) {
-  table.forEach(question => {
+  table.forEach((question) => {
     while (question.options.length < total) {
       const newOption = rnd({ from: min, to: max });
-      const exists = question.options.find(option => option === newOption);
+      const exists = question.options.find((option) => option === newOption);
       if (!exists) question.options.push(newOption);
     }
-    question.options.sort((a, b) => a - b)
+    question.options.sort((a, b) => a - b);
   });
   return table;
 }
@@ -40,9 +42,8 @@ export function generateChallenges({ initialState, definition, getQuestions }) {
       ...initialState[n],
       getQuestions,
       id: n,
-      questions: getQuestions(n)
-    }
+      questions: getQuestions(n),
+    };
   }
   return challenges;
 }
-

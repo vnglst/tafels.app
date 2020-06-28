@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
   import Page from "../../ui/Page.svelte";
   import Card from "../../ui/Card.svelte";
   import Grid from "../../ui/Grid.svelte";
