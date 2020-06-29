@@ -1,22 +1,24 @@
-import { addRandomOptions, removeDups, rnd, generateChallenges } from '../utils'
+import { removeDups, rnd } from "../utils";
+import { addRandomOptions, generate, Question } from "../question-utils";
 
-function generateQuestions(maxValue = 10, total = 10) {
-  let table = []
+function generateSubstractQuestions(base = 10) {
+  const TOTAL = 10;
+  let table: Question[] = [];
 
-  while (table.length < total) {
-    const i = rnd({ from: 1, to: maxValue })
-    const j = rnd({ from: 1, to: maxValue })
+  while (table.length < TOTAL) {
+    const i = rnd({ from: 1, to: base });
+    const j = rnd({ from: 1, to: base });
 
     const question = {
       q: `${i} - ${j}`,
       answer: i - j,
-      options: [i - j]
-    }
+      options: [i - j],
+    };
 
     // only add subtractions with positive results
     if (i - j > 0) {
-      table.push(question)
-      table = removeDups(table, 'q')
+      table.push(question);
+      table = removeDups(table, "q");
     }
   }
 
@@ -24,17 +26,15 @@ function generateQuestions(maxValue = 10, total = 10) {
     table,
     total: 9,
     min: 0,
-    max: maxValue,
-  })
+    max: base,
+  });
 }
-
-const getQuestions = n => generateQuestions(n)
 
 const definition = {
   title: "Subtractions",
-  category: 'subtracts',
-  slug: 'subtract'
-}
+  category: "subtracts",
+  slug: "subtract",
+};
 
 const initialState = {
   10: { unlocked: true, unlocks: 15 },
@@ -49,12 +49,10 @@ const initialState = {
   500: { unlocks: 750 },
   750: { unlocks: 999 },
   999: { unlocks: null },
-}
+};
 
-export const subtracts = {
-  ...definition,
+export const subtracts = generate({
   initialState,
-  challenges: generateChallenges({ initialState, definition, getQuestions })
-}
-
-
+  definition,
+  generateQuestions: generateSubstractQuestions,
+});

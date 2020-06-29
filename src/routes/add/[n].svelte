@@ -10,8 +10,9 @@
   }
 </script>
 
-<script>
-  export let challenge;
+<script lang="typescript">
+  import { Challenge } from "../question-utils";
+  export let challenge: Challenge;
 </script>
 
 <svelte:head>

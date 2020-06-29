@@ -1,4 +1,5 @@
 <script lang="typescript">
+  import { Challenge, Question } from "../routes/question-utils";
   import Card from "../ui/Card.svelte";
   import TimerBar from "../ui/TimerBar.svelte";
   import Grid from "../ui/Grid.svelte";
@@ -11,7 +12,7 @@
   import { nock, squakk, yeah } from "../helpers/soundFx";
   import { store } from "../routes/questions-store.js";
 
-  export let challenge;
+  export let challenge: Challenge;
 
   const DURATION = 20;
 
@@ -21,7 +22,7 @@
   let showTimer = true;
 
   let flawless: boolean;
-  let current: number;
+  let current: Question;
   let wrongs: number;
   let passed: boolean;
   let isDone: boolean;

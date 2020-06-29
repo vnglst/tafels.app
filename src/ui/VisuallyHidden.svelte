@@ -1,4 +1,3 @@
-f
 <span>
   <slot />
 </span>

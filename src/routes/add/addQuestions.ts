@@ -1,16 +1,13 @@
-import {
-  addRandomOptions,
-  removeDups,
-  rnd,
-  generateChallenges,
-} from "../utils";
+import { removeDups, rnd } from "../utils";
+import { addRandomOptions, generate, Question } from "../question-utils";
 
-function generateAddQuestions(maxValue = 10, total = 10) {
-  let table = [];
+function generateAddQuestions(base = 10) {
+  const TOTAL = 10;
+  let table: Question[] = [];
 
-  while (table.length < total) {
-    const i = rnd({ from: 1, to: maxValue - 1 });
-    const j = rnd({ from: 1, to: maxValue - i });
+  while (table.length < TOTAL) {
+    const i = rnd({ from: 1, to: base - 1 });
+    const j = rnd({ from: 1, to: base - i });
 
     const question = {
       q: `${i} + ${j}`,
@@ -22,17 +19,15 @@ function generateAddQuestions(maxValue = 10, total = 10) {
     table = removeDups(table, "q");
   }
 
-  const half = Math.floor(maxValue / 2);
+  const half = Math.floor(base / 2);
 
   return addRandomOptions({
     table,
     total: 9,
     min: half,
-    max: 2 * maxValue,
+    max: 2 * base,
   });
 }
-
-const getQuestions = (n) => generateAddQuestions(n);
 
 const definition = {
   title: "Additions",
@@ -55,8 +50,8 @@ const initialState = {
   999: { unlocks: null },
 };
 
-export const adds = {
-  ...definition,
+export const adds = generate({
   initialState,
-  challenges: generateChallenges({ initialState, definition, getQuestions }),
-};
+  definition,
+  generateQuestions: generateAddQuestions,
+});

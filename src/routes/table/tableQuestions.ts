@@ -1,30 +1,29 @@
-import { addRandomOptions, generateChallenges } from '../utils'
+import { addRandomOptions, generate, Question } from "../question-utils";
 
-function generateTableQuestions(base, maxValue = 10) {
-  const table = []
-  for (let i = 1; i <= maxValue; i++) {
+function generateTableQuestions(base: number) {
+  const TOTAL = 10;
+  const table: Question[] = [];
+  for (let i = 1; i <= TOTAL; i++) {
     const question = {
       q: `${base} x ${i}`,
       answer: base * i,
       options: [base * i],
-    }
-    table.push(question)
+    };
+    table.push(question);
   }
   return addRandomOptions({
     table,
     total: 9,
     min: 1,
-    max: base * maxValue + 10,
-  })
+    max: base * TOTAL + 10,
+  });
 }
-
-export const getQuestions = n => generateTableQuestions((n))
 
 const definition = {
   title: "Multiplications",
-  category: 'tables',
-  slug: 'table'
-}
+  category: "tables",
+  slug: "table",
+};
 
 const initialState = {
   1: { unlocked: true, unlocks: 10 },
@@ -39,10 +38,10 @@ const initialState = {
   9: { unlocks: 11 },
   11: { unlocks: 20 },
   20: { unlocks: null },
-}
+};
 
-export const tables = {
-  ...definition,
+export const tables = generate({
+  definition,
   initialState,
-  challenges: generateChallenges({ initialState, definition, getQuestions })
-}
+  generateQuestions: generateTableQuestions,
+});

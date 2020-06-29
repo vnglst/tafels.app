@@ -1,14 +1,15 @@
 <script lang="typescript">
+  import { Challenge } from "../routes/question-utils";
   import Card from "../ui/Card.svelte";
   import IconCorrect from "../ui/IconCorrect.svelte";
   import IconWrong from "../ui/IconWrong.svelte";
   import Button from "../ui/Button.svelte";
 
-  export let results;
-  export let restart;
+  export let results: boolean[];
+  export let restart: () => null;
   export let flawless = false;
   export let passed = false;
-  export let challenge;
+  export let challenge: Challenge;
 
   const { slug, id, questions, unlocks } = challenge;
 </script>
