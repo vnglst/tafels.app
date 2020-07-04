@@ -113,19 +113,19 @@ export default {
     onwarn,
   },
 
-  serviceworker: {
-    input: config.serviceworker.input(),
-    output: config.serviceworker.output(),
-    plugins: [
-      resolve(),
-      replace({
-        "process.browser": true,
-        ...vars,
-      }),
-      commonjs(),
-      !dev && terser(),
-    ],
+  // serviceworker: {
+  //   input: config.serviceworker.input(),
+  //   output: config.serviceworker.output(),
+  //   plugins: [
+  //     resolve(),
+  //     replace({
+  //       "process.browser": true,
+  //       ...vars,
+  //     }),
+  //     commonjs(),
+  //     !dev && terser(),
+  //   ],
 
-    onwarn,
-  },
+  //   onwarn,
+  // },
 };
