@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   import { Challenge, Question } from "../routes/question-utils";
   import Card from "../ui/Card.svelte";
   import TimerBar from "../ui/TimerBar.svelte";

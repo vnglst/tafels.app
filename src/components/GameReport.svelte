@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   import { Challenge } from "../routes/question-utils";
   import Card from "../ui/Card.svelte";
   import IconCorrect from "../ui/IconCorrect.svelte";

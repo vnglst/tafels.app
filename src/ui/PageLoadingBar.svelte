@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   // Source :https://github.com/imbolc/sapper-page-loading-bar/blob/master/PageLoadingBar.svelte
   export let preloading;
   export let height = "6px";

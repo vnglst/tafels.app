@@ -1,22 +1,28 @@
-export const rnd = ({ from = 0, to = 1 }) => {
+export const rnd = ({
+  from = 0,
+  to = 1,
+}: {
+  from: number;
+  to: number;
+}): number => {
   const diff = to - from;
   const rnd = Math.random() * diff + from;
   return Math.round(rnd);
 };
 
-export const shuffle = <T>(arr: T[]) => {
+export const shuffle = <T>(arr: T[]): T[] => {
   return arr.sort(() => Math.random() - 0.5);
 };
 
-export function removeDups<T>(arr: T[], property: string) {
+export function removeDups<T>(arr: T[], property: string): T[] {
   const newArray: T[] = [];
   const lookupObject = {};
 
-  for (let i in arr) {
+  for (const i in arr) {
     lookupObject[arr[i][property]] = arr[i];
   }
 
-  for (let i in lookupObject) {
+  for (const i in lookupObject) {
     newArray.push(lookupObject[i]);
   }
   return newArray;

@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   import IconLock from "../ui/IconLock.svelte";
   import IconCorrect from "../ui/IconCorrect.svelte";
   import Button from "../ui/Button.svelte";

@@ -1,11 +1,9 @@
-<script lang="typescript">
+<script lang="ts">
   import Page from "../../ui/Page.svelte";
   import Card from "../../ui/Card.svelte";
   import Grid from "../../ui/Grid.svelte";
   import Button from "../../ui/Button.svelte";
   import { store } from "../questions-store.js";
-
-  console.log(JSON.stringify($store, null, 4));
 </script>
 
 <svelte:head>

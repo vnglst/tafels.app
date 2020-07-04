@@ -1,13 +1,13 @@
-<script lang="typescript">
+<script lang="ts">
   import IconCorrect from "../ui/IconCorrect.svelte";
   import IconWrong from "../ui/IconWrong.svelte";
   import IconCircle from "../ui/IconCircle.svelte";
 
-  export let results;
+  export let results: boolean[];
 </script>
 
 <ul>
-  {#each results as result, index}
+  {#each results as result}
     <li>
       {#if result === true}
         <IconCorrect />

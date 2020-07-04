@@ -68,8 +68,8 @@ export function generate({
   initialState,
   generateQuestions,
 }: Generate): ReturnType {
-  let challenges = {};
-  for (let n in initialState) {
+  const challenges = {};
+  for (const n in initialState) {
     challenges[n] = {
       ...definition,
       ...initialState[n],

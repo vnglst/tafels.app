@@ -23,7 +23,7 @@ function createStore() {
       const stored = JSON.parse(json);
 
       update((state) => {
-        let merged = merge(state, stored);
+        const merged = merge(state, stored);
         return merged;
       });
     }
@@ -43,7 +43,7 @@ function createStore() {
       }),
     unlockNext: ({ category, challenge }) =>
       update((state) => {
-        let current = state[category][challenge];
+        const current = state[category][challenge];
         if (current.unlocks) state[category][current.unlocks].unlocked = true;
         return state;
       }),

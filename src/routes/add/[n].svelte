@@ -10,7 +10,7 @@
   }
 </script>
 
-<script lang="typescript">
+<script lang="ts">
   import { Challenge } from "../question-utils";
   export let challenge: Challenge;
 </script>
