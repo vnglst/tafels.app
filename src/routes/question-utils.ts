@@ -1,10 +1,5 @@
 import { rnd } from "./utils";
-
-export interface Question {
-  q: string;
-  answer: number;
-  options: number[];
-}
+import { Question } from "../types";
 
 export function addRandomOptions({
   table,
@@ -16,7 +11,7 @@ export function addRandomOptions({
   total: number;
   min: number;
   max: number;
-}) {
+}): Question[] {
   table.forEach((question) => {
     while (question.options.length < total) {
       const newOption = rnd({ from: min, to: max });
@@ -34,13 +29,11 @@ interface Definition {
   slug: string;
 }
 
-interface StateValue {
-  unlocked?: boolean;
-  unlocks: number;
-}
-
 interface InitialState {
-  [key: number]: StateValue;
+  [key: number]: {
+    unlocked?: boolean;
+    unlocks: number;
+  };
 }
 
 interface Generate {

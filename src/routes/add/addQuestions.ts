@@ -1,5 +1,6 @@
 import { removeDups, rnd } from "../utils";
-import { addRandomOptions, generate, Question } from "../question-utils";
+import { addRandomOptions, generate } from "../question-utils";
+import { Question } from "../../types";
 
 function generateAddQuestions(base = 10) {
   const TOTAL = 10;

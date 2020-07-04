@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Challenge, Question } from "../routes/question-utils";
+  import { Challenge } from "../routes/question-utils";
+  import { Question } from "../types";
   import Card from "../ui/Card.svelte";
   import TimerBar from "../ui/TimerBar.svelte";
   import Grid from "../ui/Grid.svelte";
@@ -17,7 +18,7 @@
   const DURATION = 20;
 
   let total = challenge.questions.length;
-  let results = new Array(total);
+  let results: boolean[] = new Array(total);
   let currentIdx = 0;
   let showTimer = true;
 

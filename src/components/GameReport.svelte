@@ -6,9 +6,9 @@
   import Button from "../ui/Button.svelte";
 
   export let results: boolean[];
-  export let restart: () => null;
-  export let flawless = false;
-  export let passed = false;
+  export let restart: () => void;
+  export let flawless: boolean = false;
+  export let passed: boolean = false;
   export let challenge: Challenge;
 
   const { slug, id, questions, unlocks } = challenge;

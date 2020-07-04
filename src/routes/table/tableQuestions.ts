@@ -1,4 +1,5 @@
-import { addRandomOptions, generate, Question } from "../question-utils";
+import { addRandomOptions, generate } from "../question-utils";
+import { Question } from "../../types";
 
 function generateTableQuestions(base: number) {
   const TOTAL = 10;
