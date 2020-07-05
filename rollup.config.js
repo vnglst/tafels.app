@@ -8,11 +8,7 @@ import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import config from "sapper/config/rollup.js";
 import pkg from "./package.json";
-import { injectManifest } from "rollup-plugin-workbox";
 import childProcess from "child_process";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const workboxConfig = require("./workbox-config.js");
 
 const commitHash = childProcess
   .execSync('git log --pretty=format:"%h" -n1')
@@ -116,8 +112,6 @@ export default {
       require("module").builtinModules ||
         Object.keys(process.binding("natives"))
     ),
-
     onwarn,
   },
-  plugins: [injectManifest(workboxConfig)],
 };

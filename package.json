@@ -5,17 +5,14 @@
   "license": "MIT",
   "scripts": {
     "start": "sapper dev",
-    "export": "sapper export --legacy"
+    "export": "sapper export --legacy && workbox injectManifest workbox-config.js"
   },
   "dependencies": {
-    "@types/node": "^14.0.14",
     "compression": "^1.7.4",
     "howler": "^2.2.0",
     "lodash.merge": "^4.6.2",
     "polka": "0.5.2",
-    "rollup-plugin-workbox": "^5.0.1",
-    "sirv": "^1.0.1",
-    "workbox-cli": "^5.1.3"
+    "sirv": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
@@ -25,6 +22,7 @@
     "@babel/runtime": "^7.10.4",
     "@rollup/plugin-typescript": "^5.0.1",
     "@types/howler": "^2.2.1",
+    "@types/node": "^14.0.14",
     "@typescript-eslint/eslint-plugin": "^3.5.0",
     "@typescript-eslint/parser": "^3.5.0",
     "eslint": "^7.4.0",
@@ -41,6 +39,7 @@
     "svelte": "^3.23.2",
     "svelte-preprocess": "^3.9.11",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "workbox-cli": "^5.1.3"
   }
 }
