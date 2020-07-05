@@ -24,7 +24,6 @@
   <VisuallyHidden>
     <h1>Categories</h1>
   </VisuallyHidden>
-  <p>update!</p>
   {#each categories as category}
     <Card>
       <h2 slot="header">{category.title}</h2>

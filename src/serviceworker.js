@@ -1,9 +1,11 @@
+/* global workbox */
+// TODO: use bundlerhttps://developers.google.com/web/tools/workbox/guides/get-started#using_a_bundler
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
 );
 
 workbox.core.setCacheNameDetails({
-  prefix: "PhrassedChatCache",
+  prefix: "TafelsAppCache",
   precache: "precache",
   runtime: "runtime",
 });
@@ -15,7 +17,7 @@ if (workbox) {
 }
 
 const { registerRoute } = workbox.routing;
-const { NetworkFirst, StaleWhileRevalidate, CacheFirst } = workbox.strategies;
+const { StaleWhileRevalidate, CacheFirst } = workbox.strategies;
 const { ExpirationPlugin } = workbox.expiration;
 
 registerRoute(

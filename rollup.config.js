@@ -8,8 +8,13 @@ import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import config from "sapper/config/rollup.js";
 import pkg from "./package.json";
+import { injectManifest } from "rollup-plugin-workbox";
+import childProcess from "child_process";
 
-const commitHash = require("child_process")
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const workboxConfig = require("./workbox-config.js");
+
+const commitHash = childProcess
   .execSync('git log --pretty=format:"%h" -n1')
   .toString()
   .trim();
@@ -30,6 +35,8 @@ const vars = {
   "process.env.COMMIT_HASH": JSON.stringify(commitHash),
   "process.env.APP_VERSION": JSON.stringify(pkg.version),
 };
+
+console.log("Building with following vars", vars);
 
 export default {
   client: {
@@ -112,20 +119,5 @@ export default {
 
     onwarn,
   },
-
-  // serviceworker: {
-  //   input: config.serviceworker.input(),
-  //   output: config.serviceworker.output(),
-  //   plugins: [
-  //     resolve(),
-  //     replace({
-  //       "process.browser": true,
-  //       ...vars,
-  //     }),
-  //     commonjs(),
-  //     !dev && terser(),
-  //   ],
-
-  //   onwarn,
-  // },
+  plugins: [injectManifest(workboxConfig)],
 };

@@ -1,12 +1,11 @@
 {
   "name": "tafels-app",
   "description": "Tafels",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "scripts": {
-    "dev": "sapper dev",
-    "export": "sapper export --legacy && workbox injectManifest workbox-config.js",
-    "start": "node __sapper__/build"
+    "start": "sapper dev",
+    "export": "sapper export --legacy"
   },
   "dependencies": {
     "@types/node": "^14.0.14",
@@ -14,6 +13,7 @@
     "howler": "^2.2.0",
     "lodash.merge": "^4.6.2",
     "polka": "0.5.2",
+    "rollup-plugin-workbox": "^5.0.1",
     "sirv": "^1.0.1",
     "workbox-cli": "^5.1.3"
   },
