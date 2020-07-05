@@ -2,6 +2,11 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules/*"],
   "compilerOptions": {
+    "diagnostics": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "allowJs": true,
     "target": "es2015",
     "module": "es2015",
     "types": ["svelte", "node"]
