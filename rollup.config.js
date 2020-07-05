@@ -111,13 +111,12 @@ export default {
       }),
       commonjs(),
       typescript(),
+      injectManifest(workboxConfig),
     ],
     external: Object.keys(pkg.dependencies).concat(
       require("module").builtinModules ||
         Object.keys(process.binding("natives"))
     ),
-
     onwarn,
   },
-  plugins: [injectManifest(workboxConfig)],
 };
