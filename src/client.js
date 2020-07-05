@@ -15,7 +15,7 @@ if ("serviceWorker" in navigator) {
     if (!dev) navigator.serviceWorker.register("service-worker.js");
 
     // remove all old service workers when developing
-    if (!dev) {
+    if (dev) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
         console.log("Unloading service workers", registrations);
         for (let registration of registrations) {
