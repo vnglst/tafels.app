@@ -1,7 +1,5 @@
 <script>
   import VisuallyHidden from "../ui/VisuallyHidden.svelte";
-  import IconLock from "../ui/IconLock.svelte";
-  import IconCorrect from "../ui/IconCorrect.svelte";
   import Page from "../ui/Page.svelte";
   import Card from "../ui/Card.svelte";
   import Grid from "../ui/Grid.svelte";
