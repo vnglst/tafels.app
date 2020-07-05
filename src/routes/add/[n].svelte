@@ -1,6 +1,6 @@
 <script context="module">
   import Game from "../../components/Game.svelte";
-  import { adds } from "./addQuestions.js";
+  import { adds } from "./addQuestions";
 
   export async function preload(page) {
     const { n } = page.params;

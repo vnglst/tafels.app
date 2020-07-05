@@ -1,8 +1,8 @@
-import merge from 'lodash.merge';
+import merge from "lodash.merge";
 import { writable } from "svelte/store";
-import { subtracts } from './subtract/subtractQuestions';
-import { adds } from './add/addQuestions';
-import { tables } from './table/tableQuestions';
+import { subtracts } from "./subtract/subtractQuestions";
+import { adds } from "./add/addQuestions";
+import { tables } from "./table/tableQuestions";
 
 const initialState = {
   tables: tables.initialState,
@@ -22,13 +22,12 @@ function createStore() {
     if (json) {
       const stored = JSON.parse(json);
 
-      update(state => {
-        let merged = merge(state, stored)
+      update((state) => {
+        const merged = merge(state, stored);
         return merged;
-      })
-
+      });
     }
-    subscribe(state => {
+    subscribe((state) => {
       localStorage.setItem(KEY, JSON.stringify(state));
     });
   }
@@ -38,13 +37,13 @@ function createStore() {
   return {
     subscribe,
     complete: ({ category, challenge }) =>
-      update(state => {
+      update((state) => {
         state[category][challenge].completed = true;
         return state;
       }),
     unlockNext: ({ category, challenge }) =>
-      update(state => {
-        let current = state[category][challenge];
+      update((state) => {
+        const current = state[category][challenge];
         if (current.unlocks) state[category][current.unlocks].unlocked = true;
         return state;
       }),
