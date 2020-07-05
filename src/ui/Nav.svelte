@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import IconBack from "./IconBack.svelte";
   import IconUserCircle from "./IconUserCircle.svelte";
 

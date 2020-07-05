@@ -1,7 +1,5 @@
 <script>
   import VisuallyHidden from "../ui/VisuallyHidden.svelte";
-  import IconLock from "../ui/IconLock.svelte";
-  import IconCorrect from "../ui/IconCorrect.svelte";
   import Page from "../ui/Page.svelte";
   import Card from "../ui/Card.svelte";
   import Grid from "../ui/Grid.svelte";
@@ -9,9 +7,9 @@
   import ChallengeLink from "../components/ChallengeLink.svelte";
 
   import { store } from "./questions-store.js";
-  import { subtracts } from "./subtract/subtractQuestions.js";
-  import { adds } from "./add/addQuestions.js";
-  import { tables } from "./table/tableQuestions.js";
+  import { subtracts } from "./subtract/subtractQuestions.ts";
+  import { adds } from "./add/addQuestions.ts";
+  import { tables } from "./table/tableQuestions.ts";
 
   let categories = [tables, adds, subtracts];
 </script>
