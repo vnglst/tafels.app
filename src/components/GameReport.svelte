@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { Challenge } from "../routes/question-utils";
+  import type { Challenge } from "../types";
   import Card from "../ui/Card.svelte";
-  import IconCorrect from "../ui/IconCorrect.svelte";
   import IconWrong from "../ui/IconWrong.svelte";
   import Button from "../ui/Button.svelte";
 

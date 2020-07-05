@@ -3,3 +3,13 @@ export interface Question {
   answer: number;
   options: number[];
 }
+
+export interface Challenge {
+  id: string;
+  title: string;
+  category: string;
+  slug: string;
+  questions: Question[];
+  unlocked?: boolean;
+  unlocks?: number;
+}

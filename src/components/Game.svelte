@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { Challenge } from "../routes/question-utils";
-  import { Question } from "../types";
+  import type { Question, Challenge } from "../types";
   import Card from "../ui/Card.svelte";
   import TimerBar from "../ui/TimerBar.svelte";
   import Grid from "../ui/Grid.svelte";
@@ -12,6 +11,7 @@
 
   import { nock, squakk, yeah } from "../helpers/soundFx";
   import { store } from "../routes/questions-store.js";
+  import { store as practiceStore } from "../routes/practice-store.js";
 
   export let challenge: Challenge;
 
@@ -69,6 +69,9 @@
   function handleWrong() {
     squakk.play();
     results[currentIdx] = false;
+    console.log("wrong", current);
+    practiceStore.add(current);
+    console.log("store", $practiceStore);
   }
 
   function handleTimeout() {

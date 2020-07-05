@@ -22,6 +22,14 @@
   <VisuallyHidden>
     <h1>Categories</h1>
   </VisuallyHidden>
+  <Card>
+    <h2 slot="header">Practice</h2>
+    <Grid>
+      <ChallengeLink href="/practice/today" unlocked>Today</ChallengeLink>
+      <ChallengeLink href="/practice/tomorrow">Tomorrow</ChallengeLink>
+      <ChallengeLink href="/practice/nextweek">Next week</ChallengeLink>
+    </Grid>
+  </Card>
   {#each categories as category}
     <Card>
       <h2 slot="header">{category.title}</h2>

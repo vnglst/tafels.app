@@ -1,5 +1,5 @@
 import { rnd } from "./utils";
-import { Question } from "../types";
+import { Question, Challenge } from "../types";
 
 export function addRandomOptions({
   table,
@@ -42,14 +42,9 @@ interface Generate {
   generateQuestions: (base: number) => Question[];
 }
 
-export interface Challenge extends Definition {
-  id: string;
-  questions: Question[];
-  unlocked?: boolean;
-  unlocks?: number;
-}
-
-interface ReturnType extends Definition {
+interface ReturnType {
+  title: string;
+  category: string;
   initialState: InitialState;
   challenges: {
     [key: number]: Challenge;

@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-  <title>Subtractions {challenge.id}</title>
+  <title>Subtractions {challenge.id} - tafels.app</title>
 </svelte:head>
 
 <Game {challenge} />

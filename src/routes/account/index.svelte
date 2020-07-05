@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <title>About Tafels</title>
+  <title>About - tafels.app</title>
 </svelte:head>
 
 <Page>
