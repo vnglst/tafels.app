@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap");
 
 :root {
@@ -58,7 +62,7 @@ body {
 *:before,
 *:after {
   box-sizing: inherit;
-  -webkit-user-select: none; /* disable text selection for all elements */
+  /* -webkit-user-select: none; disable text selection for all elements */
 }
 
 h1,
@@ -74,6 +78,7 @@ h6 {
 
 a {
   color: inherit;
+  @apply underline;
 }
 
 ul {

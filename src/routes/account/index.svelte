@@ -1,11 +1,15 @@
 <script lang="ts">
-  import IconWrong from "../../ui/IconWrong.svelte";
+  import type { Question } from "../../types";
   import Page from "../../ui/Page.svelte";
   import Card from "../../ui/Card.svelte";
-  import Button from "../../ui/Button.svelte";
   import { store } from "../questions-store.js";
   import { practiceStore } from "../practice-store";
   import { accountStore } from "../account-store";
+
+  let stats: Question[];
+  $: stats = $practiceStore.today
+    .concat($practiceStore.someday)
+    .sort((q1, q2) => q2.mistakes - q1.mistakes);
 </script>
 
 <svelte:head>
@@ -14,134 +18,87 @@
 
 <Page>
   <Card>
-    <h1 slot="header">Account</h1>
-    <div class="img">
-      <img
-        src={`https://bigheads.io/svg?seed=${$accountStore.name}`}
-        alt="user"
-        height="300"
-        width="300"
+    <img
+      class="object-contain w-full pb-8"
+      src={`https://bigheads.io/svg?seed=${$accountStore.name}`}
+      alt="user"
+    />
+    <div slot="footer" class="m-8">
+      <input
+        class="text-2xl p-4 font-bold text-center focus:shadow-outline bg-white
+        focus:outline-none border border-gray-300 rounded-lg block w-full
+        appearance-none leading-normal uppercase"
+        bind:value={$accountStore.name}
       />
     </div>
-    <input slot="footer" bind:value={$accountStore.name} />
   </Card>
   <Card>
-    <h2 slot="header">Stats</h2>
-    <div>
-      <table>
-        <tr>
-          <th>Question</th>
-          <th>Mistakes</th>
-          <th>Interval</th>
-        </tr>
-        {#each $practiceStore.today as question}
+    <div class="overflow-y-auto stats p-8 m-4">
+      <table class="table-fixed w-full">
+        <thead>
           <tr>
-            <td>
-              <pre>{question.q}</pre>
+            <th class="text-left w-1/2 p-4">Question</th>
+            <th class="text-right w-1/4 p-4">Mistakes</th>
+            <!-- <th class="text-right w-1/4 p-4">Interval</th> -->
+          </tr>
+        </thead>
+        {#each stats as question, i}
+          <tr class={i % 2 ? 'bg-gray-100' : ''}>
+            <td class="p-4 text-left">
+              <pre>{question.q} = {question.answer}</pre>
             </td>
-            <td>{question.mistakes}</td>
-            <td>{question.interval}</td>
+            <td class="p-4 text-right">{question.mistakes}</td>
+            <!-- <td class="p-4 text-right">{question.interval}</td> -->
           </tr>
         {/each}
       </table>
     </div>
   </Card>
   <Card>
-    <h2 slot="header">About</h2>
-    <div>
+    <h2 slot="header" class="m-8 text-4xl">About</h2>
+    <div class="p-10 text-lg text-center">
       <p>
         Tafels.app was created by
         <a href="https://koenvangilst.nl">Koen van Gilst</a>
         using Sapper and Svelte.
       </p>
-      <div>
+      <div class="my-8">
         <a href="https://www.buymeacoffee.com/vnglst" target="_blank">
           <img
             src="https://cdn.buymeacoffee.com/buttons/default-green.png"
             alt="Buy Me A Coffee"
-            style="height: 51px !important;width: 217px !important;"
           />
         </a>
       </div>
 
-    </div>
+      <p class="my-4">🚧 Work in Progress 🚧</p>
+      <p>
+        <a href="https://github.com/vnglst/tafels.app">Source code on Github</a>
+      </p>
 
-    <div class="footer" slot="footer">
-      <p>🚧 Work in Progress 🚧</p>
-      <a href="https://github.com/vnglst/tafels.app">Source code on Github</a>
-      <div>
-        <a
-          href="/"
-          on:click={(e) => {
-            const sure = confirm('Cannot be undone, are you sure?');
-            if (sure) {
-              store.reset();
-              practiceStore.reset();
-              localStorage.clear();
-            } else {
-              e.preventDefault();
-            }
-          }}
-        >
-          Reset progress
-        </a>
-      </div>
+    </div>
+    <div slot="footer" class="p-10 text-center">
+      <a
+        href="/"
+        on:click={(e) => {
+          const sure = confirm('Cannot be undone, are you sure?');
+          if (sure) {
+            store.reset();
+            practiceStore.reset();
+            localStorage.clear();
+          } else {
+            e.preventDefault();
+          }
+        }}
+      >
+        Reset progress
+      </a>
     </div>
   </Card>
 </Page>
 
 <style>
-  .footer {
-    margin-top: 4em;
-  }
-  table {
-    width: 100%;
-  }
-
-  td {
-    padding: 0;
-    margin: 0;
-    text-align: center;
-  }
-
-  input {
-    text-align: center;
-    font-weight: 400;
-    font-size: 28px;
-    margin: 1em;
-    padding: 0.5em;
-    width: 24rem;
-    border-radius: 1em;
-    border: 1px solid var(--grey-100);
-  }
-
-  input:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--blue-100);
-  }
-
-  .img {
-    flex-direction: row;
-  }
-
-  h1,
-  h2 {
-    margin: 0;
-    padding: 4rem 0 0 0;
-    font-weight: 400;
-    font-size: 28px;
-    text-transform: uppercase;
-  }
-
-  div {
-    margin: 1rem 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  p {
-    font-size: 18px;
+  .stats {
+    max-height: 40rem;
   }
 </style>

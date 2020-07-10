@@ -2,6 +2,9 @@ export interface Question {
   q: string;
   answer: number;
   options: number[];
+  mistakes?: number;
+  lastTry?: Date;
+  interval?: number; // in days?
 }
 
 export interface Challenge {
@@ -12,7 +15,4 @@ export interface Challenge {
   questions: Question[];
   unlocked?: boolean;
   unlocks?: number;
-  mistakes?: number;
-  lastTry?: Date;
-  interval: number; // in days?
 }

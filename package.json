@@ -5,9 +5,13 @@
   "license": "MIT",
   "scripts": {
     "start": "sapper dev",
-    "export": "sapper export --legacy && workbox injectManifest workbox-config.js"
+    "export": "npm run build:tailwind && sapper export --legacy && workbox injectManifest workbox-config.js",
+    "watch:tailwind": "postcss static/tailwind.css -o static/index.css -w",
+    "build:tailwind": "NODE_ENV=production postcss static/tailwind.css -o static/index.css",
+    "build": "npm run export"
   },
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "^2.3.0",
     "compression": "^1.7.4",
     "howler": "^2.2.0",
     "lodash.merge": "^4.6.2",
@@ -27,6 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "@typescript-eslint/parser": "^3.6.0",
     "eslint": "^7.4.0",
+    "postcss-cli": "^7.1.1",
     "prettier": "^2.0.5",
     "prettier-plugin-svelte": "^1.1.0",
     "rollup": "^2.21.0",
@@ -38,6 +43,7 @@
     "sapper": "^0.27.16",
     "svelte": "^3.24.0",
     "svelte-preprocess": "^4.0.6",
+    "tailwindcss": "^1.4.6",
     "tslib": "^2.0.0",
     "typescript": "^3.9.6",
     "workbox-cli": "^5.1.3"

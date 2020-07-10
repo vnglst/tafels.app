@@ -34,7 +34,7 @@
       {/each}
     </ul>
   {/if}
-  <div class="call-to-actions">
+  <div class="call-to-actions p-8" slot="footer">
     <Button
       on:click={restart}
       primary

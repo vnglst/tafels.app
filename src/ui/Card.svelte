@@ -16,7 +16,7 @@
     <slot name="header" />
   </div>
   <slot />
-  <div class="footer">
+  <div class="footer mt-auto">
     <slot name="footer" />
   </div>
 </div>
@@ -45,9 +45,5 @@
   .header {
     font-size: 28px;
     text-align: center;
-  }
-  .footer {
-    margin: 0;
-    padding: 0;
   }
 </style>
