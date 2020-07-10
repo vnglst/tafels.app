@@ -4,31 +4,50 @@ import { removeDups } from "./utils";
 
 const initialState = {
   today: [],
-  tomorrow: [],
-  nextWeek: [],
+  someday: [],
 };
 
 function createStore() {
   const KEY = "tafels-app-practice";
   const { subscribe, update } = writable(initialState);
-
   useLocalStorage({ subscribe, update, key: KEY });
 
   return {
     subscribe,
     add: (question) => {
       update((state) => {
-        const { today } = state;
-        today.push(question);
-        state.today = removeDups(today, "q");
+        question.mistakes = question.mistakes ? question.mistakes + 1 : 1;
+        question.lastTry = new Date();
+        question.interval = 1;
+        state.today.push(question);
+        state.today = removeDups(state.today, "q");
         return state;
       });
     },
-    improve: (question) => {
-      // TODO ??
+    practiced: (question) => {
+      update((state) => {
+        question.lastTry = new Date();
+        question.interval *= 2;
+        state.someday.push(question);
+        state.someday = removeDups(state.someday, "q");
+        state.today = state.today.filter((qst) => qst.q !== question.q);
+        return state;
+      });
+    },
+    sync: () => {
+      update((state) => {
+        state.someday.forEach((question) => {
+          const now = new Date().getTime();
+          const intervalInMs = question.interval * 12 * 60 * 60 * 1000; // 12 hours
+          const lastTry = new Date(question.lastTry).getTime();
+          if (now > lastTry + intervalInMs) state.today.push(question);
+          state.today = removeDups(state.today, "q");
+        });
+        return state;
+      });
     },
     reset: () => update(() => initialState),
   };
 }
 
-export const store = createStore();
+export const practiceStore = createStore();

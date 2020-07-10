@@ -12,4 +12,7 @@ export interface Challenge {
   questions: Question[];
   unlocked?: boolean;
   unlocks?: number;
+  mistakes?: number;
+  lastTry?: Date;
+  interval: number; // in days?
 }

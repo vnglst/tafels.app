@@ -13,6 +13,6 @@ export function useLocalStorage({ update, subscribe, key }) {
     });
   }
   subscribe((state) => {
-    localStorage.setItem(key, JSON.stringify(state));
+    if (state) localStorage.setItem(key, JSON.stringify(state));
   });
 }

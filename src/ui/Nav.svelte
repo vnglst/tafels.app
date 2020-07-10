@@ -1,8 +1,7 @@
 <script lang="ts">
   import IconBack from "./IconBack.svelte";
-  import IconUserCircle from "./IconUserCircle.svelte";
-
-  export let segment;
+  import { accountStore } from "../routes/account-store";
+  export let segment: string;
 </script>
 
 <nav>
@@ -17,8 +16,13 @@
     {/if}
     {#if !segment}
       <li class="right nav-link">
-        <a rel="prefetch" href="/account">
-          <IconUserCircle />
+        <a rel="prefetch" href="/account" class="account">
+          <img
+            src={`https://bigheads.io/svg?seed=${$accountStore.name}`}
+            alt="Account"
+            height="50"
+            width="50"
+          />
         </a>
       </li>
     {/if}
@@ -31,7 +35,7 @@
     color: var(--grey-800);
     background-color: var(--white);
     box-shadow: var(--shadow-3);
-    min-height: 57px;
+    min-height: 60px;
   }
 
   ul {
@@ -61,6 +65,12 @@
     text-decoration: none;
     padding: 1rem;
     align-items: center;
+  }
+
+  .account {
+    padding: 0;
+    padding-right: 1rem;
+    /* padding-top: 5px; */
   }
 
   span {

@@ -11,9 +11,11 @@
 
   import { nock, squakk, yeah } from "../helpers/soundFx";
   import { store } from "../routes/questions-store.js";
-  import { store as practiceStore } from "../routes/practice-store.js";
+  import { practiceStore } from "../routes/practice-store";
 
   export let challenge: Challenge;
+  export let onWrong: (current: Question) => void = practiceStore.add;
+  export let onCorrect: (current: Question) => void = () => {};
 
   const DURATION = 20;
 
@@ -63,20 +65,18 @@
     setTimeout(() => {
       showTimer = true;
       currentIdx++;
+      onCorrect(current);
     }, 200);
   }
 
   function handleWrong() {
     squakk.play();
     results[currentIdx] = false;
-    console.log("wrong", current);
-    practiceStore.add(current);
-    console.log("store", $practiceStore);
+    onWrong(current);
   }
 
   function handleTimeout() {
-    squakk.play();
-    results[currentIdx] = false;
+    handleWrong();
     showTimer = false;
     setTimeout(() => {
       showTimer = true;

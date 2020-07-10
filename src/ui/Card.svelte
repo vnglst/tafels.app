@@ -24,7 +24,8 @@
 <style>
   .card {
     border-top: 10px solid var(--blue-050);
-    display: grid;
+    display: flex;
+    flex-direction: column;
     background-color: var(--white);
     color: var(--grey-900);
     border-radius: 10px;
