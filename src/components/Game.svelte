@@ -91,7 +91,9 @@
       <span slot="progress">
         <TimerBar duration={DURATION} on:timeout={handleTimeout} {showTimer} />
       </span>
-      <h1 slot="header">{`${current.q} = ?`}</h1>
+      <h1 class="text-4xl m-0 p-0 mt-12 font-bold" slot="header">
+        {`${current.q} = ?`}
+      </h1>
       <Grid>
         {#each current.options as option, index (`${current.q}-${option}-${index}`)}
           <GameButton
@@ -115,9 +117,9 @@
 </Page>
 
 <style>
-  h1 {
+  /* h1 {
     font-size: 28px;
     margin: 0;
     padding: 4rem 0 0 0;
-  }
+  } */
 </style>

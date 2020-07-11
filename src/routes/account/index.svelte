@@ -24,10 +24,17 @@
       alt="user"
     />
     <div slot="footer" class="m-8">
+      <label
+        class="block text-gray-700 text-lg font-bold mb-2 center"
+        for="name"
+      >
+        Your name
+      </label>
       <input
-        class="text-2xl p-4 font-bold text-center focus:shadow-outline bg-white
-        focus:outline-none border border-gray-300 rounded-lg block w-full
-        appearance-none leading-normal uppercase"
+        id="name"
+        class="text-2xl p-4 font-bold text-center bg-white focus:outline-none
+        focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block
+        w-full appearance-none leading-normal"
         bind:value={$accountStore.name}
       />
     </div>
@@ -39,7 +46,6 @@
           <tr>
             <th class="text-left w-1/2 p-4">Question</th>
             <th class="text-right w-1/4 p-4">Mistakes</th>
-            <!-- <th class="text-right w-1/4 p-4">Interval</th> -->
           </tr>
         </thead>
         {#each stats as question, i}
@@ -48,7 +54,6 @@
               <pre>{question.q} = {question.answer}</pre>
             </td>
             <td class="p-4 text-right">{question.mistakes}</td>
-            <!-- <td class="p-4 text-right">{question.interval}</td> -->
           </tr>
         {/each}
       </table>
@@ -62,7 +67,7 @@
         <a href="https://koenvangilst.nl">Koen van Gilst</a>
         using Sapper and Svelte.
       </p>
-      <div class="my-8">
+      <div class="m-12">
         <a href="https://www.buymeacoffee.com/vnglst" target="_blank">
           <img
             src="https://cdn.buymeacoffee.com/buttons/default-green.png"
@@ -77,7 +82,7 @@
       </p>
 
     </div>
-    <div slot="footer" class="p-10 text-center">
+    <div slot="footer" class="p-5 text-center bg-red-100 rounded-b-lg">
       <a
         href="/"
         on:click={(e) => {
