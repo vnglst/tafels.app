@@ -86,7 +86,7 @@ exports.handler = async (event) => {
       "Content-Type": "image/svg+xml",
     };
 
-    if (seed) headers["Cache-Control"] = "max-age=365000000,immutable";
+    if (seed) headers["Cache-Control"] = "max-age=365000000";
 
     return {
       statusCode: 200,
