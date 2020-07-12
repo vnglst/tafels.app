@@ -1,4 +1,6 @@
 {
+  "name": "bigheads-svg",
+  "version": "1.0.0",
   "dependencies": {
     "@bigheads/core": "0.2.0",
     "react": "^16.13.1",
