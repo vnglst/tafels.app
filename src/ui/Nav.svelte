@@ -56,10 +56,6 @@
     /* float: left; */
   }
 
-  .right {
-    float: right;
-  }
-
   a {
     display: flex;
     text-decoration: none;

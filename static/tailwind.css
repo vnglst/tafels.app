@@ -62,7 +62,7 @@ body {
 *:before,
 *:after {
   box-sizing: inherit;
-  /* -webkit-user-select: none; disable text selection for all elements */
+  -webkit-user-select: none; /* disable text selection for all elements */
 }
 
 h1,
@@ -83,4 +83,22 @@ a {
 
 ul {
   list-style: none;
+}
+
+input[type="range"] {
+  height: 0;
+}
+
+input,
+input[type="text"] {
+  -webkit-appearance: none;
+}
+
+textarea {
+  -webkit-appearance: none;
+}
+
+input,
+textarea {
+  -webkit-user-select: auto;
 }

@@ -107,8 +107,4 @@
   .stats {
     max-height: 40rem;
   }
-
-  input[type="text"] {
-    -web-kit-appearance: none;
-  }
 </style>
