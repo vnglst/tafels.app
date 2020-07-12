@@ -82,13 +82,16 @@ exports.handler = async (event) => {
       React.createElement(BigHead, mergedProps)
     );
 
+    const headers = {
+      "Content-Type": "image/svg+xml",
+    };
+
+    if (seed) headers["Cache-Control"] = "max-age=365000000,immutable";
+
     return {
       statusCode: 200,
       body: avatarString,
-      headers: {
-        "Content-Type": "image/svg+xml",
-        "Cache-Control": "max-age=365000000,immutable",
-      },
+      headers,
     };
   } catch (err) {
     return { statusCode: 500, body: err.toString() };
