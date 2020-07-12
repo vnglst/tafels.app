@@ -4,11 +4,6 @@
   functions = "functions"
   publish = "__sapper__/export"
 
-[[redirects]]
-  from = "/functions"
-  to = "/.netlify/functions/"
-  status = 200
-
   ## (optional) Settings for Netlify Dev
   ## https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
   #[dev] 
