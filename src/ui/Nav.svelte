@@ -18,7 +18,7 @@
       <li class="nav-link float-right">
         <a rel="prefetch" href="/account" class="p-0 pr-5">
           <img
-            src={`https://bigheads.io/svg?seed=${$accountStore.name}`}
+            src={`/svg?seed=${$accountStore.name}`}
             alt="Account"
             height="50"
             width="50"

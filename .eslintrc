@@ -12,5 +12,8 @@
     "node": true,
     "es6": true,
     "worker": true
+  },
+  "rules": {
+    "@typescript-eslint/no-var-requires": false
   }
 }
