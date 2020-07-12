@@ -18,7 +18,7 @@
       <li class="nav-link float-right">
         <a rel="prefetch" href="/account" class="p-0 pr-5">
           <img
-            src={`.netlify/functions/bigheads?seed=${$accountStore.name}`}
+            src={`/.netlify/functions/bigheads?seed=${$accountStore.name}`}
             alt="Account"
             height="50"
             width="50"
