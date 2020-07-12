@@ -14,7 +14,7 @@
 </script>
 
 <Card>
-  <h1 slot="header">REPORT CARD</h1>
+  <h1 class="my-10" slot="header">REPORT CARD</h1>
   {#if flawless}
     <p>Flawless! 🎉</p>
   {:else}
@@ -65,9 +65,6 @@
 </Card>
 
 <style>
-  h1 {
-    margin-top: 4rem;
-  }
   ul {
     font-size: 18px;
     margin: 1em 0;

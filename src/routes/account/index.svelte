@@ -21,7 +21,7 @@
     <img
       class="object-contain w-full pb-8"
       src={`https://bigheads.io/svg?seed=${$accountStore.name}`}
-      alt="user"
+      alt={$accountStore.name}
     />
     <div slot="footer" class="m-8">
       <label
@@ -32,6 +32,7 @@
       </label>
       <input
         id="name"
+        type="text"
         class="text-2xl p-4 font-bold text-center bg-white focus:outline-none
         focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block
         w-full appearance-none leading-normal"
@@ -105,5 +106,9 @@
 <style>
   .stats {
     max-height: 40rem;
+  }
+
+  input[type="text"] {
+    -web-kit-appearance: none;
   }
 </style>

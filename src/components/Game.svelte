@@ -91,7 +91,7 @@
       <span slot="progress">
         <TimerBar duration={DURATION} on:timeout={handleTimeout} {showTimer} />
       </span>
-      <h1 class="text-4xl m-0 p-0 mt-12 font-bold" slot="header">
+      <h1 class="text-4xl m-5 p-0 mt-16 font-bold" slot="header">
         {`${current.q} = ?`}
       </h1>
       <Grid>

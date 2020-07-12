@@ -7,16 +7,16 @@
 <nav>
   <ul>
     {#if segment && process.browser}
-      <li class="back-link">
-        <a rel="prefetch" href="../">
+      <li class="back-link float-left">
+        <a rel="prefetch" href="../" class="p-5">
           <IconBack />
           <span>Back</span>
         </a>
       </li>
     {/if}
     {#if !segment}
-      <li class="right nav-link">
-        <a rel="prefetch" href="/account" class="account">
+      <li class="nav-link float-right">
+        <a rel="prefetch" href="/account" class="p-0 pr-5">
           <img
             src={`https://bigheads.io/svg?seed=${$accountStore.name}`}
             alt="Account"
@@ -53,7 +53,7 @@
 
   li {
     display: block;
-    float: left;
+    /* float: left; */
   }
 
   .right {
@@ -63,14 +63,7 @@
   a {
     display: flex;
     text-decoration: none;
-    padding: 1rem;
     align-items: center;
-  }
-
-  .account {
-    padding: 0;
-    padding-right: 1rem;
-    /* padding-top: 5px; */
   }
 
   span {
@@ -83,7 +76,7 @@
       transform: translateX(0px);
     }
     25% {
-      transform: translateX(-10px);
+      transform: translateX(-5px);
     }
     100% {
       transform: translateX(0px);
@@ -96,6 +89,6 @@
 
   .nav-link:hover {
     transition: 0.75s cubic-bezier(0, 1.2, 0.2, 1.5);
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
 </style>
