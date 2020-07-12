@@ -1,2 +1,1 @@
 /bigheads           /.netlify/functions/bigheads 200
-/bigheads/:seed 	/.netlify/functions/bigheads?seed=:seed	200
