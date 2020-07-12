@@ -87,6 +87,7 @@ exports.handler = async (event) => {
       body: avatarString,
       headers: {
         "Content-Type": "image/svg+xml",
+        "Cache-Control": "max-age=365000000,immutable",
       },
     };
   } catch (err) {
