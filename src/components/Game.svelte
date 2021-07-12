@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { Challenge } from "../routes/question-utils";
-  import { Question } from "../types";
+  import type { Question, Challenge } from "../types";
   import Card from "../ui/Card.svelte";
   import TimerBar from "../ui/TimerBar.svelte";
   import Grid from "../ui/Grid.svelte";
@@ -12,8 +11,11 @@
 
   import { nock, squakk, yeah } from "../helpers/soundFx";
   import { store } from "../routes/questions-store.js";
+  import { practiceStore } from "../routes/practice-store";
 
   export let challenge: Challenge;
+  export let onWrong: (current: Question) => void = practiceStore.add;
+  export let onCorrect: (current: Question) => void = () => {};
 
   const DURATION = 20;
 
@@ -63,17 +65,18 @@
     setTimeout(() => {
       showTimer = true;
       currentIdx++;
+      onCorrect(current);
     }, 200);
   }
 
   function handleWrong() {
     squakk.play();
     results[currentIdx] = false;
+    onWrong(current);
   }
 
   function handleTimeout() {
-    squakk.play();
-    results[currentIdx] = false;
+    handleWrong();
     showTimer = false;
     setTimeout(() => {
       showTimer = true;
@@ -88,7 +91,9 @@
       <span slot="progress">
         <TimerBar duration={DURATION} on:timeout={handleTimeout} {showTimer} />
       </span>
-      <h1 slot="header">{`${current.q} = ?`}</h1>
+      <h1 class="text-4xl m-5 p-0 mt-16 font-bold" slot="header">
+        {`${current.q} = ?`}
+      </h1>
       <Grid>
         {#each current.options as option, index (`${current.q}-${option}-${index}`)}
           <GameButton
@@ -112,9 +117,9 @@
 </Page>
 
 <style>
-  h1 {
+  /* h1 {
     font-size: 28px;
     margin: 0;
     padding: 4rem 0 0 0;
-  }
+  } */
 </style>

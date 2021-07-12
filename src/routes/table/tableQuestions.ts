@@ -1,4 +1,4 @@
-import { addRandomOptions, generate } from "../question-utils";
+import { addRndOptions, generate } from "../question-utils";
 import { Question } from "../../types";
 
 function generateTableQuestions(base: number) {
@@ -12,7 +12,7 @@ function generateTableQuestions(base: number) {
     };
     table.push(question);
   }
-  return addRandomOptions({
+  return addRndOptions({
     table,
     total: 9,
     min: 1,

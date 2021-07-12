@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { Challenge } from "../routes/question-utils";
+  import type { Challenge } from "../types";
   import Card from "../ui/Card.svelte";
-  import IconCorrect from "../ui/IconCorrect.svelte";
   import IconWrong from "../ui/IconWrong.svelte";
   import Button from "../ui/Button.svelte";
 
@@ -15,7 +14,7 @@
 </script>
 
 <Card>
-  <h1 slot="header">REPORT CARD</h1>
+  <h1 class="my-10" slot="header">REPORT CARD</h1>
   {#if flawless}
     <p>Flawless! 🎉</p>
   {:else}
@@ -35,7 +34,7 @@
       {/each}
     </ul>
   {/if}
-  <div class="call-to-actions">
+  <div class="call-to-actions p-8" slot="footer">
     <Button
       on:click={restart}
       primary
@@ -66,9 +65,6 @@
 </Card>
 
 <style>
-  h1 {
-    margin-top: 4rem;
-  }
   ul {
     font-size: 18px;
     margin: 1em 0;

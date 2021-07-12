@@ -4,8 +4,8 @@
   import Button from "../ui/Button.svelte";
 
   export let href: string;
-  export let unlocked = false;
-  export let completed = false;
+  export let unlocked: boolean = false;
+  export let completed: boolean = false;
 </script>
 
 <Button {href} disabled={!unlocked} primary elementType="link">

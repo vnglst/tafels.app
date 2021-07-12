@@ -16,7 +16,7 @@
     <slot name="header" />
   </div>
   <slot />
-  <div class="footer">
+  <div class="footer mt-auto">
     <slot name="footer" />
   </div>
 </div>
@@ -24,7 +24,8 @@
 <style>
   .card {
     border-top: 10px solid var(--blue-050);
-    display: grid;
+    display: flex;
+    flex-direction: column;
     background-color: var(--white);
     color: var(--grey-900);
     border-radius: 10px;
@@ -44,9 +45,5 @@
   .header {
     font-size: 28px;
     text-align: center;
-  }
-  .footer {
-    margin: 0;
-    padding: 0;
   }
 </style>

@@ -1,17 +1,19 @@
 import { rnd } from "./utils";
-import { Question } from "../types";
+import { Question, Challenge } from "../types";
 
-export function addRandomOptions({
-  table,
-  total,
-  min,
-  max,
-}: {
+type AddRndOptions = {
   table: Question[];
   total: number;
   min: number;
   max: number;
-}): Question[] {
+}
+
+export function addRndOptions({
+  table,
+  total,
+  min,
+  max,
+}: AddRndOptions) {
   table.forEach((question) => {
     while (question.options.length < total) {
       const newOption = rnd({ from: min, to: max });
@@ -20,47 +22,30 @@ export function addRandomOptions({
     }
     question.options.sort((a, b) => a - b);
   });
+
   return table;
 }
 
-interface Definition {
-  title: string;
-  category: string;
-  slug: string;
-}
-
-interface InitialState {
-  [key: number]: {
-    unlocked?: boolean;
-    unlocks: number;
-  };
-}
-
-interface Generate {
-  definition: Definition;
-  initialState: InitialState;
+type Generate = {
+  definition: {
+    title: string;
+    category: string;
+    slug: string;
+  }
+  initialState: {
+    [key: number]: {
+      unlocked?: boolean;
+      unlocks: number;
+    };
+  }
   generateQuestions: (base: number) => Question[];
-}
-
-export interface Challenge extends Definition {
-  id: string;
-  questions: Question[];
-  unlocked?: boolean;
-  unlocks?: number;
-}
-
-interface ReturnType extends Definition {
-  initialState: InitialState;
-  challenges: {
-    [key: number]: Challenge;
-  };
 }
 
 export function generate({
   definition,
   initialState,
   generateQuestions,
-}: Generate): ReturnType {
+}: Generate) {
   const challenges = {};
   for (const n in initialState) {
     challenges[n] = {

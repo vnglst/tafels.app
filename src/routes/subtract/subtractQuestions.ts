@@ -1,5 +1,5 @@
 import { removeDups, rnd } from "../utils";
-import { addRandomOptions, generate } from "../question-utils";
+import { addRndOptions, generate } from "../question-utils";
 import { Question } from "../../types";
 
 function generateSubstractQuestions(base = 10) {
@@ -23,7 +23,7 @@ function generateSubstractQuestions(base = 10) {
     }
   }
 
-  return addRandomOptions({
+  return addRndOptions({
     table,
     total: 9,
     min: 0,

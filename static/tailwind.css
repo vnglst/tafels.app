@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap");
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --white: white;
 
@@ -74,9 +78,27 @@ h6 {
 
 a {
   color: inherit;
+  @apply underline;
 }
 
 ul {
   list-style: none;
 }
 
+input[type="range"] {
+  height: 0;
+}
+
+input,
+input[type="text"] {
+  -webkit-appearance: none;
+}
+
+textarea {
+  -webkit-appearance: none;
+}
+
+input,
+textarea {
+  -webkit-user-select: auto;
+}

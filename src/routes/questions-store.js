@@ -1,13 +1,14 @@
-import merge from "lodash.merge";
 import { writable } from "svelte/store";
 import { subtracts } from "./subtract/subtractQuestions";
 import { adds } from "./add/addQuestions";
 import { tables } from "./table/tableQuestions";
+import { useLocalStorage } from "./store-hooks";
 
 const initialState = {
   tables: tables.initialState,
   adds: adds.initialState,
   subtracts: subtracts.initialState,
+  practice: { today: {}, tomorrow: {}, nextWeek: {} },
 };
 
 function createStore() {
@@ -15,24 +16,7 @@ function createStore() {
 
   const { subscribe, update } = writable(initialState);
 
-  function useLocalStorage() {
-    // skip localstorage for SSR
-    if (!process.browser) return;
-    const json = localStorage.getItem(KEY);
-    if (json) {
-      const stored = JSON.parse(json);
-
-      update((state) => {
-        const merged = merge(state, stored);
-        return merged;
-      });
-    }
-    subscribe((state) => {
-      localStorage.setItem(KEY, JSON.stringify(state));
-    });
-  }
-
-  useLocalStorage();
+  useLocalStorage({ subscribe, update, key: KEY });
 
   return {
     subscribe,
