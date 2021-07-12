@@ -4,7 +4,8 @@
   "version": "0.5.0",
   "license": "MIT",
   "scripts": {
-    "start": "netlify dev",
+    "netlify": "npx netlify-cli dev",
+    "start": "sapper dev",
     "export": "npm run build:tailwind && sapper export --legacy && workbox injectManifest workbox-config.js",
     "watch:tailwind": "postcss static/tailwind.css -o static/index.css -w",
     "build:tailwind": "NODE_ENV=production postcss static/tailwind.css -o static/index.css",
@@ -31,7 +32,6 @@
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "@typescript-eslint/parser": "^3.6.0",
     "eslint": "^7.4.0",
-    "netlify-cli": "^4.2.1",
     "postcss-cli": "^7.1.1",
     "prettier": "^2.0.5",
     "prettier-plugin-svelte": "^1.1.0",
