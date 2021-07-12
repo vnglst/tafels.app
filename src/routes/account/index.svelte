@@ -68,6 +68,12 @@
         <a href="https://koenvangilst.nl">Koen van Gilst</a>
         using Sapper and Svelte.
       </p>
+      <p class="mt-2">
+        The avatars are from
+        <a href="https://bigheads.io" target="_blank">bigheads.io</a>
+        made by
+        <a href="https://twitter.com/robertbrosma">@robertbrosma</a>
+      </p>
       <div class="m-12">
         <a href="https://www.buymeacoffee.com/vnglst" target="_blank">
           <img

@@ -9,6 +9,7 @@ Made with:
 - service workers 🌐
 - web Audio with Howler 🎺
 - UI + colors based on book Refactoring UI 🎉
+- the avatars are from <a href="https://bigheads.io" target="_blank">bigheads.io</a> made by <a href="https://twitter.com/robertbrosma">@robertbrosma</a>
 
 ## Development
 
