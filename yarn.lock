@@ -804,10 +804,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bigheads/core@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@bigheads/core/-/core-0.2.0.tgz#b4c96b87330c1987254c2c1e927c9fd038d5b577"
-  integrity sha512-3PDVlLHKka1+Rjyle7m3tz4YOz4NMm5eGcU/fO56/Rjz5vmurG1WBYdpQ+AD/Wddxc1awWswT7FLQVQEdvtv0Q==
+"@bigheads/core@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@bigheads/core/-/core-0.3.1.tgz#b495f6d83b067ace5eb49a8bea05fd884c90ec4d"
+  integrity sha512-qI6sfKPVne0jhePjpJ6AU10S0LwZUizFpPyAEbUH1zRHfWWvCc56jQCuwP869q94I7HlFz4jBCdmjEYL4lSvJw==
 
 "@fullhuman/postcss-purgecss@^2.1.2", "@fullhuman/postcss-purgecss@^2.3.0":
   version "2.3.0"
@@ -1503,9 +1503,9 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 caniuse-lite@^1.0.30001093, caniuse-lite@^1.0.30001097:
-  version "1.0.30001099"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001099.tgz#540118fcc6842d1fde62f4ee5521d1ec6afdb40e"
-  integrity sha512-sdS9A+sQTk7wKoeuZBN/YMAHVztUfVnjDi4/UV3sDE8xoh7YR12hKW+pIdB3oqKGwr9XaFL2ovfzt9w8eUI5CA==
+  version "1.0.30001243"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001243.tgz"
+  integrity sha512-vNxw9mkTBtkmLFnJRv/2rhs1yufpDfCkBZexG3Y0xdOH2Z/eE/85E4Dl5j1YUN34nZVsSp6vVRFQRrez9wJMRA==
 
 chalk@^2.0.0, chalk@^2.0.1, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
