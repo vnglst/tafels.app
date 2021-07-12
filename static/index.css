@@ -210,11 +210,6 @@ progress {
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
 
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
 /**
  * 1. Correct the odd appearance in Chrome and Safari.
  * 2. Correct the outline style in Safari.
@@ -251,10 +246,6 @@ progress {
  * Add the correct display in IE 10.
  */
 
-[hidden] {
-  display: none;
-}
-
 /**
  * Manually forked from SUIT CSS Base: https://github.com/suitcss/base
  * A thin layer on top of normalize.css that provides a starting point more
@@ -276,7 +267,6 @@ pre {
 button {
   background-color: transparent;
   background-image: none;
-  padding: 0;
 }
 
 /**
@@ -446,10 +436,6 @@ img {
   height: auto;
 }
 
-/*tailwind start components */
-
-/*tailwind end components */
-
 .appearance-none{
   appearance: none;
 }
@@ -588,7 +574,8 @@ img {
 }
 
 .focus\:outline-none:focus{
-  outline: 0;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .overflow-y-auto{
@@ -675,6 +662,37 @@ img {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@keyframes spin{
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ping{
+  75%, 100%{
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse{
+  50%{
+    opacity: .5;
+  }
+}
+
+@keyframes bounce{
+  0%, 100%{
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50%{
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
 :root {
   --white: white;
   --grey-050: hsl(210, 36%, 96%);
@@ -754,4 +772,16 @@ input[type="text"] {
 
 input {
   -webkit-user-select: auto;
+}
+
+@media (min-width: 640px){
+}
+
+@media (min-width: 768px){
+}
+
+@media (min-width: 1024px){
+}
+
+@media (min-width: 1280px){
 }
