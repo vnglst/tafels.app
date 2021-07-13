@@ -2,6 +2,7 @@
   import IconBack from "./IconBack.svelte";
   import { accountStore } from "../routes/account-store";
   export let segment: string;
+
 </script>
 
 <nav>
@@ -18,7 +19,7 @@
       <li class="nav-link float-right">
         <a rel="prefetch" href="/account" class="p-0 pr-5">
           <img
-            src={`/bigheads?seed=${$accountStore.name}`}
+            src={`.netlify/functions/bigheads?seed=${$accountStore.name}`}
             alt="Account"
             height="50"
             width="50"
@@ -87,4 +88,5 @@
     transition: 0.75s cubic-bezier(0, 1.2, 0.2, 1.5);
     transform: scale(1.2);
   }
+
 </style>

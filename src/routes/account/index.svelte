@@ -2,7 +2,6 @@
   import type { Question } from "../../types";
   import Page from "../../ui/Page.svelte";
   import Card from "../../ui/Card.svelte";
-  import { store } from "../questions-store.js";
   import { practiceStore } from "../practice-store";
   import { accountStore } from "../account-store";
 
@@ -10,6 +9,7 @@
   $: stats = $practiceStore.today
     .concat($practiceStore.someday)
     .sort((q1, q2) => q2.mistakes - q1.mistakes);
+
 </script>
 
 <svelte:head>
@@ -20,7 +20,7 @@
   <Card>
     <img
       class="object-contain w-full pb-8"
-      src={`/bigheads/?seed=${$accountStore.name}`}
+      src={`.netlify/functions/bigheads/?seed=${$accountStore.name}`}
       alt={$accountStore.name}
     />
     <div slot="footer" class="m-8">
@@ -87,24 +87,21 @@
       <p>
         <a href="https://github.com/vnglst/tafels.app">Source code on Github</a>
       </p>
-
     </div>
     <div slot="footer" class="p-5 text-center bg-red-100 rounded-b-lg">
-      <a
-        href="/"
+      <button
         on:click={(e) => {
           const sure = confirm('Cannot be undone, are you sure?');
           if (sure) {
-            store.reset();
-            practiceStore.reset();
             localStorage.clear();
+            window.location.reload();
           } else {
             e.preventDefault();
           }
         }}
       >
         Reset progress
-      </a>
+      </button>
     </div>
   </Card>
 </Page>
@@ -113,4 +110,5 @@
   .stats {
     max-height: 40rem;
   }
+
 </style>

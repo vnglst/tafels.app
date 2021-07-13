@@ -31,7 +31,6 @@ function createStore() {
         if (current.unlocks) state[category][current.unlocks].unlocked = true;
         return state;
       }),
-    reset: () => update(() => initialState),
   };
 }
 

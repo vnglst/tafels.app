@@ -2,7 +2,3 @@
   command = "npm run export"
   functions = "functions"
   publish = "__sapper__/export"
-
-[[redirects]]
-  from = "/bigheads"
-  to = "/.netlify/functions/bigheads"

@@ -46,7 +46,6 @@ function createStore() {
         return state;
       });
     },
-    reset: () => update(() => initialState),
   };
 }
 
