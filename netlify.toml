@@ -6,3 +6,4 @@
 [[redirects]]
   from = "/bigheads"
   to = "/.netlify/functions/bigheads"
+  status = 200
