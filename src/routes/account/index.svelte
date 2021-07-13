@@ -20,7 +20,7 @@
   <Card>
     <img
       class="object-contain w-full pb-8"
-      src={`/bigheads/?seed=${$accountStore.name}`}
+      src={`.netlify/functions/bigheads/?seed=${$accountStore.name}`}
       alt={$accountStore.name}
     />
     <div slot="footer" class="m-8">
