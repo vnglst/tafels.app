@@ -11,7 +11,6 @@ function createStore() {
   return {
     subscribe,
     set,
-    reset: () => update(() => initialState),
   };
 }
 
