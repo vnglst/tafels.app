@@ -1,13 +1,30 @@
 import { assign, createMachine } from "xstate";
+import { getRndEl, rnd } from "../utils";
 import { nock, squakk, yeah } from "../../helpers/soundFx";
+
+const BASE_INTERVAL = 1000;
+export const MAX_NUMBERS = 25;
 
 const addNumber = assign({
   numbers: (ctx, event) => {
-    let { howMany = 1 } = event;
-    let toAdd = [];
+    const { value = 1 } = event;
+    const toAdd = [];
 
-    for (let i = 0; i < howMany; i++) {
-      toAdd.push(Math.floor(Math.random() * 9));
+    for (let i = 0; i < value; i++) {
+      const [n1, idx1] = getRndEl(ctx.numbers);
+      const [n2, idx2] = getRndEl(ctx.numbers);
+
+      if (
+        n1 === undefined ||
+        n2 === undefined ||
+        idx1 === idx2 ||
+        n1 > 10 ||
+        n2 > 10
+      ) {
+        toAdd.push(rnd({ from: 1, to: 9 }));
+      } else {
+        toAdd.push(n1 * n2);
+      }
     }
 
     return [...ctx.numbers, ...toAdd];
@@ -16,7 +33,7 @@ const addNumber = assign({
 
 const toggleInput = assign({
   inputs: (ctx, event) => {
-    const existingIdx = ctx.inputs.findIndex((input) => input === event.index);
+    const existingIdx = ctx.inputs.findIndex((input) => input === event.value);
     const newInputs = [...ctx.inputs];
 
     // if already active, deactivate
@@ -26,7 +43,7 @@ const toggleInput = assign({
       // else find first empty input field
       const firstNull = ctx.inputs.findIndex((input) => input === null);
       // make that active
-      newInputs[firstNull] = event.index;
+      newInputs[firstNull] = event.value;
       nock.play();
     }
 
@@ -50,8 +67,8 @@ const handleCorrect = assign({
     return [null, null, null, null];
   },
   score: (ctx) => {
-    const result = calcResult(ctx.numbers, ctx.inputs);
-    return ctx.score + result;
+    const outcome = ctx.numbers[ctx.inputs[2]];
+    return ctx.score + outcome;
   },
 });
 
@@ -62,45 +79,27 @@ const handleWrong = assign({
   },
 });
 
-const calcResult = (numbers, inputs) => {
-  const idx1 = inputs[2];
-  const idx2 = inputs[3];
-
-  if (idx1 === null && idx2 === null) return null;
-
-  const r1 = idx1 === null ? "" : numbers[idx1];
-  const r2 = idx2 === null ? "" : numbers[idx2];
-
-  return Number(`${r1}${r2}`);
-};
-
-export const resultSelector = ({ context }) =>
-  calcResult(context.numbers, context.inputs);
-
 // guards
 
 const isGameOver = ({ numbers }) => {
-  return numbers.length >= 20;
+  return numbers.length >= MAX_NUMBERS;
 };
 
 const isCorrect = ({ numbers, inputs }) => {
-  const result = calcResult(numbers, inputs);
-  if (result === null) return false;
-
   const first = numbers[inputs[0]];
   const second = numbers[inputs[1]];
-
-  return first * second === result;
+  const outcome = numbers[inputs[2]];
+  return first * second === outcome;
 };
 
 const isWrong = ({ numbers, inputs }) => {
-  const result = calcResult(numbers, inputs);
-  if (result === null) return false;
+  if (inputs[2] === null) return false;
 
   const first = numbers[inputs[0]];
   const second = numbers[inputs[1]];
+  const outcome = numbers[inputs[2]];
 
-  return first * second > result;
+  return first * second !== outcome;
 };
 
 export const gameMachine = createMachine(
@@ -109,7 +108,7 @@ export const gameMachine = createMachine(
     context: {
       score: 0,
       level: 1,
-      numbers: [2, 6, 1, 2, 8, 0, 0],
+      numbers: [4, 4, 16],
       inputs: [null, null, null, null],
     },
     states: {
@@ -118,7 +117,7 @@ export const gameMachine = createMachine(
           src: (context) => (cb) => {
             const interval = setInterval(() => {
               cb("ADD_NUMBER");
-            }, 2500 - context.score);
+            }, BASE_INTERVAL - context.score);
 
             return () => {
               clearInterval(interval);
@@ -133,6 +132,10 @@ export const gameMachine = createMachine(
           {
             cond: "isCorrect",
             target: "correct",
+          },
+          {
+            cond: "isWrong",
+            target: "wrong",
           },
         ],
         on: {

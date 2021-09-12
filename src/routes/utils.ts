@@ -27,3 +27,8 @@ export function removeDups<T>(arr: T[], property: string): T[] {
   }
   return newArray;
 }
+
+export const getRndEl = <T>(arr: T[]): [T, number] => {
+  const rndIdx = Math.floor(Math.random() * arr.length);
+  return [arr[rndIdx], rndIdx];
+};
