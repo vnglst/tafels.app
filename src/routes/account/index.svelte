@@ -83,6 +83,8 @@
         </a>
       </div>
 
+      <div class="m-12"><a href="/game"> New game! </a></div>
+
       <p class="my-4">🚧 Work in Progress 🚧</p>
       <p>
         <a href="https://github.com/vnglst/tafels.app">Source code on Github</a>

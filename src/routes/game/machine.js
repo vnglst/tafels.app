@@ -2,7 +2,7 @@ import { assign, createMachine } from "xstate";
 import { getRndEl, rnd } from "../utils";
 import { nock, squakk, yeah } from "../../helpers/soundFx";
 
-const BASE_INTERVAL = 1000;
+const BASE_INTERVAL = 3000;
 export const MAX_NUMBERS = 25;
 
 const addNumber = assign({
@@ -108,7 +108,7 @@ export const gameMachine = createMachine(
     context: {
       score: 0,
       level: 1,
-      numbers: [4, 4, 16],
+      numbers: [5, 4, 16, 20, 3],
       inputs: [null, null, null, null],
     },
     states: {
