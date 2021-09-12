@@ -12,11 +12,13 @@
     "build": "npm run export"
   },
   "dependencies": {
+    "@xstate/svelte": "^0.2.0",
     "compression": "^1.7.4",
     "howler": "^2.2.3",
     "lodash.merge": "^4.6.2",
     "polka": "0.5.2",
-    "sirv": "^1.0.12"
+    "sirv": "^1.0.12",
+    "xstate": "^4.23.4"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

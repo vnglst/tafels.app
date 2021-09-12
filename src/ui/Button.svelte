@@ -29,6 +29,7 @@
       },
     };
   }
+
 </script>
 
 {#if elementType === 'button' || disabled}
@@ -97,6 +98,7 @@
     justify-content: center;
     align-items: center;
     transition: 0.5s cubic-bezier(0, 1.2, 0.2, 1.5);
+    outline: none;
   }
 
   a {
@@ -116,4 +118,5 @@
     background-color: var(--grey-100);
     cursor: not-allowed;
   }
+
 </style>

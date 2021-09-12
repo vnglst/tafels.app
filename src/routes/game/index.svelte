@@ -2,111 +2,18 @@
   import Button from "../../ui/Button.svelte";
   import Page from "../../ui/Page.svelte";
 
-  let numbers = [2, 6, 1, 2, 5, 3, 1, 2];
+  import { useMachine, useSelector } from "@xstate/svelte";
 
-  let first = null;
-  let second = null;
-  let result1 = null;
-  let result2 = null;
+  import { gameMachine, resultSelector } from "./machine";
 
-  $: console.log(
-    numbers[first],
-    "x",
-    numbers[second],
-    "=",
-    numbers[result1],
-    numbers[result2]
-  );
-  $: console.log(getStatus());
+  const { state, send, service } = useMachine(gameMachine);
+  const result = useSelector(service, resultSelector);
 
-  function addNumber() {
-    const newNumber = Math.floor(Math.random() * 10);
-    numbers = [...numbers, newNumber];
-  }
+  $: console.log($state.value, $state.context, $state.event);
+  $: ({ numbers, inputs, score } = $state.context);
 
-  setInterval(addNumber, 4000);
-
-  function removeIdxsFromArray(arr, idxs) {
-    return arr.filter((_, i) => idxs.findIndex((idx) => idx === i) === -1);
-  }
-
-  function getStatus() {
-    const result = Number(
-      `${numbers[result1]}${result2 !== null ? numbers[result2] : ""}`
-    );
-    const isCorrect = numbers[first] * numbers[second] === result;
-    if (isCorrect) return "correct";
-
-    const isValid = numbers[first] * numbers[second] >= result;
-    if (isValid) return "valid";
-
-    return "wrong";
-  }
-
-  function handleClick(i) {
-    if (i === first) {
-      first = null;
-      return;
-    }
-
-    if (i === second) {
-      second = null;
-      return;
-    }
-
-    if (i === result1) {
-      result1 = null;
-      return;
-    }
-
-    if (first === null) {
-      first = i;
-      return;
-    }
-    if (second === null) {
-      second = i;
-      return;
-    }
-
-    if (result1 === null) {
-      result1 = i;
-      if (getStatus() === "valid") return;
-    }
-
-    if (getStatus() === "correct") {
-      handleCorrect();
-      return;
-    }
-
-    if (result2 === null) {
-      result2 = i;
-    }
-
-    if (getStatus() === "correct") {
-      handleCorrect();
-    } else {
-      handleWrong();
-    }
-  }
-
-  function handleCorrect() {
-    console.log("correct");
-    numbers = removeIdxsFromArray(numbers, [first, second, result1, result2]);
-    first = null;
-    second = null;
-    result1 = null;
-    result2 = null;
-  }
-
-  function handleWrong() {
-    console.log("wrong");
-    first = null;
-    second = null;
-    result1 = null;
-    result2 = null;
-    addNumber();
-    addNumber();
-    addNumber();
+  function handleClick(index) {
+    send({ type: "TOGGLE_INPUT", index });
   }
 
 </script>
@@ -114,20 +21,23 @@
 <Page>
   <div class="container">
     <h1 class="text-4xl m-5 p-0 mt-16 font-bold text-center">
-      {numbers[first] || '?'}
+      {numbers[inputs[0]] ?? '?'}
       x
-      {numbers[second] || '?'}
+      {numbers[inputs[1]] ?? '?'}
       =
-      {numbers[result1] || '?'}
-      {numbers[result2] || ''}
+      {$result ?? '?'}
     </h1>
+
+    <span class="m-4 text-center">{$state.value} / {score}</span>
 
     <div class="grid">
       {#each numbers as number, i}
         <Button
-          primary={i === first}
-          success={i === second}
-          danger={i === result1}
+          animate
+          delay={1}
+          primary={inputs[0] === i}
+          success={inputs[1] === i}
+          danger={inputs[2] == i || inputs[3] === i}
           on:click={() => handleClick(i)}
         >
           {number}
@@ -149,6 +59,7 @@
     grid-auto-rows: 5rem;
     grid-gap: 2rem;
     margin: 2rem auto;
+    min-height: 50vh;
   }
 
 </style>

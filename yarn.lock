@@ -1187,6 +1187,11 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
+"@xstate/svelte@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@xstate/svelte/-/svelte-0.2.0.tgz#a26a96da14b569f6145fe2ac5d1b4664e80e143d"
+  integrity sha512-SwPEz0oY6T4B4xvFFqJsuXfNyA0PoEhkrbO3jDQ6fXhwx/x9+Y38mM5w+qGnPtczI7UJ+T0XKWn5GJJsH4JbRA==
+
 accepts@~1.3.5:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.7.tgz#531bc726517a3b2b41f850021c6cc15eaab507cd"
@@ -5509,6 +5514,11 @@ xdg-basedir@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xdg-basedir/-/xdg-basedir-3.0.0.tgz#496b2cc109eca8dbacfe2dc72b603c17c5870ad4"
   integrity sha1-SWsswQnsqNus/i3HK2A8F8WHCtQ=
+
+xstate@^4.23.4:
+  version "4.23.4"
+  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.23.4.tgz#b894205ac46bb3acc09755907d3e57c81c86e80e"
+  integrity sha512-lWaUvyrd0HGhosyKnf8i9wBlszVaS+/uIs0EfnuPYNsZIh1BW9ed4bZ64P57wVYk2uln7v3u+Mv98FC+r8xrxQ==
 
 xtend@^4.0.2:
   version "4.0.2"
