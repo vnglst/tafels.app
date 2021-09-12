@@ -2,8 +2,19 @@ import { assign, createMachine } from "xstate";
 import { getRndEl, rnd } from "../utils";
 import { nock, squakk, yeah } from "../../helpers/soundFx";
 
-const BASE_INTERVAL = 3000;
+const BASE_INTERVAL = 1000;
 export const MAX_NUMBERS = 25;
+
+const INITIAL_STATE = {
+  score: 0,
+  level: 1,
+  numbers: [],
+  inputs: [null, null, null, null],
+};
+
+const rndNumber = () => rnd({ from: 1, to: 9 });
+
+let uid = 1;
 
 const addNumber = assign({
   numbers: (ctx, event) => {
@@ -18,12 +29,12 @@ const addNumber = assign({
         n1 === undefined ||
         n2 === undefined ||
         idx1 === idx2 ||
-        n1 > 10 ||
-        n2 > 10
+        n1.v > 10 ||
+        n2.v > 10
       ) {
-        toAdd.push(rnd({ from: 1, to: 9 }));
+        toAdd.push({ id: uid++, v: rndNumber() });
       } else {
-        toAdd.push(n1 * n2);
+        toAdd.push({ id: uid++, v: n1.v * n2.v });
       }
     }
 
@@ -67,7 +78,7 @@ const handleCorrect = assign({
     return [null, null, null, null];
   },
   score: (ctx) => {
-    const outcome = ctx.numbers[ctx.inputs[2]];
+    const outcome = ctx.numbers[ctx.inputs[2]].v;
     return ctx.score + outcome;
   },
 });
@@ -79,6 +90,8 @@ const handleWrong = assign({
   },
 });
 
+const newGame = assign({ ...INITIAL_STATE });
+
 // guards
 
 const isGameOver = ({ numbers }) => {
@@ -86,30 +99,22 @@ const isGameOver = ({ numbers }) => {
 };
 
 const isCorrect = ({ numbers, inputs }) => {
-  const first = numbers[inputs[0]];
-  const second = numbers[inputs[1]];
-  const outcome = numbers[inputs[2]];
-  return first * second === outcome;
+  const [first, second, outcome] = inputs.map((idx) => numbers[idx]);
+  return first?.v * second?.v === outcome?.v;
 };
 
 const isWrong = ({ numbers, inputs }) => {
   if (inputs[2] === null) return false;
 
-  const first = numbers[inputs[0]];
-  const second = numbers[inputs[1]];
-  const outcome = numbers[inputs[2]];
-
-  return first * second !== outcome;
+  const [first, second, outcome] = inputs.map((idx) => numbers[idx]);
+  return first?.v * second?.v !== outcome?.v;
 };
 
 export const gameMachine = createMachine(
   {
     initial: "playing",
     context: {
-      score: 0,
-      level: 1,
-      numbers: [5, 4, 16, 20, 3],
-      inputs: [null, null, null, null],
+      ...INITIAL_STATE,
     },
     states: {
       playing: {
@@ -158,7 +163,14 @@ export const gameMachine = createMachine(
           300: { actions: "handleWrong", target: "playing" },
         },
       },
-      gameover: {},
+      gameover: {
+        on: {
+          NEW_GAME: {
+            actions: "newGame",
+            target: "playing",
+          },
+        },
+      },
     },
   },
   {
@@ -167,6 +179,7 @@ export const gameMachine = createMachine(
       toggleInput,
       handleCorrect,
       handleWrong,
+      newGame,
     },
     guards: { isGameOver, isCorrect, isWrong },
   }
