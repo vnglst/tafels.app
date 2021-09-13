@@ -122,7 +122,7 @@ export const gameMachine = createMachine(
           src: (context) => (cb) => {
             const interval = setInterval(() => {
               cb("ADD_NUMBER");
-            }, BASE_INTERVAL - context.score);
+            }, BASE_INTERVAL - context.score * 5);
 
             return () => {
               clearInterval(interval);
