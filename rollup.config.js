@@ -34,7 +34,7 @@ const vars = {
   "process.env.APP_VERSION": JSON.stringify(pkg.version),
 };
 
-console.log("Building with following vars", vars);
+console.log("\nBuilding with following vars", vars, "\n");
 export default {
   client: {
     input: config.client.input(),
