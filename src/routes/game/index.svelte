@@ -57,7 +57,13 @@
           <div class="my-auto text-center text-xl">🎉 New highscore! 🎉</div>
         {/if}
         <div class="flex justify-center p-8 mb-4 w-full" slot="footer">
-          <Button pill primary on:click={() => send({ type: "NEW_GAME" })}>
+          <Button
+            pill
+            primary
+            animate
+            delay={100}
+            on:click={() => send({ type: "NEW_GAME" })}
+          >
             New game
           </Button>
         </div>
