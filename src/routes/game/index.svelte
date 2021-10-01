@@ -81,7 +81,7 @@
               class:green={secondIdx === i}
               class:orange={outcomeIdx == i}
               on:click={() => handleClick(i)}
-              on:touchstart={() => handleClick(i)}
+              on:touchend={() => handleClick(i)}
             >
               {number.v}
             </button>
