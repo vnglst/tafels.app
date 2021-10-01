@@ -14,7 +14,7 @@
   const { state, send } = useMachine(gameMachine);
 
   // $: console.log($state.value, $state.context, $state.event);
-  $: ({ numbers, inputs, score } = $state.context);
+  $: ({ numbers, inputs, score, highscore } = $state.context);
   $: [firstIdx, secondIdx, outcomeIdx] = inputs;
   $: [first, second, outcome] = inputs.map((idx) => numbers[idx]);
 
@@ -23,18 +23,17 @@
   }
 
   onMount(() => {
-    send({ type: "ADD_NUMBER", value: 5 });
+    send({ type: "LOAD_HIGHSCORE" });
+    send({ type: "ADD_NUMBER" });
   });
 
   const [sendFade, receiveFade] = crossfade({
-    duration: (d) => Math.sqrt(d * 200),
-
+    duration: (d) => Math.sqrt(d * 150),
     fallback(node) {
       const style = getComputedStyle(node);
       const transform = style.transform === "none" ? "" : style.transform;
-
       return {
-        duration: 600,
+        duration: 200,
         easing: quintOut,
         css: (t) => `
 					transform: ${transform} scale(${t});
@@ -43,44 +42,60 @@
       };
     },
   });
-
 </script>
 
 <Page>
   <div class="container">
-    <Card progress={(numbers.length / MAX_NUMBERS) * 100}>
-      <h1 slot="header" class="text-4xl my-12 font-bold text-center">
-        {first?.v ?? '?'}
-        x
-        {second?.v ?? '?'}
-        =
-        {outcome?.v ?? '?'}
-      </h1>
-      <div class="field">
-        {#each numbers as number, i (number.id)}
-          <button
-            in:receiveFade={{ key: i }}
-            out:sendFade={{ key: i }}
-            animate:flip
-            class:blue={firstIdx === i}
-            class:green={secondIdx === i}
-            class:orange={outcomeIdx == i}
-            on:click={() => handleClick(i)}
-          >
-            {number.v}
-          </button>
-        {/each}
-      </div>
-      <div slot="footer" class="my-8 text-center">score: {score}</div>
-      {#if $state.value === 'gameover'}
-        <div class="overlayer">
-          <h2 class="text-4xl pb-8 font-bold text-center">Game over</h2>
-          <Button pill primary on:click={() => send({ type: 'NEW_GAME' })}>
+    {#if $state.value === "gameover"}
+      <Card>
+        <h1 class="my-10" slot="header">GAME OVER</h1>
+        <div class="my-auto text-center text-xl">
+          You scored <br />
+          {score} points
+        </div>
+        {#if score > highscore}
+          <div class="my-auto text-center text-xl">🎉 New highscore! 🎉</div>
+        {/if}
+        <div class="flex justify-center p-8 mb-4 w-full" slot="footer">
+          <Button pill primary on:click={() => send({ type: "NEW_GAME" })}>
             New game
           </Button>
         </div>
-      {/if}
-    </Card>
+      </Card>
+    {:else}
+      <Card progress={(numbers.length / MAX_NUMBERS) * 100}>
+        <h1 slot="header" class="text-4xl my-12 font-bold text-center">
+          {first?.v ?? "?"}
+          x
+          {second?.v ?? "?"}
+          =
+          {outcome?.v ?? "?"}
+        </h1>
+        <div class="field">
+          {#each numbers as number, i (number.id)}
+            <button
+              in:receiveFade={{ key: i }}
+              out:sendFade={{ key: i }}
+              animate:flip
+              class:blue={firstIdx === i}
+              class:green={secondIdx === i}
+              class:orange={outcomeIdx == i}
+              on:click={() => handleClick(i)}
+              on:touch={() => handleClick(i)}
+            >
+              {number.v}
+            </button>
+          {/each}
+        </div>
+        <div
+          slot="footer"
+          class="mt-8 mb-4 px-4 text-xs w-full flex justify-between"
+        >
+          <span>score: {score}</span>
+          <span>highscore: {highscore}</span>
+        </div>
+      </Card>
+    {/if}
   </div>
 </Page>
 
@@ -98,22 +113,6 @@
     justify-content: center;
     gap: 1rem;
     min-height: 23rem;
-  }
-
-  .overlayer {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    max-width: 40rem;
-    padding: 6rem;
-    border-radius: 1rem;
-    background-color: white;
-    box-shadow: var(--shadow-2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   button {
@@ -156,5 +155,4 @@
   .orange {
     background-color: var(--orange-100);
   }
-
 </style>

@@ -32,3 +32,7 @@ export const getRndEl = <T>(arr: T[]): [T, number] => {
   const rndIdx = Math.floor(Math.random() * arr.length);
   return [arr[rndIdx], rndIdx];
 };
+
+export const removeIdxsFromArray = <T>(arr: T[], idxs: number[]): T[] => {
+  return arr.filter((_, i) => idxs.findIndex((idx) => idx === i) === -1);
+};
