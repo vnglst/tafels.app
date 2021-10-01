@@ -81,7 +81,7 @@
               class:green={secondIdx === i}
               class:orange={outcomeIdx == i}
               on:click={() => handleClick(i)}
-              on:touchend={(e) => {
+              on:touchstart={(e) => {
                 e.preventDefault();
                 handleClick(i);
               }}
