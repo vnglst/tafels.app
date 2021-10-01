@@ -19,7 +19,7 @@ type Context = {
 };
 
 const BASE_INTERVAL = 3000;
-export const MAX_NUMBERS = 5;
+export const MAX_NUMBERS = 25;
 
 const INITIAL_STATE: Context = {
   highscore: 0,
