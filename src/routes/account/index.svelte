@@ -9,7 +9,6 @@
   $: stats = $practiceStore.today
     .concat($practiceStore.someday)
     .sort((q1, q2) => q2.mistakes - q1.mistakes);
-
 </script>
 
 <svelte:head>
@@ -50,7 +49,7 @@
           </tr>
         </thead>
         {#each stats as question, i}
-          <tr class={i % 2 ? 'bg-gray-100' : ''}>
+          <tr class={i % 2 ? "bg-gray-100" : ""}>
             <td class="p-4 text-left">
               <pre>{question.q} = {question.answer}</pre>
             </td>
@@ -83,8 +82,6 @@
         </a>
       </div>
 
-      <div class="m-12"><a href="/game"> New game! </a></div>
-
       <p class="my-4">🚧 Work in Progress 🚧</p>
       <p>
         <a href="https://github.com/vnglst/tafels.app">Source code on Github</a>
@@ -93,7 +90,7 @@
     <div slot="footer" class="p-5 text-center bg-red-100 rounded-b-lg">
       <button
         on:click={(e) => {
-          const sure = confirm('Cannot be undone, are you sure?');
+          const sure = confirm("Cannot be undone, are you sure?");
           if (sure) {
             localStorage.clear();
             window.location.reload();
@@ -112,5 +109,4 @@
   .stats {
     max-height: 40rem;
   }
-
 </style>

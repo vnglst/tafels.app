@@ -89,7 +89,7 @@
         </div>
         <div
           slot="footer"
-          class="mt-8 mb-4 px-4 text-xs w-full flex justify-between"
+          class="mt-10 mb-6 px-10 text-xs w-full flex justify-between"
         >
           <span>score: {score}</span>
           <span>highscore: {highscore}</span>
