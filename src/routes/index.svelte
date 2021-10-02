@@ -33,6 +33,7 @@
         {#each Object.entries($store[category.category]) as [n, challenge]}
           <ChallengeLink
             href={`${category.slug}/${n}`}
+            locked={!challenge.unlocked}
             unlocked={challenge.unlocked}
             completed={challenge.completed}
           >
@@ -45,6 +46,9 @@
   <Card>
     <h2 slot="header">Practice</h2>
     <Grid>
+      <ChallengeLink href="/game" present />
+      Play a game
+      <span />
       <ChallengeLink
         href="/practice/today"
         unlocked
@@ -54,13 +58,10 @@
       </ChallengeLink>
       Questions for today
       <span />
-      <ChallengeLink href="/practice/someday">
+      <ChallengeLink href="/practice/someday" locked>
         {$practiceStore.someday.length}
       </ChallengeLink>
       Questions for later
-      <span />
-      <ChallengeLink href="/practice/mixed">20</ChallengeLink>
-      Mixed questions
     </Grid>
   </Card>
 </Page>

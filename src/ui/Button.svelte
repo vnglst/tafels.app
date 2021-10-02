@@ -4,9 +4,16 @@
 
   export let elementType = "button";
   export let href = null;
+
   export let primary = false;
+  export let blue = false;
   export let success = false;
+  export let green = false;
   export let danger = false;
+  export let red = false;
+  export let warning = false;
+  export let orange = false;
+
   export let disabled = false;
   export let pill = false;
   export let animate = false;
@@ -29,16 +36,18 @@
       },
     };
   }
+
 </script>
 
 {#if elementType === 'button' || disabled}
   <button
     in:pop={{ duration: 750, delay }}
     class={class_name}
-    class:primary
+    class:primary={primary || blue}
+    class:success={success || green}
+    class:danger={danger || red}
+    class:orange={warning || orange}
     class:pill
-    class:success
-    class:danger
     {disabled}
     {href}
     on:click|preventDefault={(e) => dispatch('click', e)}
@@ -49,10 +58,11 @@
   <a
     in:pop={{ duration: 750, delay }}
     rel="prefetch"
-    class:primary
+    class:primary={primary || blue}
+    class:success={success || green}
+    class:danger={danger || red}
+    class:orange={warning || orange}
     class:pill
-    class:success
-    class:danger
     {href}
     on:click={(e) => dispatch('click', e)}
   >
@@ -71,6 +81,10 @@
 
   .danger {
     background-color: var(--red-100);
+  }
+
+  .orange {
+    background-color: var(--orange-100);
   }
 
   .pill {
@@ -97,6 +111,7 @@
     justify-content: center;
     align-items: center;
     transition: 0.5s cubic-bezier(0, 1.2, 0.2, 1.5);
+    outline: none;
   }
 
   a {
@@ -116,4 +131,5 @@
     background-color: var(--grey-100);
     cursor: not-allowed;
   }
+
 </style>
