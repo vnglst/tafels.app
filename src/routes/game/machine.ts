@@ -15,7 +15,7 @@ type Context = {
   score: number;
   level: number;
   numbers: NumberType[];
-  inputs: number[];
+  inputs: (number | null)[];
 };
 
 const BASE_INTERVAL = 3000;
