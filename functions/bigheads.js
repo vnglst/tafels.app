@@ -1,7 +1,8 @@
-// source: https://github.com/RobertBroersma/bigheads/tree/main/site/functions/svg
 const React = require("react");
 const RDS = require("react-dom/server");
 const seedrandom = require("seedrandom");
+const express = require("express");
+const cors = require("cors");
 
 const {
   BigHead,
@@ -66,11 +67,13 @@ function getRandomOptions(rng) {
   };
 }
 
-// Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
-exports.handler = async (event) => {
-  try {
-    const { seed, ...props } = event.queryStringParameters;
+const app = express();
 
+app.get("/", (req, res) => {
+  console.log("Incoming request:", req.url);
+
+  try {
+    const { seed, ...props } = req.query;
     const rng = seed ? seedrandom(seed) : Math.random;
 
     const mergedProps = {
@@ -82,18 +85,18 @@ exports.handler = async (event) => {
       React.createElement(BigHead, mergedProps)
     );
 
-    const headers = {
-      "Content-Type": "image/svg+xml",
-    };
+    res.set("Content-Type", "image/svg+xml");
+    if (seed) {
+      res.set("Cache-Control", "max-age=0, must-revalidate, public");
+    }
 
-    if (seed) headers["Cache-Control"] = "max-age=0, must-revalidate, public";
-
-    return {
-      statusCode: 200,
-      body: avatarString,
-      headers,
-    };
+    res.send(avatarString);
   } catch (err) {
-    return { statusCode: 500, body: err.toString() };
+    res.status(500).send(err.toString());
   }
-};
+});
+
+const PORT = process.env.PORT || 9000;
+app.listen(PORT, () => {
+  console.log(`Avatar service running on port ${PORT}`);
+});

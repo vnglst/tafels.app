@@ -1,0 +1,14 @@
+FROM node:14-alpine as builder
+
+RUN apk add --no-cache git
+
+WORKDIR /app
+COPY package.json yarn.lock ./
+COPY functions/package.json ./functions/
+RUN yarn install
+COPY . .
+RUN yarn build:tailwind && yarn export
+
+FROM nginx:alpine
+COPY --from=builder /app/__sapper__/export /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf

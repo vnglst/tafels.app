@@ -1,4 +1,0 @@
-[build]
-  command = "npm run export"
-  functions = "functions"
-  publish = "__sapper__/export"

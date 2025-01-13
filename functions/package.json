@@ -5,6 +5,11 @@
     "@bigheads/core": "^0.3.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "seedrandom": "^3.0.5"
+    "seedrandom": "^3.0.5",
+    "express": "^4.17.1",
+    "cors": "^2.8.5"
+  },
+  "scripts": {
+    "start": "node bigheads.js"
   }
 }
