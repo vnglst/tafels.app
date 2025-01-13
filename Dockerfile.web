@@ -4,7 +4,6 @@ RUN apk add --no-cache git
 
 WORKDIR /app
 COPY package.json yarn.lock ./
-COPY functions/package.json ./functions/
 RUN yarn install
 COPY . .
 RUN yarn build:tailwind && yarn export
