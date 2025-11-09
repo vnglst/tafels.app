@@ -19,8 +19,6 @@
     <br />
     Source code on
     <a href="https://github.com/vnglst/tafels.app">Github</a>
-    <br />
-    v. {process.env.APP_VERSION} git {process.env.COMMIT_HASH}
   </footer>
 </div>
 

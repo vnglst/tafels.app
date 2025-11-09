@@ -1,10 +1,10 @@
 <script context="module">
-  import Game from "../../components/Game.svelte";
-  import { subtracts } from "./subtractQuestions";
+  import Game from "$lib/components/Game.svelte";
+  import { adds } from "../addQuestions";
 
   export async function preload(page) {
     const { n } = page.params;
-    const challenge = subtracts.challenges[n];
+    const challenge = adds.challenges[n];
     if (!challenge) return this.error(404, "Not found");
     return { challenge };
   }
@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-  <title>Subtractions {challenge.id} - tafels.app</title>
+  <title>Additions {challenge.id} - tafels.app</title>
 </svelte:head>
 
 <Game {challenge} />

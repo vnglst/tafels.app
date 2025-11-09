@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Challenge } from "../types";
-  import Card from "../ui/Card.svelte";
-  import IconWrong from "../ui/IconWrong.svelte";
-  import Button from "../ui/Button.svelte";
+  import type { Challenge } from "$lib/types";
+  import Card from "$lib/ui/Card.svelte";
+  import IconWrong from "$lib/ui/IconWrong.svelte";
+  import Button from "$lib/ui/Button.svelte";
 
   export let results: boolean[];
   export let restart: () => void;

@@ -4,9 +4,9 @@
   import { flip } from "svelte/animate";
   import { useMachine } from "@xstate/svelte";
 
-  import Page from "../../ui/Page.svelte";
-  import Card from "../../ui/Card.svelte";
-  import Button from "../../ui/Button.svelte";
+  import Page from "$lib/ui/Page.svelte";
+  import Card from "$lib/ui/Card.svelte";
+  import Button from "$lib/ui/Button.svelte";
 
   import { gameMachine, MAX_NUMBERS } from "./machine";
   import { onMount } from "svelte";

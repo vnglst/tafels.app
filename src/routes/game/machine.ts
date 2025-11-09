@@ -1,6 +1,6 @@
 import { assign, createMachine } from "xstate";
-import { getRndEl, removeIdxsFromArray, rnd } from "../utils";
-import { nock, squakk, yeah } from "../../helpers/soundFx";
+import { getRndEl, removeIdxsFromArray, rnd } from "$lib/utils";
+import { nock, squakk, yeah } from "$lib/helpers/soundFx";
 
 type NumberType = { id: number; v: number };
 

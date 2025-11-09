@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
-import { useLocalStorage } from "./store-hooks";
-import { removeDups } from "./utils";
+import { useLocalStorage } from "$lib/store-hooks";
+import { removeDups } from "$lib/utils";
 
 const initialState = {
   today: [],

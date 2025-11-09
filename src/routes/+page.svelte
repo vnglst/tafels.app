@@ -1,12 +1,12 @@
 <script>
   import { onMount } from "svelte";
-  import VisuallyHidden from "../ui/VisuallyHidden.svelte";
-  import Page from "../ui/Page.svelte";
-  import Card from "../ui/Card.svelte";
-  import Grid from "../ui/Grid.svelte";
-  import ChallengeLink from "../components/ChallengeLink.svelte";
-  import { store } from "./questions-store.js";
-  import { practiceStore } from "./practice-store";
+  import VisuallyHidden from "$lib/ui/VisuallyHidden.svelte";
+  import Page from "$lib/ui/Page.svelte";
+  import Card from "$lib/ui/Card.svelte";
+  import Grid from "$lib/ui/Grid.svelte";
+  import ChallengeLink from "$lib/components/ChallengeLink.svelte";
+  import { store } from "$lib/stores/questions-store.js";
+  import { practiceStore } from "$lib/stores/practice-store";
   import { subtracts } from "./subtract/subtractQuestions.ts";
   import { adds } from "./add/addQuestions.ts";
   import { tables } from "./table/tableQuestions.ts";

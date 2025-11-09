@@ -1,17 +1,17 @@
 <script lang="ts">
-  import type { Question, Challenge } from "../types";
-  import Card from "../ui/Card.svelte";
-  import TimerBar from "../ui/TimerBar.svelte";
-  import Grid from "../ui/Grid.svelte";
-  import Page from "../ui/Page.svelte";
+  import type { Question, Challenge } from "$lib/types";
+  import Card from "$lib/ui/Card.svelte";
+  import TimerBar from "$lib/ui/TimerBar.svelte";
+  import Grid from "$lib/ui/Grid.svelte";
+  import Page from "$lib/ui/Page.svelte";
 
   import GameButton from "./GameButton.svelte";
   import GameScore from "./GameScore.svelte";
   import GameReport from "./GameReport.svelte";
 
-  import { nock, squakk, yeah } from "../helpers/soundFx";
-  import { store } from "../routes/questions-store.js";
-  import { practiceStore } from "../routes/practice-store";
+  import { nock, squakk, yeah } from "$lib/helpers/soundFx";
+  import { store } from "$lib/stores/questions-store.js";
+  import { practiceStore } from "$lib/stores/practice-store";
 
   export let challenge: Challenge;
   export let onWrong: (current: Question) => void = practiceStore.add;

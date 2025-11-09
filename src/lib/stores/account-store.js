@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import { useLocalStorage } from "./store-hooks";
+import { useLocalStorage } from "$lib/store-hooks";
 
 const initialState = { name: "BigHead" };
 

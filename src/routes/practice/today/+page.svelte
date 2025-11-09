@@ -1,6 +1,6 @@
 <script>
-  import Game from "../../components/Game.svelte";
-  import { practiceStore } from "../practice-store";
+  import Game from "$lib/components/Game.svelte";
+  import { practiceStore } from "$lib/stores/practice-store";
 
   const challenge = {
     id: "today",

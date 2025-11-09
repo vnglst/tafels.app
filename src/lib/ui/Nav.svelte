@@ -1,12 +1,13 @@
 <script lang="ts">
+  import { browser } from "$app/environment";
   import IconBack from "./IconBack.svelte";
-  import { accountStore } from "../routes/account-store";
+  import { accountStore } from "$lib/stores/account-store";
   export let segment: string;
 </script>
 
 <nav>
   <ul>
-    {#if segment && process.browser}
+    {#if segment && browser}
       <li class="back-link float-left">
         <a rel="prefetch" href="../" class="p-5">
           <IconBack />

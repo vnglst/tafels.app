@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { Question } from "../../types";
-  import Page from "../../ui/Page.svelte";
-  import Card from "../../ui/Card.svelte";
-  import { practiceStore } from "../practice-store";
-  import { accountStore } from "../account-store";
+  import type { Question } from "$lib/types";
+  import Page from "$lib/ui/Page.svelte";
+  import Card from "$lib/ui/Card.svelte";
+  import { practiceStore } from "$lib/stores/practice-store";
+  import { accountStore } from "$lib/stores/account-store";
 
   let stats: Question[];
   $: stats = $practiceStore.today

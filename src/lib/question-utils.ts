@@ -1,5 +1,5 @@
-import { rnd } from "./utils";
-import type { Question } from "../types";
+import { rnd } from "$lib/utils";
+import type { Question } from "$lib/types";
 
 type AddRndOptions = {
   table: Question[];

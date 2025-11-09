@@ -1,5 +1,5 @@
-import { addRndOptions, generate } from "../question-utils";
-import type { Question } from "../../types";
+import { addRndOptions, generate } from "$lib/question-utils";
+import type { Question } from "$lib/types";
 
 function generateTableQuestions(base: number) {
   const TOTAL = 10;

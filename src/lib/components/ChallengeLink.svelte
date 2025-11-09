@@ -1,8 +1,8 @@
 <script lang="ts">
-  import IconLock from "../ui/IconLock.svelte";
-  import IconCorrect from "../ui/IconCorrect.svelte";
-  import IconPresent from "../ui/IconPresent.svelte";
-  import Button from "../ui/Button.svelte";
+  import IconLock from "$lib/ui/IconLock.svelte";
+  import IconCorrect from "$lib/ui/IconCorrect.svelte";
+  import IconPresent from "$lib/ui/IconPresent.svelte";
+  import Button from "$lib/ui/Button.svelte";
 
   export let href: string;
   export let locked: boolean = false;

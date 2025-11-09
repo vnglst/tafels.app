@@ -1,7 +1,7 @@
 <script lang="ts">
-  import IconCorrect from "../ui/IconCorrect.svelte";
-  import IconWrong from "../ui/IconWrong.svelte";
-  import IconCircle from "../ui/IconCircle.svelte";
+  import IconCorrect from "$lib/ui/IconCorrect.svelte";
+  import IconWrong from "$lib/ui/IconWrong.svelte";
+  import IconCircle from "$lib/ui/IconCircle.svelte";
 
   export let results: boolean[];
 </script>

@@ -1,8 +1,8 @@
 import { writable } from "svelte/store";
-import { subtracts } from "./subtract/subtractQuestions";
-import { adds } from "./add/addQuestions";
-import { tables } from "./table/tableQuestions";
-import { useLocalStorage } from "./store-hooks";
+import { subtracts } from "../../routes/subtract/subtractQuestions";
+import { adds } from "../../routes/add/addQuestions";
+import { tables } from "../../routes/table/tableQuestions";
+import { useLocalStorage } from "$lib/store-hooks";
 
 const initialState = {
   tables: tables.initialState,

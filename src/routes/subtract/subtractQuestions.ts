@@ -1,6 +1,6 @@
-import { removeDups, rnd } from "../utils";
-import { addRndOptions, generate } from "../question-utils";
-import type { Question } from "../../types";
+import { removeDups, rnd } from "$lib/utils";
+import { addRndOptions, generate } from "$lib/question-utils";
+import type { Question } from "$lib/types";
 
 function generateSubstractQuestions(base = 10) {
   const TOTAL = 10;

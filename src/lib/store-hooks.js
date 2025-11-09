@@ -1,8 +1,9 @@
 import merge from "lodash.merge";
+import { browser } from "$app/environment";
 
 export function useLocalStorage({ update, subscribe, key }) {
   // skip localstorage for SSR
-  if (!process.browser) return;
+  if (!browser) return;
   const json = localStorage.getItem(key);
   if (json) {
     const stored = JSON.parse(json);
