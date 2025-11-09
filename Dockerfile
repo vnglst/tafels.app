@@ -3,22 +3,22 @@ FROM node:22-alpine as web-builder
 
 WORKDIR /app
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN npm install --legacy-peer-deps
 COPY . .
-RUN yarn build
+RUN npm run build
 
 # Stage 2: Build the functions
 FROM node:22-alpine as functions-builder
 
 WORKDIR /app/functions
 COPY functions/package.json functions/package-lock.json ./
-RUN yarn install --frozen-lockfile --production
+RUN npm ci --omit=dev
 
 # Stage 3: Final image with nginx and node
 FROM nginx:alpine
 
 # Install Node.js and supervisor
-RUN apk add --no-cache nodejs supervisor
+RUN apk add --no-cache nodejs npm supervisor
 
 # Copy built SvelteKit app
 COPY --from=web-builder /app/dist /usr/share/nginx/html
