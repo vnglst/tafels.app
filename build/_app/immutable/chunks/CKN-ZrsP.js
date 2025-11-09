@@ -1,0 +1,1 @@
+import{X as r}from"./D6Jb6PhO.js";import{s as o}from"./CHXogpFl.js";const n=!0,i=n,c=r,t=()=>{const s=o;return{page:{subscribe:s.page.subscribe},navigating:{subscribe:s.navigating.subscribe},updated:s.updated}},u={subscribe(s){return t().page.subscribe(s)}},g={subscribe(s){return t().navigating.subscribe(s)}};export{i as b,c as d,g as n,u as p};
