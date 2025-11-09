@@ -10,8 +10,8 @@ RUN yarn build
 # Stage 2: Build the functions
 FROM node:22-alpine as functions-builder
 
-WORKDIR /app
-COPY functions/package.json ./
+WORKDIR /app/functions
+COPY functions/package.json functions/package-lock.json ./
 RUN yarn install --frozen-lockfile --production
 
 # Stage 3: Final image with nginx and node
@@ -28,7 +28,8 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy functions
 WORKDIR /app/functions
-COPY --from=functions-builder /app/node_modules ./node_modules
+COPY --from=functions-builder /app/functions/node_modules ./node_modules
+COPY --from=functions-builder /app/functions/package.json ./
 COPY functions/bigheads.js ./
 
 # Copy supervisor configuration
