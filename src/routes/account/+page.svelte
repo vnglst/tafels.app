@@ -19,7 +19,7 @@
   <Card>
     <img
       class="object-contain w-full pb-8"
-      src={`.netlify/functions/bigheads/?seed=${$accountStore.name}`}
+      src={`/bigheads?seed=${$accountStore.name}`}
       alt={$accountStore.name}
     />
     <div slot="footer" class="m-8">
@@ -48,14 +48,16 @@
             <th class="text-right w-1/4 p-4">Mistakes</th>
           </tr>
         </thead>
-        {#each stats as question, i}
-          <tr class={i % 2 ? "bg-gray-100" : ""}>
-            <td class="p-4 text-left">
-              <pre>{question.q} = {question.answer}</pre>
-            </td>
-            <td class="p-4 text-right">{question.mistakes}</td>
-          </tr>
-        {/each}
+        <tbody>
+          {#each stats as question, i}
+            <tr class={i % 2 ? "bg-gray-100" : ""}>
+              <td class="p-4 text-left">
+                <pre>{question.q} = {question.answer}</pre>
+              </td>
+              <td class="p-4 text-right">{question.mistakes}</td>
+            </tr>
+          {/each}
+        </tbody>
       </table>
     </div>
   </Card>
@@ -65,7 +67,7 @@
       <p>
         Tafels.app was created by
         <a href="https://koenvangilst.nl">Koen van Gilst</a>
-        using Sapper and Svelte.
+        using SvelteKit and Svelte.
       </p>
       <p class="mt-2">
         The avatars are from
