@@ -1,1 +1,0 @@
-import{w as r}from"./D6Jb6PhO.js";import{u as s}from"./Brd7-tEb.js";const n={name:"BigHead"};function c(){const e="tafels-app-name",{set:a,subscribe:t,update:o}=r(n);return s({subscribe:t,update:o,key:e}),{subscribe:t,set:a}}const m=c();export{m as a};
