@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --white: white;
+
+  --grey-050: hsl(210, 36%, 96%);
+  --grey-100: hsl(212, 33%, 89%);
+  --grey-200: hsl(210, 31%, 80%);
+  --grey-300: hsl(211, 27%, 70%);
+  --grey-400: hsl(209, 23%, 60%);
+  --grey-500: hsl(210, 22%, 49%);
+  --grey-600: hsl(209, 28%, 39%);
+  --grey-700: hsl(209, 34%, 30%);
+  --grey-800: hsl(211, 39%, 23%);
+  --grey-900: hsl(209, 61%, 16%);
+
+  --shadow-2: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+  --shadow-3: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+
+  --blue-050: hsl(212, 79%, 92%);
+  --blue-100: hsl(212, 97%, 85%);
+  --blue-200: hsl(212, 84%, 74%);
+  --blue-300: hsl(212, 74%, 65%);
+  --blue-400: hsl(212, 65%, 55%);
+  --blue-500: hsl(212, 67%, 45%);
+  --blue-600: hsl(212, 76%, 39%);
+  --blue-700: hsl(212, 82%, 33%);
+  --blue-800: hsl(212, 87%, 29%);
+  --blue-900: hsl(212, 100%, 21%);
+
+  --red-050: hsl(0, 100%, 87%);
+  --red-100: hsl(0, 100%, 87%);
+  --red-500: hsl(360, 100%, 69%);
+  --red-1000: hsl(0, 100%, 15%);
+
+  --green-050: hsla(134, 85%, 85%);
+  --green-100: hsl(134, 94%, 79%);
+  --green-500: hsl(134, 95%, 71%);
+  --green-1000: hsl(127, 66%, 15%);
+
+  --orange-100: hsl(30, 94%, 79%);
+}
+
+html {
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: calc(0.5em + 1vmin);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif, -apple-system, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Cantarell, Helvetica Neue;
+  color: var(--grey-900);
+  background-color: var(--grey-050);
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  -webkit-user-select: none; /* disable text selection for all elements */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 0.5em 0;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  @apply underline;
+}
+
+ul {
+  list-style: none;
+}
+
+input[type="range"] {
+  height: 0;
+}
+
+input,
+input[type="text"] {
+  -webkit-appearance: none;
+}
+
+textarea {
+  -webkit-appearance: none;
+}
+
+input,
+textarea {
+  -webkit-user-select: auto;
+}

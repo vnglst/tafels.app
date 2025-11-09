@@ -1,6 +1,6 @@
 import { assign, createMachine } from "xstate";
-import { getRndEl, removeIdxsFromArray, rnd } from "../utils";
-import { nock, squakk, yeah } from "../../helpers/soundFx";
+import { getRndEl, removeIdxsFromArray, rnd } from "$lib/utils";
+import { nock, squakk, yeah } from "$lib/helpers/soundFx";
 
 type NumberType = { id: number; v: number };
 
@@ -99,12 +99,16 @@ export const gameMachine = createMachine<Context, Event>(
   {
     actions: {
       setHighscore: (context: Context) => {
+        if (typeof localStorage === 'undefined') return;
         const highscore = Number(localStorage.getItem("highscore"));
         if (context.score > highscore)
           localStorage.setItem("highscore", context.score.toString());
       },
       loadHighscore: assign<Context>({
-        highscore: () => Number(localStorage.getItem("highscore")),
+        highscore: () => {
+          if (typeof localStorage === 'undefined') return 0;
+          return Number(localStorage.getItem("highscore"));
+        },
       }),
       addNumber: assign<Context, Event>({
         numbers: (ctx) => {

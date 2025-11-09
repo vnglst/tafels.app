@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<meta name="theme-color" content="white" />
+
+		<link rel="icon" type="image/png" href="%sveltekit.assets%/favicon.png" />
+		<link rel="manifest" href="%sveltekit.assets%/manifest.json" />
+		<link rel="apple-touch-icon" href="%sveltekit.assets%/images/icons/icon-192x192.png" />
+
+		<script
+			defer
+			data-domain="tafels.koenvangilst.nl"
+			src="https://plausible.koenvangilst.nl/js/script.js"
+		></script>
+		<script
+			async
+			src="https://unpkg.com/pwacompat"
+			crossorigin="anonymous"
+		></script>
+
+		%sveltekit.head%
+	</head>
+
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
