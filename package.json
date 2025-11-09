@@ -43,8 +43,5 @@
     "vite": "^6.0.1",
     "vite-plugin-pwa": "^0.21.1"
   },
-  "private": true,
-  "workspaces": [
-    "functions"
-  ]
+  "private": true
 }
