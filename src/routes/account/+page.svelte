@@ -4,6 +4,7 @@
   import Card from "$lib/ui/Card.svelte";
   import { practiceStore } from "$lib/stores/practice-store";
   import { accountStore } from "$lib/stores/account-store";
+  import { getAvatarUrl } from "$lib/avatar/utils";
 
   let stats: Question[];
   $: stats = $practiceStore.today
@@ -19,7 +20,7 @@
   <Card>
     <img
       class="object-contain w-full pb-8"
-      src={`/bigheads?seed=${$accountStore.name}`}
+      src={getAvatarUrl($accountStore.name)}
       alt={$accountStore.name}
     />
     <div slot="footer" class="m-8">
