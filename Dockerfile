@@ -1,27 +1,12 @@
-FROM node:22-alpine
-
+FROM node:22-alpine AS build
 WORKDIR /app
-
-# Copy package files
-COPY package.json package-lock.json ./
-
-# Install dependencies
-RUN npm ci --legacy-peer-deps
-
-# Copy application code
 COPY . .
+RUN npm ci --legacy-peer-deps && npm run build
 
-# Build the application
-RUN npm run build
-
-# Remove dev dependencies
-RUN npm prune --production --legacy-peer-deps
-
-# Expose the port SvelteKit runs on
+FROM node:22-alpine
+WORKDIR /app
+COPY --from=build /app/build ./build
+COPY --from=build /app/package*.json ./
+RUN npm ci --production --legacy-peer-deps
 EXPOSE 3000
-
-# Set environment variable for production
-ENV NODE_ENV=production
-
-# Start the application
 CMD ["node", "build"]
