@@ -48,7 +48,7 @@
     <Grid>
       <ChallengeLink href="/game" present />
       Play a game
-      <span />
+      <span></span>
       <ChallengeLink
         href="/practice/today"
         unlocked
@@ -57,7 +57,7 @@
         {$practiceStore.today.length}
       </ChallengeLink>
       Questions for today
-      <span />
+      <span></span>
       <ChallengeLink href="/practice/someday" locked>
         {$practiceStore.someday.length}
       </ChallengeLink>

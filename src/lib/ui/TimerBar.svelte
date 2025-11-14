@@ -20,9 +20,9 @@
       dispatch('timeout');
     }}
     style="animation-duration: {duration}s"
-  />
+  ></div>
 {:else if timedOut}
-  <div class="progress ended" />
+  <div class="progress ended"></div>
 {/if}
 
 <style>

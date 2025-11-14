@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "start": "node build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -14,37 +15,40 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@bigheads/core": "^0.3.1",
+    "@sveltejs/adapter-node": "^5.2.9",
     "@xstate/svelte": "^3.0.5",
     "howler": "^2.2.4",
     "lodash.merge": "^4.6.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "seedrandom": "^3.0.5",
     "xstate": "^5.18.2"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^3.0.6",
     "@sveltejs/kit": "^2.48.4",
-    "@sveltejs/vite-plugin-svelte": "^5.0.4",
+    "@sveltejs/vite-plugin-svelte": "^5.1.1",
     "@types/howler": "^2.2.12",
     "@types/lodash.merge": "^4.6.9",
-    "@types/node": "^22.9.0",
-    "@typescript-eslint/eslint-plugin": "^8.15.0",
-    "@typescript-eslint/parser": "^8.15.0",
-    "autoprefixer": "^10.4.20",
+    "@types/node": "^22.19.1",
+    "@types/react": "^18.3.26",
+    "@types/react-dom": "^18.3.7",
+    "@types/seedrandom": "^3.0.8",
+    "@typescript-eslint/eslint-plugin": "^8.46.4",
+    "@typescript-eslint/parser": "^8.46.4",
+    "autoprefixer": "^10.4.22",
     "eslint": "^9.15.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^9.1.2",
     "eslint-plugin-svelte": "^2.46.1",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
     "prettier-plugin-svelte": "^3.2.8",
-    "svelte": "^5.2.9",
-    "svelte-check": "^4.0.8",
-    "tailwindcss": "^3.4.15",
+    "svelte": "^5.43.6",
+    "svelte-check": "^4.3.4",
+    "tailwindcss": "^3.4.18",
     "tslib": "^2.8.1",
     "typescript": "^5.7.2",
-    "vite": "^6.0.1",
-    "vite-plugin-pwa": "^0.21.1"
+    "vite": "^6.4.1"
   },
-  "private": true,
-  "workspaces": [
-    "functions"
-  ]
+  "private": true
 }
