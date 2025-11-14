@@ -9,7 +9,7 @@
         class="progress"
         style="width: {progress}%; border-radius: 20px {progress > 97 ? '20px' : '0'}
         0 0;"
-      />
+      ></div>
     {/if}
   </slot>
   <div class="header">
