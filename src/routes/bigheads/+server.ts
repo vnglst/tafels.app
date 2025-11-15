@@ -2,88 +2,71 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import seedrandom from 'seedrandom';
 import type { RequestHandler } from './$types';
-import {
-	BigHead,
-	theme,
-	eyesMap,
-	eyebrowsMap,
-	mouthsMap,
-	hairMap,
-	facialHairMap,
-	clothingMap,
-	accessoryMap,
-	graphicsMap,
-	hatMap,
-	bodyMap
-} from '@bigheads/core';
+import { BigHead } from '@bigheads/core';
+import { generateAvatarOptions } from '$lib/avatar/utils';
 
-function getRandomOptions(rng: () => number) {
-	function selectRandomKey(object: Record<string, unknown>): string {
-		return Object.keys(object)[Math.floor(rng() * Object.keys(object).length)];
+const MAX_SEED_LENGTH = 200;
+
+/**
+ * Validates the seed parameter
+ * @param seed - The seed value to validate
+ * @returns Object with isValid flag and optional error message
+ */
+function validateSeed(seed: string | null): { isValid: boolean; error?: string } {
+	if (!seed) {
+		return { isValid: true }; // null/empty seed is valid (will use Math.random)
 	}
 
-	const skinTone = selectRandomKey(theme.colors.skin);
-	const eyes = selectRandomKey(eyesMap);
-	const eyebrows = selectRandomKey(eyebrowsMap);
-	const mouth = selectRandomKey(mouthsMap);
-	const hair = selectRandomKey(hairMap);
-	const facialHair = selectRandomKey(facialHairMap);
-	const clothing = selectRandomKey(clothingMap);
-	const accessory = selectRandomKey(accessoryMap);
-	const graphic = selectRandomKey(graphicsMap);
-	const hat = selectRandomKey(hatMap);
-	const body = selectRandomKey(bodyMap);
+	if (seed.length > MAX_SEED_LENGTH) {
+		return {
+			isValid: false,
+			error: `Seed parameter exceeds maximum length of ${MAX_SEED_LENGTH} characters`
+		};
+	}
 
-	const hairColor = selectRandomKey(theme.colors.hair);
-	const clothingColor = selectRandomKey(theme.colors.clothing);
-	const circleColor = selectRandomKey(theme.colors.bgColors);
-	const lipColor = selectRandomKey(theme.colors.lipColors);
-	const hatColor = selectRandomKey(theme.colors.clothing);
-
-	const mask = true;
-	const lashes = rng() > 0.5;
-
-	return {
-		skinTone,
-		eyes,
-		eyebrows,
-		mouth,
-		hair,
-		facialHair,
-		clothing,
-		accessory,
-		graphic,
-		hat,
-		body,
-		hairColor,
-		clothingColor,
-		circleColor,
-		lipColor,
-		hatColor,
-		mask,
-		lashes
-	};
+	return { isValid: true };
 }
 
-export const GET: RequestHandler = async ({ url }) => {
+/**
+ * GET endpoint for generating avatar SVGs
+ * Accepts an optional 'seed' query parameter to generate deterministic avatars
+ * @param url - Request URL containing optional seed parameter
+ * @returns Response with SVG content or error message
+ */
+export const GET: RequestHandler = ({ url }) => {
 	try {
 		const seed = url.searchParams.get('seed');
+
+		// Validate seed parameter
+		const validation = validateSeed(seed);
+		if (!validation.isValid) {
+			return new Response(validation.error, {
+				status: 400,
+				headers: {
+					'Content-Type': 'text/plain'
+				}
+			});
+		}
+
 		const rng = seed ? seedrandom(seed) : Math.random;
 
-		const mergedProps = {
-			...getRandomOptions(rng)
-		};
+		const avatarOptions = generateAvatarOptions(rng);
+		const avatarElement = React.createElement(BigHead, avatarOptions);
+		const avatarString = renderToString(avatarElement);
 
-		const avatarString = renderToString(React.createElement(BigHead, mergedProps));
+		const cacheControl = seed ? 'max-age=0, must-revalidate, public' : 'no-cache';
 
 		return new Response(avatarString, {
 			headers: {
 				'Content-Type': 'image/svg+xml',
-				'Cache-Control': seed ? 'max-age=0, must-revalidate, public' : 'no-cache'
+				'Cache-Control': cacheControl
 			}
 		});
-	} catch (err) {
-		return new Response(String(err), {
+	} catch (error) {
+		console.error('Error generating avatar:', error);
+		const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
+		return new Response(`Error generating avatar: ${errorMessage}`, {
 			status: 500,
 			headers: {
 				'Content-Type': 'text/plain'
