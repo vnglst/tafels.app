@@ -1,4 +1,3 @@
-import type { ReactElement } from 'react';
 import {
 	theme,
 	eyesMap,
@@ -13,6 +12,9 @@ import {
 	bodyMap
 } from '@bigheads/core';
 
+/**
+ * Configuration options for generating a BigHead avatar
+ */
 export interface AvatarOptions {
 	skinTone: string;
 	eyes: string;
@@ -36,14 +38,25 @@ export interface AvatarOptions {
 
 /**
  * Selects a random key from an object using the provided random number generator
+ * @param object - The object to select a random key from
+ * @param rng - Random number generator function that returns a value between 0 and 1
+ * @returns A randomly selected key from the object
+ * @throws {Error} If the object is empty or has no keys
  */
 export function selectRandomKey(object: Record<string, unknown>, rng: () => number): string {
 	const keys = Object.keys(object);
+
+	if (keys.length === 0) {
+		throw new Error('Cannot select random key from empty object');
+	}
+
 	return keys[Math.floor(rng() * keys.length)];
 }
 
 /**
  * Generates random feature options for the avatar
+ * @param rng - Random number generator function
+ * @returns Object containing random selections for facial and body features
  */
 function getRandomFeatures(rng: () => number) {
 	return {
@@ -63,6 +76,8 @@ function getRandomFeatures(rng: () => number) {
 
 /**
  * Generates random color options for the avatar
+ * @param rng - Random number generator function
+ * @returns Object containing random color selections for various avatar elements
  */
 function getRandomColors(rng: () => number) {
 	return {
@@ -76,6 +91,8 @@ function getRandomColors(rng: () => number) {
 
 /**
  * Generates random boolean options for the avatar
+ * @param rng - Random number generator function
+ * @returns Object containing random boolean flags for avatar features
  */
 function getRandomBooleanOptions(rng: () => number) {
 	return {
@@ -86,6 +103,8 @@ function getRandomBooleanOptions(rng: () => number) {
 
 /**
  * Generates a complete set of random avatar options using the provided RNG
+ * @param rng - Random number generator function (e.g., Math.random or seedrandom)
+ * @returns Complete AvatarOptions object with all features, colors, and flags
  */
 export function generateAvatarOptions(rng: () => number): AvatarOptions {
 	return {
@@ -95,9 +114,22 @@ export function generateAvatarOptions(rng: () => number): AvatarOptions {
 	};
 }
 
+const MAX_SEED_LENGTH = 200;
+
 /**
  * Generates an avatar URL with the given seed
+ * @param seed - The seed string used to generate a deterministic avatar
+ * @returns URL string for fetching the avatar SVG
+ * @throws {Error} If the seed is empty or exceeds maximum length
  */
 export function getAvatarUrl(seed: string): string {
+	if (!seed || seed.trim().length === 0) {
+		throw new Error('Avatar seed cannot be empty');
+	}
+
+	if (seed.length > MAX_SEED_LENGTH) {
+		throw new Error(`Avatar seed exceeds maximum length of ${MAX_SEED_LENGTH} characters`);
+	}
+
 	return `/bigheads?seed=${encodeURIComponent(seed)}`;
 }

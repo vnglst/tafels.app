@@ -5,13 +5,49 @@ import type { RequestHandler } from './$types';
 import { BigHead } from '@bigheads/core';
 import { generateAvatarOptions } from '$lib/avatar/utils';
 
+const MAX_SEED_LENGTH = 200;
+
+/**
+ * Validates the seed parameter
+ * @param seed - The seed value to validate
+ * @returns Object with isValid flag and optional error message
+ */
+function validateSeed(seed: string | null): { isValid: boolean; error?: string } {
+	if (!seed) {
+		return { isValid: true }; // null/empty seed is valid (will use Math.random)
+	}
+
+	if (seed.length > MAX_SEED_LENGTH) {
+		return {
+			isValid: false,
+			error: `Seed parameter exceeds maximum length of ${MAX_SEED_LENGTH} characters`
+		};
+	}
+
+	return { isValid: true };
+}
+
 /**
  * GET endpoint for generating avatar SVGs
- * Accepts a 'seed' query parameter to generate deterministic avatars
+ * Accepts an optional 'seed' query parameter to generate deterministic avatars
+ * @param url - Request URL containing optional seed parameter
+ * @returns Response with SVG content or error message
  */
-export const GET: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = ({ url }) => {
 	try {
 		const seed = url.searchParams.get('seed');
+
+		// Validate seed parameter
+		const validation = validateSeed(seed);
+		if (!validation.isValid) {
+			return new Response(validation.error, {
+				status: 400,
+				headers: {
+					'Content-Type': 'text/plain'
+				}
+			});
+		}
+
 		const rng = seed ? seedrandom(seed) : Math.random;
 
 		const avatarOptions = generateAvatarOptions(rng);

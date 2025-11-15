@@ -1,6 +1,9 @@
-import { writable } from 'svelte/store';
+import { writable, type Updater } from 'svelte/store';
 import { useLocalStorage } from '$lib/store-hooks';
 
+/**
+ * Account state interface containing user information
+ */
 export interface AccountState {
 	name: string;
 }
@@ -14,6 +17,7 @@ const initialState: AccountState = {
 
 /**
  * Creates the account store with localStorage persistence
+ * @returns Svelte store with subscribe, set, and update methods
  */
 function createAccountStore() {
 	const { set, subscribe, update } = writable<AccountState>(initialState);
@@ -21,8 +25,13 @@ function createAccountStore() {
 
 	return {
 		subscribe,
-		set
+		set,
+		update
 	};
 }
 
+/**
+ * Account store for managing user account information
+ * Persists to localStorage automatically
+ */
 export const accountStore = createAccountStore();
