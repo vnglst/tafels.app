@@ -1,5 +1,5 @@
 import merge from "lodash.merge";
-import { browser } from "$app/environment";
+import { browser } from "$app/env";
 
 export function useLocalStorage({ update, subscribe, key }) {
   // skip localstorage for SSR

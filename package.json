@@ -16,26 +16,27 @@
   },
   "dependencies": {
     "@bigheads/core": "^0.3.1",
-    "@sveltejs/adapter-node": "^5.2.9",
-    "@xstate/svelte": "^3.0.5",
+    "@sveltejs/adapter-node": "^6.0.0",
+    "@sveltejs/kit": "^3.1.0",
+    "@xstate/svelte": "^5.0.1",
     "howler": "^2.2.4",
     "lodash.merge": "^4.6.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "seedrandom": "^3.0.5",
-    "xstate": "^5.18.2"
+    "svelte": "^5.57.2",
+    "xstate": "^5.33.3"
   },
   "devDependencies": {
-    "@sveltejs/kit": "^2.48.4",
-    "@sveltejs/vite-plugin-svelte": "^5.1.1",
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
     "@types/howler": "^2.2.12",
     "@types/lodash.merge": "^4.6.9",
     "@types/node": "^22.19.1",
     "@types/react": "^18.3.26",
     "@types/react-dom": "^18.3.7",
     "@types/seedrandom": "^3.0.8",
-    "@typescript-eslint/eslint-plugin": "^8.46.4",
-    "@typescript-eslint/parser": "^8.46.4",
+    "@typescript-eslint/eslint-plugin": "^8.72.0",
+    "@typescript-eslint/parser": "^8.72.0",
     "autoprefixer": "^10.4.22",
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.2",
@@ -43,12 +44,11 @@
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
     "prettier-plugin-svelte": "^3.2.8",
-    "svelte": "^5.43.6",
     "svelte-check": "^4.3.4",
     "tailwindcss": "^3.4.18",
     "tslib": "^2.8.1",
-    "typescript": "^5.7.2",
-    "vite": "^6.4.1"
+    "typescript": "^6.0.3",
+    "vite": "^8.3.5"
   },
   "private": true
 }

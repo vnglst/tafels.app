@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { browser } from "$app/environment";
+  import { browser } from "$app/env";
   import IconBack from "./IconBack.svelte";
   import { accountStore } from "$lib/stores/account-store";
   export let segment: string;

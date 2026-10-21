@@ -74,7 +74,12 @@ export const GET: RequestHandler = async ({ url }) => {
 			...getRandomOptions(rng)
 		};
 
-		const avatarString = renderToString(React.createElement(BigHead, mergedProps));
+		const avatarString = renderToString(
+			React.createElement(
+				BigHead,
+				mergedProps as React.ComponentProps<typeof BigHead>
+			)
+		);
 
 		return new Response(avatarString, {
 			headers: {

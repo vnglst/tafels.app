@@ -1,4 +1,4 @@
-import { assign, createMachine } from "xstate";
+import { assign, fromCallback, setup } from "xstate";
 import { getRndEl, removeIdxsFromArray, rnd } from "$lib/utils";
 import { nock, squakk, yeah } from "$lib/helpers/soundFx";
 
@@ -32,162 +32,159 @@ const INITIAL_STATE: Context = {
 // assign an incrementing id for animation keys
 let uid = 1;
 
-export const gameMachine = createMachine<Context, Event>(
-  {
-    initial: "playing",
-    context: { ...INITIAL_STATE },
-    states: {
-      playing: {
-        invoke: {
-          src: (context) => (cb) => {
-            const interval = setInterval(() => {
-              cb("ADD_NUMBER");
-            }, BASE_INTERVAL - context.score * 4);
+export const gameMachine = setup({
+  types: {} as { context: Context; events: Event },
+  actors: {
+    ticker: fromCallback<Event, Context>(({ input, sendBack }) => {
+      const interval = setInterval(() => {
+        sendBack({ type: "ADD_NUMBER" });
+      }, BASE_INTERVAL - input.score * 4);
 
-            return () => {
-              clearInterval(interval);
-            };
-          },
-        },
-        always: [
-          {
-            cond: "isGameOver",
-            target: "gameover",
-          },
-          {
-            cond: "isCorrect",
-            target: "correct",
-          },
-          {
-            cond: "isWrong",
-            target: "wrong",
-          },
-        ],
-        on: {
-          LOAD_HIGHSCORE: {
-            actions: "loadHighscore",
-          },
-          ADD_NUMBER: {
-            actions: "addNumber",
-          },
-          TOGGLE_INPUT: {
-            actions: "toggleInput",
-          },
-        },
+      return () => clearInterval(interval);
+    }),
+  },
+  actions: {
+    setHighscore: ({ context }) => {
+      if (typeof localStorage === "undefined") return;
+      const highscore = Number(localStorage.getItem("highscore"));
+      if (context.score > highscore)
+        localStorage.setItem("highscore", context.score.toString());
+    },
+    loadHighscore: assign({
+      highscore: () => {
+        if (typeof localStorage === "undefined") return 0;
+        return Number(localStorage.getItem("highscore"));
       },
-      correct: {
-        after: {
-          300: { actions: "handleCorrect", target: "playing" },
-        },
+    }),
+    addNumber: assign({
+      numbers: ({ context }) => {
+        let n: NumberType;
+        const [n1, idx1] = getRndEl(context.numbers);
+        const [n2, idx2] = getRndEl(context.numbers);
+
+        if (
+          n1 === undefined ||
+          n2 === undefined ||
+          idx1 === idx2 ||
+          n1.v > 10 ||
+          n2.v > 10
+        ) {
+          n = { id: uid++, v: rnd({ from: 1, to: 9 }) };
+        } else {
+          n = { id: uid++, v: n1.v * n2.v };
+        }
+
+        return [...context.numbers, n];
       },
-      wrong: {
-        after: {
-          300: { actions: "handleWrong", target: "playing" },
-        },
+    }),
+    toggleInput: assign({
+      inputs: ({ context, event }) => {
+        if (event.type !== "TOGGLE_INPUT") return;
+        const existingIdx = context.inputs.findIndex(
+          (input) => input === event.value
+        );
+        const newInputs = [...context.inputs];
+
+        if (existingIdx > -1) {
+          newInputs[existingIdx] = null;
+        } else {
+          const firstNull = context.inputs.findIndex((input) => input === null);
+          newInputs[firstNull] = event.value;
+          nock.play();
+        }
+
+        return newInputs;
       },
-      gameover: {
-        on: {
-          NEW_GAME: {
-            actions: ["newGame", "loadHighscore"],
-            target: "playing",
-          },
-        },
-        entry: "setHighscore",
+    }),
+    handleCorrect: assign({
+      numbers: ({ context }) => {
+        const inputs = context.inputs;
+        yeah.play();
+        return removeIdxsFromArray(context.numbers, inputs);
       },
+      inputs: () => [null, null, null, null],
+      score: ({ context }) => {
+        const outcome = context.numbers[context.inputs[2]].v;
+        return context.score + outcome;
+      },
+    }),
+    handleWrong: assign({
+      inputs: () => {
+        squakk.play();
+        return [null, null, null, null];
+      },
+    }),
+    newGame: assign({ ...INITIAL_STATE }),
+  },
+  guards: {
+    isGameOver: ({ context }) => context.numbers.length >= MAX_NUMBERS,
+    isCorrect: ({ context }) => {
+      const [first, second, outcome] = context.inputs.map(
+        (idx) => context.numbers[idx]
+      );
+      return first?.v * second?.v === outcome?.v;
+    },
+    isWrong: ({ context }) => {
+      if (context.inputs[2] === null) return false;
+      const [first, second, outcome] = context.inputs.map(
+        (idx) => context.numbers[idx]
+      );
+      return first?.v * second?.v !== outcome?.v;
     },
   },
-  {
-    actions: {
-      setHighscore: (context: Context) => {
-        if (typeof localStorage === 'undefined') return;
-        const highscore = Number(localStorage.getItem("highscore"));
-        if (context.score > highscore)
-          localStorage.setItem("highscore", context.score.toString());
+}).createMachine({
+  initial: "playing",
+  context: { ...INITIAL_STATE },
+  states: {
+    playing: {
+      invoke: {
+        src: "ticker",
+        input: ({ context }) => context,
       },
-      loadHighscore: assign<Context>({
-        highscore: () => {
-          if (typeof localStorage === 'undefined') return 0;
-          return Number(localStorage.getItem("highscore"));
+      always: [
+        {
+          guard: "isGameOver",
+          target: "gameover",
         },
-      }),
-      addNumber: assign<Context, Event>({
-        numbers: (ctx) => {
-          let n: NumberType;
-          const [n1, idx1] = getRndEl(ctx.numbers);
-          const [n2, idx2] = getRndEl(ctx.numbers);
-
-          if (
-            n1 === undefined ||
-            n2 === undefined ||
-            idx1 === idx2 ||
-            n1.v > 10 ||
-            n2.v > 10
-          ) {
-            n = { id: uid++, v: rnd({ from: 1, to: 9 }) };
-          } else {
-            n = { id: uid++, v: n1.v * n2.v };
-          }
-
-          return [...ctx.numbers, n];
+        {
+          guard: "isCorrect",
+          target: "correct",
         },
-      }),
-      toggleInput: assign({
-        inputs: (ctx, event) => {
-          if (event.type !== "TOGGLE_INPUT") return;
-          const existingIdx = ctx.inputs.findIndex(
-            (input) => input === event.value
-          );
-          const newInputs = [...ctx.inputs];
-
-          // if already active, deactivate
-          if (existingIdx > -1) {
-            newInputs[existingIdx] = null;
-          } else {
-            // else find first empty input field
-            const firstNull = ctx.inputs.findIndex((input) => input === null);
-            // make that active
-            newInputs[firstNull] = event.value;
-            nock.play();
-          }
-
-          return newInputs;
+        {
+          guard: "isWrong",
+          target: "wrong",
         },
-      }),
-      handleCorrect: assign({
-        numbers: (ctx: Context) => {
-          const inputs = ctx.inputs;
-          yeah.play();
-          return removeIdxsFromArray(ctx.numbers, inputs);
+      ],
+      on: {
+        LOAD_HIGHSCORE: {
+          actions: "loadHighscore",
         },
-        inputs: () => {
-          return [null, null, null, null];
+        ADD_NUMBER: {
+          actions: "addNumber",
         },
-        score: (ctx: Context) => {
-          const outcome = ctx.numbers[ctx.inputs[2]].v;
-          return ctx.score + outcome;
+        TOGGLE_INPUT: {
+          actions: "toggleInput",
         },
-      }),
-      handleWrong: assign({
-        inputs: () => {
-          squakk.play();
-          return [null, null, null, null];
-        },
-      }),
-      newGame: assign({ ...INITIAL_STATE }),
-    },
-    guards: {
-      isGameOver: ({ numbers }) => {
-        return numbers.length >= MAX_NUMBERS;
-      },
-      isCorrect: ({ numbers, inputs }) => {
-        const [first, second, outcome] = inputs.map((idx) => numbers[idx]);
-        return first?.v * second?.v === outcome?.v;
-      },
-      isWrong: ({ numbers, inputs }) => {
-        if (inputs[2] === null) return false;
-        const [first, second, outcome] = inputs.map((idx) => numbers[idx]);
-        return first?.v * second?.v !== outcome?.v;
       },
     },
-  }
-);
+    correct: {
+      after: {
+        300: { actions: "handleCorrect", target: "playing" },
+      },
+    },
+    wrong: {
+      after: {
+        300: { actions: "handleWrong", target: "playing" },
+      },
+    },
+    gameover: {
+      on: {
+        NEW_GAME: {
+          actions: ["newGame", "loadHighscore"],
+          target: "playing",
+        },
+      },
+      entry: "setHighscore",
+    },
+  },
+});
