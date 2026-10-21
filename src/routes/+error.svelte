@@ -1,9 +1,14 @@
-<script>
-	import { page } from '$app/stores';
-	import { dev } from '$app/environment';
+<script lang="ts">
+	import { page } from '$app/state';
+	import { dev } from '$app/env';
 
-	$: status = $page.status;
-	$: message = $page.error?.message;
+	const status = $derived(page.status);
+	const message = $derived(page.error?.message);
+	const stack = $derived(
+		page.error && 'stack' in page.error && typeof page.error.stack === 'string'
+			? page.error.stack
+			: undefined
+	);
 </script>
 
 <svelte:head>
@@ -14,8 +19,8 @@
 
 <p>{message}</p>
 
-{#if dev && $page.error?.stack}
-	<pre>{$page.error.stack}</pre>
+{#if dev && stack}
+	<pre>{stack}</pre>
 {/if}
 
 <style>

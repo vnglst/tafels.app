@@ -11,7 +11,7 @@
   import { gameMachine, MAX_NUMBERS } from "./machine";
   import { onMount } from "svelte";
 
-  const { state, send } = useMachine(gameMachine);
+  const { snapshot: state, send } = useMachine(gameMachine);
 
   // $: console.log($state.value, $state.context, $state.event);
   $: ({ numbers, inputs, score, highscore } = $state.context);

@@ -9,6 +9,9 @@ export default defineConfig({
       adapter: adapter({
         out: "build",
       }),
+      alias: {
+        "$lib": "src/lib",
+      },
       preprocess: vitePreprocess(),
     }),
   ],

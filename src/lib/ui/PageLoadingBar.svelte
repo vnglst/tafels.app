@@ -10,7 +10,7 @@
   $: inner_style = `background-color: ${color2}`;
 </script>
 
-{#if $preloading}
+{#if preloading}
   <div class="progress" {style}>
     <div class="indeterminate" style={inner_style}></div>
   </div>

@@ -10,5 +10,7 @@
     "sourceMap": true,
     "strict": false,
     "moduleResolution": "bundler"
-  }
+  },
+  "include": ["src", "test", "*"],
+  "exclude": ["src/service-worker"]
 }

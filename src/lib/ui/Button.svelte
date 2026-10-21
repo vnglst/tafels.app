@@ -49,7 +49,6 @@
     class:orange={warning || orange}
     class:pill
     {disabled}
-    {href}
     on:click|preventDefault={(e) => dispatch('click', e)}
   >
     <slot />
