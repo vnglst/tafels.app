@@ -1,21 +1,13 @@
-<script context="module">
+<script lang="ts">
   import Game from "$lib/components/Game.svelte";
-  import { tables } from "../tableQuestions";
-
-  export async function preload(page) {
-    const { n } = page.params;
-    const challenge = tables.challenges[n];
-    if (!challenge) return this.error(404, "Not found");
-    return { challenge };
-  }
-</script>
-
-<script>
-  export let challenge;
+  import type { PageData } from './$types';
+  export let data: PageData;
 </script>
 
 <svelte:head>
-  <title>Tables {challenge.id} - tafels.app</title>
+  <title>Tables {data.challenge.id} - tafels.app</title>
 </svelte:head>
 
-<Game {challenge} />
+{#key data.challenge.id}
+  <Game challenge={data.challenge} />
+{/key}

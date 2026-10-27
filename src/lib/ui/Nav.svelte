@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { avatarDataUrl } from "$lib/avatar";
   import { browser } from "$app/environment";
   import IconBack from "./IconBack.svelte";
   import { accountStore } from "$lib/stores/account-store";
@@ -9,7 +10,7 @@
   <ul>
     {#if segment && browser}
       <li class="back-link float-left">
-        <a rel="prefetch" href="../" class="p-5">
+        <a rel="prefetch" href="/" class="p-5">
           <IconBack />
           <span>Back</span>
         </a>
@@ -19,7 +20,7 @@
       <li class="nav-link float-right">
         <a rel="prefetch" href="/account" class="p-0 pr-5">
           <img
-            src={`/bigheads?seed=${$accountStore.name}`}
+            src={avatarDataUrl($accountStore.name)}
             alt="Account"
             height="50"
             width="50"

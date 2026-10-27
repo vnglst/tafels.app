@@ -7,16 +7,16 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "start": "node build",
+    "start": "vite preview",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "export": "npm run build"
   },
   "dependencies": {
     "@bigheads/core": "^0.3.1",
-    "@sveltejs/adapter-node": "^5.2.9",
     "@xstate/svelte": "^3.0.5",
     "howler": "^2.2.4",
     "lodash.merge": "^4.6.2",
@@ -26,6 +26,7 @@
     "xstate": "^5.18.2"
   },
   "devDependencies": {
+    "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.48.4",
     "@sveltejs/vite-plugin-svelte": "^5.1.1",
     "@types/howler": "^2.2.12",

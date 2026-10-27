@@ -7,9 +7,9 @@
   import ChallengeLink from "$lib/components/ChallengeLink.svelte";
   import { store } from "$lib/stores/questions-store.js";
   import { practiceStore } from "$lib/stores/practice-store";
-  import { subtracts } from "./subtract/subtractQuestions.ts";
-  import { adds } from "./add/addQuestions.ts";
-  import { tables } from "./table/tableQuestions.ts";
+  import { subtracts } from "./subtract/subtractQuestions";
+  import { adds } from "./add/addQuestions";
+  import { tables } from "./table/tableQuestions";
 
   let categories = [tables, adds, subtracts];
 

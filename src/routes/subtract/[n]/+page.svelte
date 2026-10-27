@@ -1,21 +1,13 @@
-<script context="module">
+<script lang="ts">
   import Game from "$lib/components/Game.svelte";
-  import { subtracts } from "../subtractQuestions";
-
-  export async function preload(page) {
-    const { n } = page.params;
-    const challenge = subtracts.challenges[n];
-    if (!challenge) return this.error(404, "Not found");
-    return { challenge };
-  }
-</script>
-
-<script>
-  export let challenge;
+  import type { PageData } from './$types';
+  export let data: PageData;
 </script>
 
 <svelte:head>
-  <title>Subtractions {challenge.id} - tafels.app</title>
+  <title>Subtractions {data.challenge.id} - tafels.app</title>
 </svelte:head>
 
-<Game {challenge} />
+{#key data.challenge.id}
+  <Game challenge={data.challenge} />
+{/key}

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { avatarDataUrl } from "$lib/avatar";
   import type { Question } from "$lib/types";
   import Page from "$lib/ui/Page.svelte";
   import Card from "$lib/ui/Card.svelte";
@@ -19,7 +20,7 @@
   <Card>
     <img
       class="object-contain w-full pb-8"
-      src={`/bigheads?seed=${$accountStore.name}`}
+      src={avatarDataUrl($accountStore.name)}
       alt={$accountStore.name}
     />
     <div slot="footer" class="m-8">

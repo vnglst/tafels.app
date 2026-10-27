@@ -1,7 +1,6 @@
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server';
 import seedrandom from 'seedrandom';
-import type { RequestHandler } from './$types';
 import {
 	BigHead,
 	theme,
@@ -18,7 +17,7 @@ import {
 } from '@bigheads/core';
 
 function getRandomOptions(rng: () => number) {
-	function selectRandomKey(object: Record<string, unknown>): string {
+	function selectRandomKey<T extends Record<string, unknown>>(object: T): keyof T {
 		return Object.keys(object)[Math.floor(rng() * Object.keys(object).length)];
 	}
 
@@ -65,29 +64,9 @@ function getRandomOptions(rng: () => number) {
 	};
 }
 
-export const GET: RequestHandler = async ({ url }) => {
-	try {
-		const seed = url.searchParams.get('seed');
-		const rng = seed ? seedrandom(seed) : Math.random;
-
-		const mergedProps = {
-			...getRandomOptions(rng)
-		};
-
-		const avatarString = renderToString(React.createElement(BigHead, mergedProps));
-
-		return new Response(avatarString, {
-			headers: {
-				'Content-Type': 'image/svg+xml',
-				'Cache-Control': seed ? 'max-age=0, must-revalidate, public' : 'no-cache'
-			}
-		});
-	} catch (err) {
-		return new Response(String(err), {
-			status: 500,
-			headers: {
-				'Content-Type': 'text/plain'
-			}
-		});
-	}
-};
+// The same seeded options as the former server endpoint; no backend is needed.
+export function avatarDataUrl(name: string): string {
+  const props = getRandomOptions(seedrandom(name));
+  const svg = renderToStaticMarkup(React.createElement(BigHead, props));
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}

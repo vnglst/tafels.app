@@ -1,6 +1,6 @@
-FROM node:22-alpine
-WORKDIR /app
-COPY . .
-RUN npm ci --legacy-peer-deps && npx svelte-kit sync && npm run build && npm prune --omit=dev --legacy-peer-deps
-EXPOSE 3000
-CMD ["node", "build"]
+# The export is built, checked and committed in this repository before release.
+FROM nginx:stable-alpine
+COPY dist/ /usr/share/nginx/html/
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN nginx -t
+EXPOSE 80

@@ -1,6 +1,5 @@
 <script>
 	import { page } from '$app/stores';
-	import { dev } from '$app/environment';
 
 	$: status = $page.status;
 	$: message = $page.error?.message;
@@ -14,9 +13,6 @@
 
 <p>{message}</p>
 
-{#if dev && $page.error?.stack}
-	<pre>{$page.error.stack}</pre>
-{/if}
 
 <style>
 	h1,
