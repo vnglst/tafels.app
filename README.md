@@ -49,6 +49,29 @@ answer, check the game timer and sound, and verify a missing route returns 404.
 The 36 exercise routes are enumerated in `svelte.config.js`; keep that list in
 sync when adding challenges.
 
+## Verification
+
+```sh
+npm ci --legacy-peer-deps
+npm run check
+npm run export
+npm run test:export
+npx playwright install chromium firefox webkit
+npm run test:e2e
+```
+
+`test:export` checks the 40 HTML shells, local asset references, manifest icons
+and sound files in `dist/`. Browser tests cover exercises, unlocking, practice,
+timeouts, arcade scoring/restart, touch, navigation, saved names and avatars.
+To test the committed export through Nginx, build and run the Dockerfile on a
+local port, then set `TEST_BASE_URL` to that server when running `test:e2e`.
+
+Security updates stay on SvelteKit 2, Svelte 5 and Vite 6. `npm audit` retains
+four low findings: SvelteKit enhanced forms/untrusted prerender cache headers
+(features this app does not use), its build-time cookie dependency, and
+build-tool deepmerge. The deployed export has no Node server or cookies API.
+Shared hosting serves only `dist/`; updating this repository does not deploy it.
+
 ## Credits
 
 - Sound files (squakk + nock + restart): https://freesound.org/people/yawfle/packs/367/
